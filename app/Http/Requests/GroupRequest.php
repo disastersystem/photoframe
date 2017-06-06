@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class TripRequest extends Request
+class GroupRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class TripRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required',
-            'price' => 'integer'
+            'title' => 'required'
         ];
     }
 }

@@ -13,7 +13,7 @@
                         <!-- <v-btn light flat @click.native="dialog = false">Save</v-btn> -->
                     </v-toolbar>
 
-                    <v-carousel icon="stop" interval="6000" class="hello">
+                    <v-carousel icon="stop" class="hello">
                         <v-carousel-item v-for="(item, i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
                     </v-carousel>
                 </v-card-row>

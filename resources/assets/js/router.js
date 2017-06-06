@@ -6,6 +6,9 @@ let routes = [{
 	}, {
 		path: '/group/:id',
 		component: require('./views/Group')
+	}, {
+		path: '/test',
+		component: require('./views/draw')
 	}
 ]
 

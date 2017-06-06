@@ -6585,7 +6585,7 @@ var _PhotoFrame2 = _interopRequireDefault(_PhotoFrame);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component('drawer', {
-	template: '\n\t\t<div>\n\t\t\t<v-navigation-drawer class="grey lighten-4 pb-0" permanent absolute height="100%" light>\n\t\t\t\t<!-- <v-toolbar-side-icon light></v-toolbar-side-icon> -->\n\t\t\t\t<creategroup style="margin: 20px 0;"></creategroup>\n\t\t\t\t<v-list dense>\n\t\t\t\t\t<template v-for="(item, i) in items">\n\t\t\t\t\t\t<v-layout row v-if="item.heading" align-center :key="i">\n\t\t\t\t\t\t\t<v-flex xs12>\n\t\t\t\t\t\t\t\t<v-subheader v-if="item.heading">\n\t\t\t\t\t\t\t\t\t{{ item.heading }}\n\t\t\t\t\t\t\t\t</v-subheader>\n\t\t\t\t\t\t\t</v-flex>\n\t\t\t\t\t\t</v-layout>\n\t\t\t\t\t\t\n\t\t\t\t\t\t<v-divider dark v-else-if="item.divider" class="my-4" :key="i"></v-divider>\n\n\t\t\t\t\t\t<v-list-item :key="i" v-else>\n\t\t\t\t\t\t\t<v-list-tile>\n\t\t\t\t\t\t\t\t<v-list-tile-content>\n\t\t\t\t\t                <router-link :to="\'/group/\' + item.id" class="nav-item">{{ item.text }}</router-link>\n\t\t\t\t\t\t\t\t</v-list-tile-content>\n\t\t\t\t\t\t\t</v-list-tile>\n\t\t\t\t\t\t</v-list-item>\n\t\t\t\t\t</template>\n\t\t\t\t</v-list>\n\t\t\t\t\n\n\t\t\t</v-navigation-drawer>\n\t\t</div>\n\t',
+	template: '\n\t\t<div>\n\t\t\t<v-navigation-drawer class="grey lighten-4 pb-0" permanent absolute height="100%" light>\n\t\t\t\t<!-- <v-toolbar-side-icon light></v-toolbar-side-icon> -->\n\t\t\t\t<creategroup v-on:event_child="eventChild" style="margin: 20px 0;"></creategroup>\n\t\t\t\t<v-layout row align-center>\n\t\t\t\t\t\t\t<v-flex xs12>\n\t\t\t\t\t\t\t\t<v-subheader>\n\t\t\t\t\t\t\t\t\tGrupper\n\t\t\t\t\t\t\t\t</v-subheader>\n\t\t\t\t\t\t\t</v-flex>\n\t\t\t\t\t\t</v-layout>\n\t\t\t\t<v-list dense>\n\t\t\t\t\t<template v-for="(group, i) in groups">\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t<!-- <v-divider dark class="my-4" :key="i"></v-divider> -->\n\n\t\t\t\t\t\t<v-list-item>\n\t\t\t\t\t\t\t<v-list-tile>\n\t\t\t\t\t\t\t\t<v-list-tile-content>\n\t\t\t\t\t                <router-link :to="\'/group/\' + group.id" class="nav-item">{{ group.title }}</router-link>\n\t\t\t\t\t\t\t\t</v-list-tile-content>\n\t\t\t\t\t\t\t</v-list-tile>\n\t\t\t\t\t\t</v-list-item>\n\t\t\t\t\t</template>\n\t\t\t\t</v-list>\n\t\t\t</v-navigation-drawer>\n\t\t</div>\n\t',
 
 	data: function data() {
 		return {
@@ -6593,7 +6593,8 @@ Vue.component('drawer', {
 			// { heading: 'Opprett en gruppe' },
 			// { icon: 'add', text: 'Lag en ny gruppe', url: 'opprett-gruppe' },
 			// { divider: true },
-			{ heading: 'Grupper' }, { id: 1, icon: '', text: 'Tyristrand', selected: false }, { id: 2, icon: '', text: 'Familie', selected: false }, { id: 3, icon: '', text: 'Turgjengen', selected: false }]
+			{ heading: 'Grupper' }, { id: 1, icon: '', text: 'Tyristrand', selected: false }, { id: 2, icon: '', text: 'Familie', selected: false }, { id: 3, icon: '', text: 'Turgjengen', selected: false }],
+			groups: []
 		};
 	},
 
@@ -6601,6 +6602,21 @@ Vue.component('drawer', {
 	components: {
 		'creategroup': _CreateGroup2.default,
 		'photoframe': _PhotoFrame2.default
+	},
+
+	mounted: function mounted() {
+		var _this = this;
+
+		axios.get('getgroups').then(function (response) {
+			_this.groups = response.data;
+		});
+	},
+
+
+	methods: {
+		eventChild: function eventChild(data) {
+			this.groups.unshift({ id: data.id, title: data.title });
+		}
 	}
 });
 
@@ -7461,50 +7477,20 @@ module.exports = function spread(callback) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _Form = __webpack_require__(374);
+
+var _Form2 = _interopRequireDefault(_Form);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     data: function data() {
         return {
             dialog: false,
-            groupname: ''
+            form: new _Form2.default({
+                title: ''
+            })
         };
     },
 
@@ -7513,12 +7499,58 @@ exports.default = {
 
     methods: {
         saveGroup: function saveGroup() {
+            var _this = this;
+
             // throwAtBackendsFace(this.groupname);
-            this.dialog = false;
-            this.groupname = '';
+            this.form.post('addgroup').then(function (response) {
+                // this.trip = response.data[0];
+                // console.log(response.title)
+                // console.log(response.id)
+                // this.sharedTrip = response.data[0];
+                _this.$emit('event_child', { id: response.id, title: response.title });
+                _this.dialog = false;
+                _this.form.title = '';
+            });
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 146 */
@@ -7891,7 +7923,8 @@ exports.default = {
     data: function data() {
         return {
             currentPage: '',
-            images: []
+            group: [],
+            numImages: 0
         };
     },
 
@@ -7899,7 +7932,7 @@ exports.default = {
     watch: {
         '$route': function $route(to, from) {
             // react to route changes...
-            this.getImages(this.$route.params.id);
+            this.getGroupData(this.$route.params.id);
         }
     },
 
@@ -7914,35 +7947,20 @@ exports.default = {
         imageLink: function imageLink(image) {
             return 'uploads/' + image;
         },
-        getImages: function getImages(id) {
-            this.images = this.ajax(id);
+        getGroupData: function getGroupData(id) {
+            var _this = this;
 
-            if (id == '1') this.currentPage = 'Tyristrand';
-
-            if (id == '2') this.currentPage = 'Familie';
-
-            if (id == '3') this.currentPage = 'Turgjengen';
-        },
-        ajax: function ajax(page) {
-            switch (page) {
-                case '1':
-                    return [{ id: 1, name: 'eli.jpg' }, { id: 2, name: 'family.jpg' }, { id: 3, name: 'fuji-san.jpg' }, { id: 4, name: 'chicken.jpg' }, { id: 9, name: 'surfer.jpg' }, { id: 10, name: 'train.jpg' }, { id: 11, name: 'woman.jpg' }, { id: 12, name: 'young-man.jpg' }];
-                    break;
-                case '2':
-                    return [];
-                    break;
-                case '3':
-                    return [{ id: 9, name: 'surfer.jpg' }, { id: 10, name: 'train.jpg' }, { id: 11, name: 'woman.jpg' }, { id: 12, name: 'young-man.jpg' }];
-                    break;
-                default:
-                    return 'Kunne ikke finne noen bilder.';
-            }
+            axios.get('getgroup/' + id).then(function (response) {
+                _this.group = response.data[0];
+                _this.currentPage = _this.group.title;
+                _this.numImages = _this.group.group_images.length;
+            });
         }
     },
 
     mounted: function mounted() {
         // this.currentPage = this.$route.params.id
-        this.getImages(this.$route.params.id);
+        this.getGroupData(this.$route.params.id);
     }
 };
 
@@ -8021,6 +8039,9 @@ var routes = [{
 }, {
 	path: '/group/:id',
 	component: __webpack_require__(352)
+}, {
+	path: '/test',
+	component: __webpack_require__(376)
 }];
 
 exports.default = new _vueRouter2.default({
@@ -13499,8 +13520,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.groupname),
-      expression: "groupname"
+      value: (_vm.form.title),
+      expression: "form.title"
     }],
     attrs: {
       "xs8": "",
@@ -13508,11 +13529,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "Skriv inn et gruppenavn"
     },
     domProps: {
-      "value": (_vm.groupname)
+      "value": (_vm.form.title)
     },
     on: {
       "input": function($event) {
-        _vm.groupname = $event
+        _vm.form.title = $event
       }
     }
   })], 1)], 1)], 1), _vm._v(" "), _c('v-card-row', {
@@ -13607,23 +13628,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "row": "",
       "wrap": ""
     }
-  }, [(_vm.images.length == 0) ? _c('p', {
+  }, [(_vm.numImages == 0) ? _c('p', {
     staticStyle: {
       "padding": "40px",
       "font-size": "18px",
       "color": "#aaa"
     }
-  }, [_vm._v("\n                    Ingen bilder i gruppen \"" + _vm._s(_vm.currentPage) + "\". "), _c('br'), _vm._v("Trykk på \"Legg til bilder\" knappen\n                    oppe i høyre hjørne for å legge til bilder.\n                ")]) : _vm._e(), _vm._v(" "), _vm._l((_vm.images), function(image, index) {
+  }, [_vm._v("\n                    Ingen bilder i gruppen \"" + _vm._s(_vm.currentPage) + "\". "), _c('br'), _vm._v("Trykk på \"Legg til bilder\"-knappen\n                    oppe i høyre hjørne for å legge til bilder.\n                ")]) : _vm._e(), _vm._v(" "), _vm._l((_vm.group.group_images), function(image, index) {
     return _c('v-flex', {
       key: index,
       attrs: {
-        "xs3": ""
+        "xs12": "",
+        "sm6": "",
+        "md4": "",
+        "lg3": "",
+        "xl3": ""
       }
     }, [_c('v-card', {
       staticClass: "elevation-10 mb-4 photo-frame"
     }, [_c('img', {
       attrs: {
-        "src": _vm.imageLink(image.name)
+        "src": _vm.imageLink(image.filepath)
       }
     })])], 1)
   })], 2)], 1), _vm._v(" "), _c('photoframe')], 1)
@@ -13698,8 +13723,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('v-icon', [_vm._v("close")])], 1)], 1), _vm._v(" "), _c('v-carousel', {
     staticClass: "hello",
     attrs: {
-      "icon": "stop",
-      "interval": "6000"
+      "icon": "stop"
     }
   }, _vm._l((_vm.items), function(item, i) {
     return _c('v-carousel-item', {
@@ -31538,6 +31562,334 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 module.exports = __webpack_require__(126);
 
+
+/***/ }),
+/* 373 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+	function Errors() {
+		_classCallCheck(this, Errors);
+
+		this.errors = {};
+	}
+
+	_createClass(Errors, [{
+		key: "get",
+		value: function get(field) {
+			if (this.errors[field]) {
+				return this.errors[field][0];
+			}
+		}
+	}, {
+		key: "has",
+		value: function has(field) {
+			return this.errors.hasOwnProperty(field);
+		}
+	}, {
+		key: "any",
+		value: function any() {
+			// return Object.keys(this.errors).length > 0;
+			return false;
+		}
+	}, {
+		key: "record",
+		value: function record(errors) {
+			this.errors = errors;
+		}
+	}, {
+		key: "clear",
+		value: function clear(field) {
+			if (this.errors[field]) {
+				delete this.errors[field][0];
+			}
+		}
+	}]);
+
+	return Errors;
+}();
+
+exports.default = Errors;
+
+/***/ }),
+/* 374 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Errors = __webpack_require__(373);
+
+var _Errors2 = _interopRequireDefault(_Errors);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Form = function () {
+	function Form(data) {
+		_classCallCheck(this, Form);
+
+		this.originalData = data;
+
+		for (var field in data) {
+			this[field] = data[field];
+		}
+
+		this.errors = new _Errors2.default();
+	}
+
+	_createClass(Form, [{
+		key: 'data',
+		value: function data() {
+			var data = {};
+
+			for (var property in this.originalData) {
+				data[property] = this[property];
+			}
+
+			return data;
+		}
+	}, {
+		key: 'post',
+		value: function post(url) {
+			return this.submit('post', url);
+		}
+
+		/**
+   * 
+   * @return Promise
+   */
+
+	}, {
+		key: 'submit',
+		value: function submit(method, url) {
+			var _this = this;
+
+			return new Promise(function (resolve, reject) {
+				axios[method.toLowerCase()](url, _this.data()).then(function (response) {
+					_this.onSuccess(response.data);
+					resolve(response.data);
+				}).catch(function (error) {
+					_this.onFail(error.response.data);
+					reject(error.response.data);
+				});
+			});
+		}
+	}, {
+		key: 'onSuccess',
+		value: function onSuccess(data) {
+			// this.reset();
+		}
+	}, {
+		key: 'onFail',
+		value: function onFail(errors) {
+			this.errors.record(errors);
+		}
+	}, {
+		key: 'reset',
+		value: function reset() {
+			for (var field in this.originalData) {
+				this[field] = '';
+			}
+
+			this.errors.clear();
+		}
+	}]);
+
+	return Form;
+}();
+
+exports.default = Form;
+
+/***/ }),
+/* 375 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    data: function data() {
+        return {
+            drawer: true
+        };
+    }
+};
+
+/***/ }),
+/* 376 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* script */
+__vue_exports__ = __webpack_require__(375)
+
+/* template */
+var __vue_template__ = __webpack_require__(377)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "C:\\xampp\\htdocs\\www\\photoframe\\resources\\assets\\js\\views\\draw.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c1dceee", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-2c1dceee", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] draw.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-app', {
+    attrs: {
+      "id": "example-1"
+    }
+  }, [_c('v-navigation-drawer', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.drawer),
+      expression: "drawer"
+    }],
+    attrs: {
+      "persistent": "",
+      "light": "",
+      "enable-resize-watcher": ""
+    },
+    domProps: {
+      "value": (_vm.drawer)
+    },
+    on: {
+      "input": function($event) {
+        _vm.drawer = $event
+      }
+    }
+  }, [_c('v-list', {
+    attrs: {
+      "dense": ""
+    }
+  }, [_c('v-list-item')], 1)], 1), _vm._v(" "), _c('v-toolbar', {
+    staticClass: "indigo",
+    attrs: {
+      "light": ""
+    }
+  }, [_c('v-toolbar-side-icon', {
+    attrs: {
+      "light": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.drawer = !_vm.drawer
+      }
+    }
+  }), _vm._v(" "), _c('v-toolbar-title', [_vm._v("Toolbar")]), _vm._v(" "), _c('v-spacer')], 1), _vm._v(" "), _c('main', [_c('v-navigation-drawer', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.left),
+      expression: "left"
+    }],
+    attrs: {
+      "temporary": ""
+    },
+    domProps: {
+      "value": (_vm.left)
+    },
+    on: {
+      "input": function($event) {
+        _vm.left = $event
+      }
+    }
+  }), _vm._v(" "), _c('v-container', {
+    attrs: {
+      "fluid": ""
+    }
+  })], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2c1dceee", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

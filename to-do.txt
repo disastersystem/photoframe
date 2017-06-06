@@ -1,0 +1,9 @@
+
+
+- reponsivt design: fokus på meny
+
+- dato når man scroller
+
+- rapporten:
+	- funker i den og den nettleseren
+

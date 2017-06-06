@@ -17,7 +17,7 @@
                             <v-text-field xs8
                                 name="groupname"
                                 label="Skriv inn et gruppenavn"
-                                v-model="groupname">
+                                v-model="form.title">
                             </v-text-field>
                         </v-layout>
                     </v-card-text>
@@ -37,11 +37,15 @@
 </template>
 
 <script>
+    import Form from '../core/Form';
+
     export default {
         data () {
             return {
                 dialog: false,
-                groupname: ''
+                form: new Form({
+                    title: '',
+                })
             }
         },
 
@@ -52,9 +56,17 @@
         methods: {
             saveGroup() {
                 // throwAtBackendsFace(this.groupname);
-                this.dialog = false
-                this.groupname = ''
-            }
+                this.form.post('addgroup').then(response => {
+                    // this.trip = response.data[0];
+                    // console.log(response.title)
+                    // console.log(response.id)
+                    // this.sharedTrip = response.data[0];
+                    this.$emit('event_child', { id: response.id, title: response.title })
+                    this.dialog = false
+                    this.form.title = ''
+                })
+
+            },
         }
     }
 </script>

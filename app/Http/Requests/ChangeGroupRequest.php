@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Trip;
+use App\Group;
 use App\Http\Requests\Request;
 
-class ChangeTripRequest extends Request
+class ChangeGroupRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,7 +17,7 @@ class ChangeTripRequest extends Request
         // if (!$this->userCreatedTrip($trip_id)) {
         //     return $this->unauthorized($request);
         // }
-        return Trip::where([
+        return Group::where([
             'id' => $this->trip_id,
             'user_id' => \Auth::user()->id
         ])->exists();

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\TripImage;
+use App\GroupImage;
 
-class TripImageController extends Controller
+class GroupImageController extends Controller
 {
     public function __construct() {
         // $this->middleware('auth');
@@ -19,27 +19,27 @@ class TripImageController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function updateCaption($img_id, Request $request)
-    {
-        $tripImage = TripImage::find($img_id);
+    // public function updateCaption($img_id, Request $request)
+    // {
+    //     $groupImage = GroupImage::find($img_id);
 
-        $tripImage->caption = $request->photo_caption;
+    //     $groupImage->caption = $request->photo_caption;
 
-        $tripImage->save();
+    //     $groupImage->save();
 
-        // flash()->success("", "");
+    //     // flash()->success("", "");
 
-        // return back();
-    }
+    //     // return back();
+    // }
 
     /**
-     * Delete a image belonging to a trip.
+     * Delete an image belonging to a group.
      *
      * @param Request $request
      * @return Response
      */
     public function destroy($photo_id) {
-        TripImage::findOrFail($photo_id)->delete();
+        GroupImage::findOrFail($photo_id)->delete();
 
         return back();
     }

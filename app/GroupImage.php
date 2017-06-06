@@ -7,32 +7,31 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use App\Trip;
+use App\Group;
 
-class TripImage extends Model
+class GroupImage extends Model
 {
     protected $fillable = [
-        'trip_id',
+        'group_id',
         'filename',
         'filepath',
-        'thumbnail_filepath',
-        'caption'
+        'thumbnail_filepath'
     ];
 
-    protected $table = 'trip_images';
+    protected $table = 'group_images';
 
-    # Base directory for uploaded trip photos.
-    protected $baseUploadDir = 'uploads/trips';
+    # Base directory for uploaded group photos.
+    protected $baseUploadDir = 'uploads/groups';
 
     protected $file;
 
     /**
-     * A trip image belongs to a trip.
+     * A group image belongs to a group.
      *
      * @return Response
      */
-    public function trip() {
-        return $this->belongsTo('App\Trip');
+    public function group() {
+        return $this->belongsTo('App\Group');
     }
 
     protected static function boot() {
@@ -45,10 +44,6 @@ class TripImage extends Model
         $photo = new static;
 
         $photo->file = $file;
-        $dimensions = $photo->file_dimensions($photo->file);
-        $photo->width = $dimensions[0];
-        $photo->height = $dimensions[1];
-        $photo->ratio = $photo->file_ratio($dimensions);
 
         $filename = $photo->filename();
 
@@ -70,14 +65,6 @@ class TripImage extends Model
 
     protected function thumbnail_filepath($filename) {
         return sprintf("%s/tn-%s", $this->baseUploadDir . '/' . $filename, $filename);
-    }
-
-    protected function file_dimensions($file) {
-        return getimagesize($file);
-    }
-
-    protected function file_ratio($dimensions) {
-        return round( (($dimensions[1] / $dimensions[0]) * 100), 4 );
     }
 
     /**

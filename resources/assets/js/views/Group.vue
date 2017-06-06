@@ -14,14 +14,14 @@
 
 		<div id="images-wrapper">
 			<v-layout row wrap>
-                <p v-if="images.length == 0" style="padding: 40px; font-size: 18px; color: #aaa;">
-                    Ingen bilder i gruppen "{{ currentPage }}". <br>Trykk på "Legg til bilder" knappen
+                <p v-if="numImages == 0" style="padding: 40px; font-size: 18px; color: #aaa;">
+                    Ingen bilder i gruppen "{{ currentPage }}". <br>Trykk på "Legg til bilder"-knappen
                     oppe i høyre hjørne for å legge til bilder.
                 </p>
 
-				<v-flex xs3 v-for="(image, index) in images" :key="index">
+				<v-flex xs12 sm6 md4 lg3 xl3 v-for="(image, index) in group.group_images" :key="index">
 					<v-card class="elevation-10 mb-4 photo-frame">
-						<img :src="imageLink(image.name)">
+						<img :src="imageLink(image.filepath)">
 						<!-- <v-card-text>Hello World</v-card-text> -->
 					</v-card>
 				</v-flex>
@@ -42,14 +42,15 @@
         data () {
             return {
                 currentPage: '',
-                images: []
+                group: [],
+                numImages: 0
             }
         },
 
         watch: {
             '$route' (to, from) {
                 // react to route changes...
-                this.getImages(this.$route.params.id)
+                this.getGroupData(this.$route.params.id)
             }
         },
 
@@ -65,55 +66,18 @@
         		return `uploads/${image}`
         	},
 
-            getImages(id) {
-                this.images = this.ajax(id)
-
-                if (id == '1') 
-                    this.currentPage = 'Tyristrand'
-
-                if (id == '2') 
-                    this.currentPage = 'Familie'
-
-                if (id == '3') 
-                    this.currentPage = 'Turgjengen'
-            },
-
-            ajax(page) {
-                switch(page) {
-                    case '1':
-                        return [
-                            { id: 1, name: 'eli.jpg' },
-                            { id: 2, name: 'family.jpg' },
-                            { id: 3, name: 'fuji-san.jpg' },
-                            { id: 4, name: 'chicken.jpg' },
-                            { id: 9, name: 'surfer.jpg' },
-                            { id: 10, name: 'train.jpg' },
-                            { id: 11, name: 'woman.jpg' },
-                            { id: 12, name: 'young-man.jpg' }
-                        ]
-                        break
-                    case '2':
-                        return [
-                           
-                        ]
-                        break
-                    case '3':
-                        return [
-                            { id: 9, name: 'surfer.jpg' },
-                            { id: 10, name: 'train.jpg' },
-                            { id: 11, name: 'woman.jpg' },
-                            { id: 12, name: 'young-man.jpg' }
-                        ]
-                        break
-                    default:
-                        return 'Kunne ikke finne noen bilder.'
-                }
+            getGroupData(id) {
+                axios.get('getgroup/' + id).then(response => {
+                    this.group = response.data[0]
+                    this.currentPage = this.group.title
+                    this.numImages = this.group.group_images.length;
+                });
             }
         }, 
 
         mounted() {
             // this.currentPage = this.$route.params.id
-            this.getImages(this.$route.params.id)
+            this.getGroupData(this.$route.params.id)
         }
     }
 </script>
