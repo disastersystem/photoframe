@@ -1,28 +1,24 @@
 <template>
     <v-layout row justify-center>
         <v-dialog v-model="dialog" width="600">
-            <v-btn class="indigo" slot="activator">
-                <!-- Medlemmer -->
-                <i class="material-icons icon icon--light icon--center">
-                    person_add
+            <v-btn class="green white--text" slot="activator">
+                Legg til gruppe
+                <i class="material-icons icon icon--light icon--right">
+                    add
                 </i>
             </v-btn>
             <v-card>
                 <v-card-row>
-                    <v-card-title>Gruppemedlemmer</v-card-title>
+                    <v-card-title>Opprett gruppe</v-card-title>
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
                         <v-layout>
-                            <v-text-field
-                                name="person"
-                                label="Søk etter en person">
+                            <v-text-field xs8
+                                name="groupname"
+                                label="Skriv inn et gruppenavn"
+                                v-model="groupname">
                             </v-text-field>
-                        </v-layout>
-
-                        <v-layout>
-                            <invitation></invitation>
-                            <member></member>
                         </v-layout>
                     </v-card-text>
                 </v-card-row>
@@ -31,9 +27,9 @@
                         <i class="material-icons icon icon--left">
                             keyboard_backspace
                         </i>
-                        Tilbake
+                        Avbryt
                     </v-btn>
-                    <v-btn class="white--text" success @click.native="dialog = false">Lagre</v-btn>
+                    <v-btn class="white--text" success @click.native="saveGroup">Lagre</v-btn>
                 </v-card-row>
             </v-card>
         </v-dialog>
@@ -41,19 +37,24 @@
 </template>
 
 <script>
-    import Member from '../components/Member'
-    import Invitation from '../components/Invitation'
-
     export default {
         data () {
             return {
-                dialog: false
+                dialog: false,
+                groupname: ''
             }
         },
 
         components: {
-            'member': Member,
-            'invitation': Invitation
+
+        },
+
+        methods: {
+            saveGroup() {
+                // throwAtBackendsFace(this.groupname);
+                this.dialog = false
+                this.groupname = ''
+            }
         }
     }
 </script>

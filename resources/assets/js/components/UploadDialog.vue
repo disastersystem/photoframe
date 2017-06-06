@@ -1,7 +1,7 @@
 <template>
     <v-layout row justify-center>
         <v-dialog v-model="dialog">
-            <v-btn success light slot="activator" style="position: absolute; bottom: 20px; right: 50px;">
+            <v-btn success light slot="activator" style="margin-right: 30px;">
                 Legg til bilder
                 <i class="material-icons icon icon--dark icon--light icon--right">cloud_upload</i>
             </v-btn>

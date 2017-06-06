@@ -2,20 +2,22 @@
 	<div>
         <div>
             <v-toolbar class="white elevation-0 ">
-                <v-toolbar-title class="hidden-sm-and-down">{{ currentPage }}</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn icon>
+                <v-toolbar-title class="hidden-sm-and-down toolbar-title">{{ currentPage }}</v-toolbar-title>
+                <!-- <v-spacer></v-spacer> -->
+                <!-- <v-btn icon>
                     <v-icon>person_add</v-icon>
-
-                </v-btn>
+                </v-btn> -->
+                <uploaddialog></uploaddialog>
+                <members></members>
             </v-toolbar>
         </div>
 
 		<div id="images-wrapper">
-            <members></members>
-            
 			<v-layout row wrap>
-                <!-- <p if="images.length == 0">Ingen bilder i gruppen "{{ currentPage }}".</p> -->
+                <p v-if="images.length == 0" style="padding: 40px; font-size: 18px; color: #aaa;">
+                    Ingen bilder i gruppen "{{ currentPage }}". <br>Trykk på "Legg til bilder" knappen
+                    oppe i høyre hjørne for å legge til bilder.
+                </p>
 
 				<v-flex xs3 v-for="(image, index) in images" :key="index">
 					<v-card class="elevation-10 mb-4 photo-frame">
@@ -24,9 +26,9 @@
 					</v-card>
 				</v-flex>
 			</v-layout>
-
-			<uploaddialog></uploaddialog>
 		</div>
+
+        <photoframe></photoframe>
     </div>
 </template>
 
@@ -34,6 +36,7 @@
 	import UploadDialog from '../components/UploadDialog'
 	import DialogForm from '../components/Dialog'
     import Members from '../components/Members'
+    import PhotoFrame from '../components/PhotoFrame'
 
     export default {
         data () {
@@ -53,7 +56,8 @@
         components: {
     		'dialogForm': DialogForm,
     		'uploaddialog': UploadDialog,
-            'members': Members
+            'members': Members,
+            'photoframe': PhotoFrame
     	},
 
         methods: {
@@ -90,18 +94,7 @@
                         break
                     case '2':
                         return [
-                            { id: 5, name: 'kitty.jpg' },
-                            { id: 6, name: 'light.jpg' },
-                            { id: 7, name: 'roadtrip.jpg' },
-                            { id: 8, name: 'sea.jpg' },
-                            { id: 1, name: 'eli.jpg' },
-                            { id: 2, name: 'family.jpg' },
-                            { id: 3, name: 'fuji-san.jpg' },
-                            { id: 4, name: 'chicken.jpg' },
-                            { id: 9, name: 'surfer.jpg' },
-                            { id: 10, name: 'train.jpg' },
-                            { id: 11, name: 'woman.jpg' },
-                            { id: 12, name: 'young-man.jpg' }
+                           
                         ]
                         break
                     case '3':
@@ -135,5 +128,9 @@
         padding-right: 10px;
         padding-left: 10px;
         padding-bottom: 10px;
+    }
+
+    .toolbar-title {
+        text-align: center;
     }
 </style>

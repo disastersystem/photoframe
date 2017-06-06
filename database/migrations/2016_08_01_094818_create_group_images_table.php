@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTripImagesTable extends Migration
+class CreateGroupImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +12,16 @@ class CreateTripImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('trip_images', function (Blueprint $table) {
+        Schema::create('group_images', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('trip_id')->unsigned();
-            $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->integer('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
 
             $table->string('filename');
             $table->string('filepath', 500);
             $table->string('thumbnail_filepath', 500)->default('');
-            $table->string('caption', 1000)->default('');
-
-            $table->integer('width')->unsigned();
-            $table->integer('height')->unsigned();
-            $table->integer('ratio')->unsigned();
+            // $table->string('caption', 1000)->default('');
 
             $table->timestamps();
 
@@ -46,6 +42,6 @@ class CreateTripImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('trip_images');
+        Schema::drop('group_images');
     }
 }

@@ -11,7 +11,8 @@ img {
 .is-active {
     /*background-color: #42f;*/
     /*color: #fff;*/
-    border-bottom: 2px solid red;
+    /*border-bottom: 2px solid red;*/
+    background: #ccc;
 }
 
 .nav-item {
@@ -87,4 +88,9 @@ body::-webkit-scrollbar-thumb:hover { background: hsla(45, 100%, 69%, 1); }
 
 .selected {
     background-color: #ddd;
+}
+
+/* keep the drawer underneath the dialogs/modals */
+.navigation-drawer {
+    z-index: 1;
 }
