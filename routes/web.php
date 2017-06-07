@@ -9,6 +9,7 @@ Route::get('/', function () {
 Route::post('addgroup', 'GroupController@add');
 Route::get('getgroups', 'GroupController@index');
 Route::get('getgroup/{group_id}/', 'GroupController@specific');
+Route::post('group/{group_id}/photo', 'GroupController@addPhoto');
 // Route::get('videos', 'TripVideoController@all');
 
 // Route::post('sendEntryMail', 'MailController@sendEntryMail');

@@ -1,6 +1,6 @@
 <template>
     <v-layout row justify-center>
-        <v-dialog v-model="dialog">
+        <v-dialog v-model="dialog" width="600">
             <v-btn success light slot="activator" style="margin-right: 30px;">
                 Legg til bilder
                 <i class="material-icons icon icon--dark icon--light icon--right">cloud_upload</i>
@@ -11,10 +11,10 @@
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
-                        <!-- <v-text-field label="Navn på gruppe"></v-text-field> -->
-                        <!-- <v-file></v-file> -->
-                        <input type="file" name="fileToUpload" id="fileToUpload">
-                        <!-- <small>*indicates required field</small> -->
+                        <dropzone id="myVueDropzone" v-bind:headers="csrfToken" v-bind:url="url" v-on:vdropzone-success="showSuccess">
+                            <!-- Optional parameters if any! -->
+                            <!-- <input type="hidden" name="token" v-bind:value="tok"> -->
+                        </dropzone>
                     </v-card-text>
                 </v-card-row>
                 <v-card-row actions>
@@ -27,10 +27,30 @@
 </template>
 
 <script>
+    import $ from "jquery"
+    import Dropzone from 'vue2-dropzone'
+
     export default {
         data () {
             return {
-                dialog: false
+                dialog: false,
+                url: 'group/' + this.$route.params.id + '/photo',
+                csrfToken: { 'X-CSRF-Token': window.Laravel.csrfToken }
+            }
+        },
+
+        components: {
+            Dropzone
+        },
+
+        methods: {
+            showSuccess(file, uploaded_file) {
+                // empty upload field
+                // set no size limit
+                // console.log('A file was successfully uploaded')
+                // self.group.group_images.unshift(response);
+                // console.log(uploaded_file);
+                this.$emit('eventchild', uploaded_file)
             }
         }
     }

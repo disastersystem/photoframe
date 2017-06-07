@@ -4,6 +4,13 @@
 
 - dato når man scroller
 
+- login system
+
+- show succes -> toast/alert/something
+
 - rapporten:
 	- funker i den og den nettleseren
+
+
+<transition-group name="list">
 

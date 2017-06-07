@@ -12,6 +12,9 @@ bower_components
 # Dependency directories
 node_modules/
 
+# image upload folder
+public/uploads/
+
 # Optional npm cache directory
 .npm
 

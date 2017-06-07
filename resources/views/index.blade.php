@@ -14,8 +14,17 @@
         <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" type="text/css" href="css/core.css">
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <title>Fotosamling</title>
+
+        <script>
+            /* used by dropzone */
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token()
+            ]); ?>
+        </script>
     </head>
     <body>
         <div id="app">
