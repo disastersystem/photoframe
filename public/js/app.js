@@ -18297,55 +18297,7 @@ exports.default = {
 
 
 /***/ }),
-/* 155 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-    data: function data() {
-        return {
-            drawer: true,
-            left: null
-        };
-    }
-};
-
-/***/ }),
+/* 155 */,
 /* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18563,9 +18515,6 @@ var routes = [{
 }, {
 	path: '/group/:id',
 	component: __webpack_require__(356)
-}, {
-	path: '/test',
-	component: __webpack_require__(358)
 }];
 
 exports.default = new _vueRouter2.default({
@@ -23870,50 +23819,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 358 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = {}
-
-/* script */
-__vue_exports__ = __webpack_require__(155)
-
-/* template */
-var __vue_template__ = __webpack_require__(363)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "C:\\xampp\\htdocs\\www\\photoframe\\resources\\assets\\js\\views\\draw.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2c1dceee", __vue_options__)
-  } else {
-    hotAPI.reload("data-v-2c1dceee", __vue_options__)
-  }
-})()}
-if (__vue_options__.functional) {console.error("[vue-loader] draw.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
+/* 358 */,
 /* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24138,86 +24044,7 @@ if (false) {
 }
 
 /***/ }),
-/* 363 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('v-app', {
-    attrs: {
-      "id": "example-1"
-    }
-  }, [_c('v-navigation-drawer', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.drawer),
-      expression: "drawer"
-    }],
-    attrs: {
-      "persistent": "",
-      "light": "",
-      "enable-resize-watcher": ""
-    },
-    domProps: {
-      "value": (_vm.drawer)
-    },
-    on: {
-      "input": function($event) {
-        _vm.drawer = $event
-      }
-    }
-  }, [_c('v-list', {
-    attrs: {
-      "dense": ""
-    }
-  }, [_c('v-list-item')], 1)], 1), _vm._v(" "), _c('v-toolbar', {
-    staticClass: "indigo",
-    attrs: {
-      "light": ""
-    }
-  }, [_c('v-toolbar-side-icon', {
-    attrs: {
-      "light": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.drawer = !_vm.drawer
-      }
-    }
-  }), _vm._v(" "), _c('v-toolbar-title', [_vm._v("Toolbar")]), _vm._v(" "), _c('v-spacer')], 1), _vm._v(" "), _c('main', [_c('v-navigation-drawer', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.left),
-      expression: "left"
-    }],
-    attrs: {
-      "temporary": ""
-    },
-    domProps: {
-      "value": (_vm.left)
-    },
-    on: {
-      "input": function($event) {
-        _vm.left = $event
-      }
-    }
-  }), _vm._v(" "), _c('v-container', {
-    attrs: {
-      "fluid": ""
-    }
-  })], 1)], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-2c1dceee", module.exports)
-  }
-}
-
-/***/ }),
+/* 363 */,
 /* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24306,7 +24133,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "elevation-10 mb-4 photo-frame"
     }, [_c('img', {
       attrs: {
-        "src": image.thumbnail_filepath
+        "src": image.filepath
       }
     })])], 1)
   })], 2)], 1), _vm._v(" "), _c('photoframe')], 1)

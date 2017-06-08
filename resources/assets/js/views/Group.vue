@@ -19,7 +19,7 @@
 
 				<v-flex xs12 sm6 md4 lg3 xl3 v-for="(image, index) in group.group_images" :key="index">
 					<v-card class="elevation-10 mb-4 photo-frame">
-						<img :src="image.thumbnail_filepath">
+						<img :src="image.filepath">
 						<!-- <v-card-text>Hello World</v-card-text> -->
 					</v-card>
 				</v-flex>

@@ -1,10 +1,13 @@
 
-
 - reponsivt design: fokus på meny
 
 - dato når man scroller
 
 - Try changing link from thumb_filepath to filepath
+
+- xs12 på last opp og members knap
+
+- Delete group functionality
 
 - login system
 
@@ -12,7 +15,6 @@
 
 - rapporten:
 	- funker i den og den nettleseren
-	- Can only upload 2mb files
 
 
 <transition-group name="list">
