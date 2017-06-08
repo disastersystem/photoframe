@@ -4,25 +4,24 @@ import router from './router'
 import CreateGroup from './components/CreateGroup'
 import PhotoFrame from './components/PhotoFrame'
 
-Vue.component('drawer', {
+
+Vue.component('main-layout', {
 	template: `
 		<div>
-			<v-navigation-drawer class="grey lighten-4 pb-0" permanent absolute height="100%" light>
-				<!-- <v-toolbar-side-icon light></v-toolbar-side-icon> -->
-				<creategroup v-on:event_child="eventChild" style="margin: 20px 0;"></creategroup>
-				<v-layout row align-center>
-							<v-flex xs12>
-								<v-subheader>
-									Grupper
-								</v-subheader>
-							</v-flex>
-						</v-layout>
-				<v-list dense>
-					<template v-for="(group, i) in groups">
-						
-						
-						<!-- <v-divider dark class="my-4" :key="i"></v-divider> -->
+	        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>
+	        	
+	        	<creategroup v-on:event_child="eventChild" style="margin: 150px 0 40px 0;"></creategroup>
+				
+				<v-layout row align-center style="margin-bottom: -10px;">
+					<v-flex xs12>
+						<v-subheader>
+							Grupper
+						</v-subheader>
+					</v-flex>
+				</v-layout>
 
+	            <v-list>
+	                <template v-for="(group, i) in groups">
 						<v-list-item>
 							<v-list-tile>
 								<v-list-tile-content>
@@ -31,29 +30,35 @@ Vue.component('drawer', {
 							</v-list-tile>
 						</v-list-item>
 					</template>
-				</v-list>
-			</v-navigation-drawer>
-		</div>
+	            </v-list>
+	        </v-navigation-drawer>
+
+	        <main>
+	            <v-navigation-drawer temporary v-model="left"></v-navigation-drawer>
+	            
+	            <v-toolbar class="elevation-0 menu-bar" flat>
+		            <v-toolbar-side-icon dark @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+		        </v-toolbar>
+
+	            <div>
+	                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">
+	                    <router-view></router-view>
+	                </transition>
+	            </div>
+	        </main>
+	    </div>
 	`,
 
 	data() {
 		return {
-			items: [
-				// { heading: 'Opprett en gruppe' },
-				// { icon: 'add', text: 'Lag en ny gruppe', url: 'opprett-gruppe' },
-				// { divider: true },
-				{ heading: 'Grupper' },
-				{ id: 1, icon: '', text: 'Tyristrand', selected: false },
-				{ id: 2, icon: '', text: 'Familie', selected: false },
-				{ id: 3, icon: '', text: 'Turgjengen', selected: false }
-			],
-			groups: []
+			groups: [],
+			drawer: true,
+			left: null
 		}
 	},
 
 	components: {
-		'creategroup': CreateGroup,
-		'photoframe': PhotoFrame
+		'creategroup': CreateGroup
 	},
 
 	mounted() {

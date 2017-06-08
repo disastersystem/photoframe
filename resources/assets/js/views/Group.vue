@@ -2,33 +2,27 @@
 	<div>
         <div>
             <v-toolbar class="white elevation-0 ">
-                <v-toolbar-title class="hidden-sm-and-down toolbar-title">{{ currentPage }}</v-toolbar-title>
-                <!-- <v-spacer></v-spacer> -->
-                <!-- <v-btn icon>
-                    <v-icon>person_add</v-icon>
-                </v-btn> -->
-                <uploaddialog v-on:eventchild="eventChild"></uploaddialog>
+                <v-toolbar-title class="hidden-sm-and-down toolbar-title" style="font-size: 25px;">{{ currentPage }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <uploaddialog v-on:eventchild="eventChild" style="margin-left: 10px;"></uploaddialog>
                 <members></members>
             </v-toolbar>
         </div>
 
 		<div id="images-wrapper">
 			<v-layout row wrap>
-                <!-- <p v-if="numImages == 0" style="padding: 40px; font-size: 18px; color: #aaa;">
-                    Ingen bilder i gruppen "{{ currentPage }}". <br>Trykk på "Legg til bilder"-knappen
-                    oppe i høyre hjørne for å legge til bilder.
-                </p> -->
+                <p v-if="numImages == 0" style="padding: 40px; font-size: 18px; color: #aaa;">
+                    Trykk på "Legg til bilder"-knappen
+                    oppe i høyre hjørne for å legge til bilder
+                    i gruppen.
+                </p>
 
-                    <!-- <transition-group name="bounce"> -->
-    				<v-flex xs12 sm6 md4 lg3 xl3 v-for="(image, index) in group.group_images" :key="index">
-                    
-    					<v-card class="elevation-10 mb-4 photo-frame">
-    						<img :src="image.thumbnail_filepath">
-    						<!-- <v-card-text>Hello World</v-card-text> -->
-    					</v-card>
-                        
-    				</v-flex>
-                <!-- </transition-group> -->
+				<v-flex xs12 sm6 md4 lg3 xl3 v-for="(image, index) in group.group_images" :key="index">
+					<v-card class="elevation-10 mb-4 photo-frame">
+						<img :src="image.thumbnail_filepath">
+						<!-- <v-card-text>Hello World</v-card-text> -->
+					</v-card>
+				</v-flex>
 			</v-layout>
 		</div>
 
@@ -74,7 +68,7 @@
                 axios.get('getgroup/' + id).then(response => {
                     this.group = response.data[0]
                     this.currentPage = this.group.title
-                    this.numImages = this.group.group_images.length;
+                    this.numImages = this.group.group_images.length
                 });
             },
 

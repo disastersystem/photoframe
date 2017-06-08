@@ -64,18 +64,18 @@ body::-webkit-scrollbar-thumb:hover { background: hsla(45, 100%, 69%, 1); }
 }
 
 /* main layout */
-#app {
+/*#app {
     display: flex;
-}
+}*/
 
-#main-content {
+/*#main-content {
     flex-basis: 100%;
-}
+}*/
 
-#main-aside {
+/*#main-aside {
     flex: 0 0 300px;
     background: #F5F5F5;
-}
+}*/
 
 #navigation-1 a {
     text-decoration: none;
@@ -86,29 +86,21 @@ body::-webkit-scrollbar-thumb:hover { background: hsla(45, 100%, 69%, 1); }
     width: 100%;
 }
 
-.selected {
+/*.selected {
     background-color: #ddd;
-}
+}*/
 
 /* keep the drawer underneath the dialogs/modals */
 .navigation-drawer {
     z-index: 1;
+    background: #eee;
 }
 
-.bounce-enter-active {
-  animation: bounce-in .5s;
-}
-.bounce-leave-active {
-  animation: bounce-in .5s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
+.menu-bar {
+    position: fixed;
+    width: 100px;
+    left: 0px;
+    top: 10px;
+    z-index: 900;
+    background: rgba(255, 255, 255, 0);
 }

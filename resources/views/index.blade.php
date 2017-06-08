@@ -28,15 +28,19 @@
     </head>
     <body>
         <div id="app">
-            <aside id="main-aside">
-                <drawer></drawer>
-            </aside>
+            <!-- <aside id="main-aside"> -->
+                <!-- <drawer></drawer> -->
+                <main-layout></main-layout>
+            <!-- </aside> -->
 
-            <main id="main-content">                
+            <!-- <main id="main-content">                
                 <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">
                     <router-view></router-view>
                 </transition>
-            </main>
+
+            </main> -->
+
+
         </div>
 
         <script src="./js/app.js"></script>

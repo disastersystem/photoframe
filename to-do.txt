@@ -4,12 +4,15 @@
 
 - dato når man scroller
 
+- Try changing link from thumb_filepath to filepath
+
 - login system
 
 - show succes -> toast/alert/something
 
 - rapporten:
 	- funker i den og den nettleseren
+	- Can only upload 2mb files
 
 
 <transition-group name="list">

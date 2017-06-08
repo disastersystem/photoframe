@@ -12,6 +12,14 @@ class GroupImageController extends Controller
         // $this->middleware('auth');
     }
 
+    /** 
+     * what
+     * @return 
+     */
+    public function all() {
+        return GroupImage::orderBy('id', 'desc')->paginate(20);
+    }
+
     /**
      * Updates a image caption.
      *

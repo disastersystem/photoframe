@@ -16844,24 +16844,20 @@ var _PhotoFrame2 = _interopRequireDefault(_PhotoFrame);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-Vue.component('drawer', {
-	template: '\n\t\t<div>\n\t\t\t<v-navigation-drawer class="grey lighten-4 pb-0" permanent absolute height="100%" light>\n\t\t\t\t<!-- <v-toolbar-side-icon light></v-toolbar-side-icon> -->\n\t\t\t\t<creategroup v-on:event_child="eventChild" style="margin: 20px 0;"></creategroup>\n\t\t\t\t<v-layout row align-center>\n\t\t\t\t\t\t\t<v-flex xs12>\n\t\t\t\t\t\t\t\t<v-subheader>\n\t\t\t\t\t\t\t\t\tGrupper\n\t\t\t\t\t\t\t\t</v-subheader>\n\t\t\t\t\t\t\t</v-flex>\n\t\t\t\t\t\t</v-layout>\n\t\t\t\t<v-list dense>\n\t\t\t\t\t<template v-for="(group, i) in groups">\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t<!-- <v-divider dark class="my-4" :key="i"></v-divider> -->\n\n\t\t\t\t\t\t<v-list-item>\n\t\t\t\t\t\t\t<v-list-tile>\n\t\t\t\t\t\t\t\t<v-list-tile-content>\n\t\t\t\t\t                <router-link :to="\'/group/\' + group.id" class="nav-item">{{ group.title }}</router-link>\n\t\t\t\t\t\t\t\t</v-list-tile-content>\n\t\t\t\t\t\t\t</v-list-tile>\n\t\t\t\t\t\t</v-list-item>\n\t\t\t\t\t</template>\n\t\t\t\t</v-list>\n\t\t\t</v-navigation-drawer>\n\t\t</div>\n\t',
+Vue.component('main-layout', {
+	template: '\n\t\t<div>\n\t        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>\n\t        \t\n\t        \t<creategroup v-on:event_child="eventChild" style="margin: 150px 0 40px 0;"></creategroup>\n\t\t\t\t\n\t\t\t\t<v-layout row align-center style="margin-bottom: -10px;">\n\t\t\t\t\t<v-flex xs12>\n\t\t\t\t\t\t<v-subheader>\n\t\t\t\t\t\t\tGrupper\n\t\t\t\t\t\t</v-subheader>\n\t\t\t\t\t</v-flex>\n\t\t\t\t</v-layout>\n\n\t            <v-list>\n\t                <template v-for="(group, i) in groups">\n\t\t\t\t\t\t<v-list-item>\n\t\t\t\t\t\t\t<v-list-tile>\n\t\t\t\t\t\t\t\t<v-list-tile-content>\n\t\t\t\t\t                <router-link :to="\'/group/\' + group.id" class="nav-item">{{ group.title }}</router-link>\n\t\t\t\t\t\t\t\t</v-list-tile-content>\n\t\t\t\t\t\t\t</v-list-tile>\n\t\t\t\t\t\t</v-list-item>\n\t\t\t\t\t</template>\n\t            </v-list>\n\t        </v-navigation-drawer>\n\n\t        <main>\n\t            <v-navigation-drawer temporary v-model="left"></v-navigation-drawer>\n\t            \n\t            <v-toolbar class="elevation-0 menu-bar" flat>\n\t\t            <v-toolbar-side-icon dark @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>\n\t\t        </v-toolbar>\n\n\t            <div>\n\t                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">\n\t                    <router-view></router-view>\n\t                </transition>\n\t            </div>\n\t        </main>\n\t    </div>\n\t',
 
 	data: function data() {
 		return {
-			items: [
-			// { heading: 'Opprett en gruppe' },
-			// { icon: 'add', text: 'Lag en ny gruppe', url: 'opprett-gruppe' },
-			// { divider: true },
-			{ heading: 'Grupper' }, { id: 1, icon: '', text: 'Tyristrand', selected: false }, { id: 2, icon: '', text: 'Familie', selected: false }, { id: 3, icon: '', text: 'Turgjengen', selected: false }],
-			groups: []
+			groups: [],
+			drawer: true,
+			left: null
 		};
 	},
 
 
 	components: {
-		'creategroup': _CreateGroup2.default,
-		'photoframe': _PhotoFrame2.default
+		'creategroup': _CreateGroup2.default
 	},
 
 	mounted: function mounted() {
@@ -18045,27 +18041,36 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {
     data: function data() {
         return {
             dialog: false,
 
-            items: [{
-                src: 'uploads/eli.jpg'
-            }, {
-                src: 'uploads/family.jpg'
-            }, {
-                src: 'uploads/fuji-san.jpg'
-            }, {
-                src: 'uploads/woman.jpg'
-            }]
+            items: [
+                // { filepath: '' }
+            ]
         };
     },
 
 
-    methods: {}
+    methods: {
+        getImages: function getImages() {
+            var _this = this;
+
+            axios.get('getphotos').then(function (response) {
+                // this.group = response.data[0]
+                // this.currentPage = this.group.title
+                // this.numImages = this.group.group_images.length
+                _this.items = response.data.data;
+                console.log(_this.items);
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        this.getImages();
+    }
 };
 
 /***/ }),
@@ -18117,19 +18122,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
 
 exports.default = {
     data: function data() {
         return {
             dialog: false,
-            url: 'group/' + this.$route.params.id + '/photo',
-            csrfToken: { 'X-CSRF-Token': window.Laravel.csrfToken }
+            csrfToken: {
+                'X-CSRF-Token': window.Laravel.csrfToken
+            },
+            maxsize: 20,
+            groupId: this.$route.params.id
         };
     },
 
 
     components: {
         Dropzone: _vue2Dropzone2.default
+    },
+
+    watch: {
+        '$route': function $route(to, from) {
+            // react to route changes...
+            this.groupId = this.$route.params.id;
+            console.log(this.groupId);
+        }
+    },
+
+    computed: {
+        groupurl: function groupurl() {
+            return 'group/' + this.groupId + '/photo';
+        }
     },
 
     methods: {
@@ -18140,6 +18166,7 @@ exports.default = {
             // self.group.group_images.unshift(response);
             // console.log(uploaded_file);
             this.$emit('eventchild', uploaded_file);
+            console.log(this.groupurl);
         }
     }
 };
@@ -18173,12 +18200,6 @@ var _PhotoFrame2 = _interopRequireDefault(_PhotoFrame);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -18318,7 +18339,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     data: function data() {
         return {
-            drawer: true
+            drawer: true,
+            left: null
         };
     }
 };
@@ -22748,7 +22770,7 @@ exports = module.exports = __webpack_require__(41)();
 
 
 // module
-exports.push([module.i, "\n.card[data-v-8b9fb28c] {\n    background: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-8b9fb28c] {\n    background: #fff;\n}\n.carousel[data-v-8b9fb28c] {\n    /*height: 935px;*/\n    /*display: flex;*/\n    height: 98vh;\n}\n.start-frame[data-v-8b9fb28c] {\n    position: fixed;\n    bottom: -6px;\n    left: -7px;\n    right: 0px;\n    width: 101%;\n    z-index: 10;\n}\n", ""]);
 
 // exports
 
@@ -24244,8 +24266,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', [_c('div', [_c('v-toolbar', {
     staticClass: "white elevation-0 "
   }, [_c('v-toolbar-title', {
-    staticClass: "hidden-sm-and-down toolbar-title"
-  }, [_vm._v(_vm._s(_vm.currentPage))]), _vm._v(" "), _c('uploaddialog', {
+    staticClass: "hidden-sm-and-down toolbar-title",
+    staticStyle: {
+      "font-size": "25px"
+    }
+  }, [_vm._v(_vm._s(_vm.currentPage))]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('uploaddialog', {
+    staticStyle: {
+      "margin-left": "10px"
+    },
     on: {
       "eventchild": _vm.eventChild
     }
@@ -24258,7 +24286,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "row": "",
       "wrap": ""
     }
-  }, _vm._l((_vm.group.group_images), function(image, index) {
+  }, [(_vm.numImages == 0) ? _c('p', {
+    staticStyle: {
+      "padding": "40px",
+      "font-size": "18px",
+      "color": "#aaa"
+    }
+  }, [_vm._v("\n                    Trykk på \"Legg til bilder\"-knappen\n                    oppe i høyre hjørne for å legge til bilder\n                    i gruppen.\n                ")]) : _vm._e(), _vm._v(" "), _vm._l((_vm.group.group_images), function(image, index) {
     return _c('v-flex', {
       key: index,
       attrs: {
@@ -24275,7 +24309,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "src": image.thumbnail_filepath
       }
     })])], 1)
-  }))], 1), _vm._v(" "), _c('photoframe')], 1)
+  })], 2)], 1), _vm._v(" "), _c('photoframe')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -24319,14 +24353,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('v-btn', {
-    staticStyle: {
-      "position": "fixed",
-      "bottom": "-6px",
-      "left": "-7px",
-      "right": "0px",
-      "width": "101%",
-      "z-index": "10"
-    },
+    staticClass: "start-frame",
     attrs: {
       "primary": "",
       "light": ""
@@ -24345,7 +24372,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('v-icon', [_vm._v("close")])], 1)], 1), _vm._v(" "), _c('v-carousel', {
-    staticClass: "hello",
     attrs: {
       "icon": "stop"
     }
@@ -24353,7 +24379,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('v-carousel-item', {
       key: i,
       attrs: {
-        "src": item.src
+        "src": item.filepath
       }
     })
   }))], 1)], 1)], 1)], 1)
@@ -24408,8 +24434,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("cloud_upload")])]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-card-title', [_vm._v("Velg bilder å legge til")])], 1), _vm._v(" "), _c('v-card-row', [_c('v-card-text', [_c('dropzone', {
     attrs: {
       "id": "myVueDropzone",
+      "maxFileSizeInMB": _vm.maxsize,
       "headers": _vm.csrfToken,
-      "url": _vm.url
+      "url": _vm.groupurl
     },
     on: {
       "vdropzone-success": _vm.showSuccess
@@ -24428,17 +24455,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.dialog = false
       }
     }
-  }, [_vm._v("Lukk")]), _vm._v(" "), _c('v-btn', {
-    staticClass: "blue--text darken-1",
-    attrs: {
-      "flat": ""
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.dialog = false
-      }
-    }
-  }, [_vm._v("Lagre")])], 1)], 1)], 1)], 1)
+  }, [_vm._v("Avbryt")])], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

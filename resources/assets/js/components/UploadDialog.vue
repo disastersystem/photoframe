@@ -11,15 +11,19 @@
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
-                        <dropzone id="myVueDropzone" v-bind:headers="csrfToken" v-bind:url="url" v-on:vdropzone-success="showSuccess">
+                        <dropzone id="myVueDropzone" 
+                            :maxFileSizeInMB="maxsize"
+                            v-bind:headers="csrfToken"
+                            v-bind:url="groupurl"
+                            v-on:vdropzone-success="showSuccess">
                             <!-- Optional parameters if any! -->
                             <!-- <input type="hidden" name="token" v-bind:value="tok"> -->
                         </dropzone>
                     </v-card-text>
                 </v-card-row>
                 <v-card-row actions>
-                    <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Lukk</v-btn>
-                    <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Lagre</v-btn>
+                    <!-- <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Lukk</v-btn> -->
+                    <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Avbryt</v-btn>
                 </v-card-row>
             </v-card>
         </v-dialog>
@@ -34,13 +38,30 @@
         data () {
             return {
                 dialog: false,
-                url: 'group/' + this.$route.params.id + '/photo',
-                csrfToken: { 'X-CSRF-Token': window.Laravel.csrfToken }
+                csrfToken: { 
+                    'X-CSRF-Token': window.Laravel.csrfToken
+                },
+                maxsize: 20,
+                groupId: this.$route.params.id
             }
         },
 
         components: {
             Dropzone
+        },
+
+        watch: {
+            '$route' (to, from) {
+                // react to route changes...
+                this.groupId = this.$route.params.id
+                console.log(this.groupId)
+            }
+        },
+
+        computed: {
+            groupurl() {
+                return 'group/' + this.groupId + '/photo'
+            }
         },
 
         methods: {
@@ -51,6 +72,7 @@
                 // self.group.group_images.unshift(response);
                 // console.log(uploaded_file);
                 this.$emit('eventchild', uploaded_file)
+                console.log(this.groupurl);
             }
         }
     }
