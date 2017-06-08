@@ -10,6 +10,9 @@
                     <v-card-title>Velg bilder å legge til</v-card-title>
                 </v-card-row>
                 <v-card-row>
+                    <p style="padding-left: 20px;">Trykk på boksen under, eller dra bilder til boksen for å laste opp.</p>
+                </v-card-row>
+                <v-card-row>
                     <v-card-text>
                         <dropzone id="myVueDropzone" 
                             :maxFileSizeInMB="maxsize"

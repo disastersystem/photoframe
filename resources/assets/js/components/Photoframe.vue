@@ -1,7 +1,9 @@
 <template>
-    <v-layout row justify-center style="z-index: 250;">
+    <v-layout row justify-center style="z-index: 990;">
         <v-dialog v-model="dialog" fullscreen transition="v-dialog-bottom-transition" :overlay=false>
-            <v-btn primary light slot="activator" class="start-frame">Start bilderammemodus</v-btn>
+            <v-btn primary light slot="activator" style="font-size: 20px;" class="start-frame">
+                Start bilderammemodus
+            </v-btn>
             <v-card>
                 <v-card-row>
                     <v-toolbar style="" class="elevation-0">

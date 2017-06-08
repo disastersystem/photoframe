@@ -13,6 +13,7 @@
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
+                        <p>Ved å opprette en gruppe vil du få tilgang til å dele bilder privat med venner og familie.</p>
                         <v-layout>
                             <v-text-field xs8
                                 name="groupname"

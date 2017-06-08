@@ -17807,6 +17807,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 /* 147 */
@@ -18066,6 +18067,8 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
 
 exports.default = {
     data: function data() {
@@ -18118,6 +18121,9 @@ var _vue2Dropzone2 = _interopRequireDefault(_vue2Dropzone);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
 //
 //
 //
@@ -24009,7 +24015,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "activator"
   }, [_vm._v("\n            Legg til gruppe\n            "), _c('i', {
     staticClass: "material-icons icon icon--light icon--right"
-  }, [_vm._v("\n                add\n            ")])]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-card-title', [_vm._v("Opprett gruppe")])], 1), _vm._v(" "), _c('v-card-row', [_c('v-card-text', [_c('v-layout', [_c('v-text-field', {
+  }, [_vm._v("\n                add\n            ")])]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-card-title', [_vm._v("Opprett gruppe")])], 1), _vm._v(" "), _c('v-card-row', [_c('v-card-text', [_c('p', [_vm._v("Ved å opprette en gruppe vil du få tilgang til å dele bilder privat med venner og familie.")]), _vm._v(" "), _c('v-layout', [_c('v-text-field', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -24175,7 +24181,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('v-layout', {
     staticStyle: {
-      "z-index": "250"
+      "z-index": "990"
     },
     attrs: {
       "row": "",
@@ -24203,12 +24209,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('v-btn', {
     staticClass: "start-frame",
+    staticStyle: {
+      "font-size": "20px"
+    },
     attrs: {
       "primary": "",
       "light": ""
     },
     slot: "activator"
-  }, [_vm._v("Start bilderammemodus")]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-toolbar', {
+  }, [_vm._v("\n            Start bilderammemodus\n        ")]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-toolbar', {
     staticClass: "elevation-0"
   }, [_c('v-btn', {
     attrs: {
@@ -24280,7 +24289,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "activator"
   }, [_vm._v("\n            Legg til bilder\n            "), _c('i', {
     staticClass: "material-icons icon icon--dark icon--light icon--right"
-  }, [_vm._v("cloud_upload")])]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-card-title', [_vm._v("Velg bilder å legge til")])], 1), _vm._v(" "), _c('v-card-row', [_c('v-card-text', [_c('dropzone', {
+  }, [_vm._v("cloud_upload")])]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-card-title', [_vm._v("Velg bilder å legge til")])], 1), _vm._v(" "), _c('v-card-row', [_c('p', {
+    staticStyle: {
+      "padding-left": "20px"
+    }
+  }, [_vm._v("Trykk på boksen under, eller dra bilder til boksen for å laste opp.")])]), _vm._v(" "), _c('v-card-row', [_c('v-card-text', [_c('dropzone', {
     attrs: {
       "id": "myVueDropzone",
       "maxFileSizeInMB": _vm.maxsize,
