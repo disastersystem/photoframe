@@ -3,8 +3,6 @@
 
 - dato når man scroller
 
-- Try changing link from thumb_filepath to filepath
-
 - xs12 på last opp og members knap
 
 - Delete group functionality
@@ -13,9 +11,13 @@
 
 - show succes -> toast/alert/something
 
-- rapporten:
-	- funker i den og den nettleseren
+- legg in hjelpetekst på dialogs
 
 
 <transition-group name="list">
 
+- scrollable invitation modal
+
+BUGS:
+- Bilde legger seg på feil side etter de blir henta ut igjen?
+	- Miss match mellom id i database, url og dropzone form?

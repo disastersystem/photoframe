@@ -30,6 +30,7 @@
         <div id="app">
             <!-- <aside id="main-aside"> -->
                 <!-- <drawer></drawer> -->
+                <v-app>
                 <main-layout></main-layout>
             <!-- </aside> -->
 
@@ -39,7 +40,7 @@
                 </transition>
 
             </main> -->
-
+</v-app>
 
         </div>
 

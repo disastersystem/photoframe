@@ -2,6 +2,7 @@
 
 # views
 Route::get('/', function () {
+	DB::delete('delete from groups');
     return view('index');
 });
 
@@ -11,6 +12,10 @@ Route::get('getgroups', 'GroupController@index');
 Route::get('getgroup/{group_id}/', 'GroupController@specific');
 Route::post('group/{group_id}/photo', 'GroupController@addPhoto');
 Route::get('getphotos', 'GroupImageController@all');
+
+Route::get('getuser/{id}', function() {
+	// return Group::where('id', $id)->get();
+});
 
 // Route::post('sendEntryMail', 'MailController@sendEntryMail');
 

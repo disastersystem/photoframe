@@ -40,7 +40,6 @@
                     // this.currentPage = this.group.title
                     // this.numImages = this.group.group_images.length
                     this.items = response.data.data;
-                    console.log(this.items);
                 });
             }
         },

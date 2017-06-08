@@ -54,7 +54,6 @@
             '$route' (to, from) {
                 // react to route changes...
                 this.groupId = this.$route.params.id
-                console.log(this.groupId)
             }
         },
 
@@ -72,7 +71,6 @@
                 // self.group.group_images.unshift(response);
                 // console.log(uploaded_file);
                 this.$emit('eventchild', uploaded_file)
-                console.log(this.groupurl);
             }
         }
     }

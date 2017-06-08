@@ -75,7 +75,6 @@
             eventChild(data) {
                 this.group.group_images.unshift(data)
                 this.numImages = this.group.group_images.length;
-                console.log(this.group.group_images);
             }
         }, 
 

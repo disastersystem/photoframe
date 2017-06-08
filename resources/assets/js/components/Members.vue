@@ -1,6 +1,6 @@
 <template>
     <v-layout row justify-center>
-        <v-dialog v-model="dialog" width="600">
+        <v-dialog v-model="dialog" width="400">
             <v-btn class="indigo" slot="activator">
                 <!-- Medlemmer -->
                 <i class="material-icons icon icon--light icon--center">
@@ -13,17 +13,13 @@
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
-                        <v-layout>
-                            <v-text-field
-                                name="person"
-                                label="Søk etter en person">
-                            </v-text-field>
-                        </v-layout>
+                        <p>Legg til venner eller familie du vil dele fotosamlingen med.
+                        Du kan søke på e-post adresse, eller navn på de som allerede er registrert.</p>
 
-                        <v-layout>
+                        <div>
                             <invitation></invitation>
-                            <member></member>
-                        </v-layout>
+                            <member style="margin-top: 50px;"></member>
+                        </div>
                     </v-card-text>
                 </v-card-row>
                 <v-card-row actions class="dialog-footer">
@@ -43,6 +39,7 @@
 <script>
     import Member from '../components/Member'
     import Invitation from '../components/Invitation'
+    import Search from '../components/Search'
 
     export default {
         data () {
