@@ -1,6 +1,4 @@
 
-- reponsivt design: fokus på meny
-
 - dato når man scroller
 
 - xs12 på last opp og members knap
@@ -9,10 +7,9 @@
 
 - login system
 
+- clear upload boksen når de er ferdig opplasta
+
 - show succes -> toast/alert/something
-
-- legg in hjelpetekst på dialogs
-
 
 <transition-group name="list">
 

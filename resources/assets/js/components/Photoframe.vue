@@ -1,13 +1,13 @@
 <template>
     <v-layout row justify-center style="z-index: 990;">
-        <v-dialog v-model="dialog" fullscreen transition="v-dialog-bottom-transition" :overlay=false>
-            <v-btn primary light slot="activator" style="font-size: 20px;" class="start-frame">
+        <v-dialog v-model="dialog" fullscreen transition="v-dialog-bottom-transition" :overlay=false style="z-index: 100;">
+            <v-btn primary light slot="activator" style="font-size: 20px; z-index: 100;" class="start-frame">
                 Start bilderammemodus
             </v-btn>
             <v-card>
                 <v-card-row>
                     <v-toolbar style="" class="elevation-0">
-                        <v-btn icon="icon" @click.native="dialog = false" light>
+                        <v-btn icon="icon" @click.native="dialog = false" light style="padding-left: 30px;">
                             <v-icon>close</v-icon>
                         </v-btn>
                         <!-- <v-toolbar-title>Settings</v-toolbar-title> -->

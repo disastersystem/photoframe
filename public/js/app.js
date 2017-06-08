@@ -24194,6 +24194,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.dialog),
       expression: "dialog"
     }],
+    staticStyle: {
+      "z-index": "100"
+    },
     attrs: {
       "fullscreen": "",
       "transition": "v-dialog-bottom-transition",
@@ -24210,7 +24213,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('v-btn', {
     staticClass: "start-frame",
     staticStyle: {
-      "font-size": "20px"
+      "font-size": "20px",
+      "z-index": "100"
     },
     attrs: {
       "primary": "",
@@ -24220,6 +24224,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n            Start bilderammemodus\n        ")]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-toolbar', {
     staticClass: "elevation-0"
   }, [_c('v-btn', {
+    staticStyle: {
+      "padding-left": "30px"
+    },
     attrs: {
       "icon": "icon",
       "light": ""
@@ -24304,20 +24311,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "vdropzone-success": _vm.showSuccess
     }
   })], 1)], 1), _vm._v(" "), _c('v-card-row', {
+    staticStyle: {
+      "border-top": "1px solid #ddd",
+      "margin-top": "20px"
+    },
     attrs: {
       "actions": ""
     }
   }, [_c('v-btn', {
-    staticClass: "blue--text darken-1",
-    attrs: {
-      "flat": ""
+    staticClass: "elevation-1",
+    staticStyle: {
+      "margin-right": "12px"
     },
     nativeOn: {
       "click": function($event) {
         _vm.dialog = false
       }
     }
-  }, [_vm._v("Avbryt")])], 1)], 1)], 1)], 1)
+  }, [_vm._v("Lukk")])], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

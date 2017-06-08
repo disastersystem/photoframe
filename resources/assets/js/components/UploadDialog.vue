@@ -24,9 +24,9 @@
                         </dropzone>
                     </v-card-text>
                 </v-card-row>
-                <v-card-row actions>
+                <v-card-row actions style="border-top: 1px solid #ddd; margin-top: 20px;">
                     <!-- <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Lukk</v-btn> -->
-                    <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Avbryt</v-btn>
+                    <v-btn class="elevation-1" @click.native="dialog = false" style="margin-right: 12px;">Lukk</v-btn>
                 </v-card-row>
             </v-card>
         </v-dialog>
