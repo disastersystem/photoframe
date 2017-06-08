@@ -2,7 +2,6 @@
 
 # views
 Route::get('/', function () {
-	DB::delete('delete from groups');
     return view('index');
 });
 
