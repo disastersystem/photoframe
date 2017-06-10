@@ -28,22 +28,11 @@
     </head>
     <body>
         <div id="app">
-            <!-- <aside id="main-aside"> -->
-                <!-- <drawer></drawer> -->
-                <v-app>
+            <v-app>
                 <main-layout></main-layout>
-            <!-- </aside> -->
-
-            <!-- <main id="main-content">                
-                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">
-                    <router-view></router-view>
-                </transition>
-
-            </main> -->
-</v-app>
-
+            </v-app>
         </div>
-
+        
         <script src="./js/app.js"></script>
     </body>
 </html>

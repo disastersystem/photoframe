@@ -1,3 +1,4 @@
+/* resets */
 html, body {
     padding: 0;
     margin: 0;
@@ -8,34 +9,31 @@ img {
     display: block;
 }
 
-.is-active {
-    /*background-color: #42f;*/
-    /*color: #fff;*/
-    /*border-bottom: 2px solid red;*/
-    background: #ccc;
-}
-
-.nav-item {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    /*padding: 20px;*/
-}
-
-.list__item, .list__tile  {
-    padding: 0; margin: 0;
-}
-
-.list__item {
-    padding: 0 30px;
-}
-
 /* body scrollbar */
 body::-webkit-scrollbar { width: 10px; }
 body::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3) }
 body::-webkit-scrollbar-thumb { background: #00B89C; }
 body::-webkit-scrollbar-thumb:hover { background: hsla(45, 100%, 69%, 1); }
+
+/* main manu */
+.navigation-drawer .list__item,
+.navigation-drawer .list__tile  {
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-drawer .nav-item {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    text-decoration: none;
+    padding: 30px;
+}
+
+.is-active {
+    background: #ccc;
+}
 
 /* maintain video aspect ratio */
 .video {
@@ -63,32 +61,6 @@ body::-webkit-scrollbar-thumb:hover { background: hsla(45, 100%, 69%, 1); }
     opacity: 0;
 }
 
-/* main layout */
-/*#app {
-    display: flex;
-}*/
-
-/*#main-content {
-    flex-basis: 100%;
-}*/
-
-/*#main-aside {
-    flex: 0 0 300px;
-    background: #F5F5F5;
-}*/
-
-#navigation-1 a {
-    text-decoration: none;
-}
-
-.nav-item {
-    text-decoration: none;
-    width: 100%;
-}
-
-/*.selected {
-    background-color: #ddd;
-}*/
 
 /* keep the drawer underneath the dialogs/modals */
 .navigation-drawer {
