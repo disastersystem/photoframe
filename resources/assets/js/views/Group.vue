@@ -4,7 +4,8 @@
             <v-toolbar class="white elevation-0 ">
                 <v-toolbar-title class="hidden-sm-and-down toolbar-title">{{ currentPage }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <upload v-on:eventchild="eventChild" v-if="numImages > 0"></upload>
+                <upload v-on:eventchild="eventChild"></upload>
+                <!-- v-if="numImages > 0" -->
                 <people></people>
             </v-toolbar>
         </div>

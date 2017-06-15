@@ -18104,6 +18104,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
     data: function data() {
@@ -23814,11 +23815,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "white elevation-0 "
   }, [_c('v-toolbar-title', {
     staticClass: "hidden-sm-and-down toolbar-title"
-  }, [_vm._v(_vm._s(_vm.currentPage))]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), (_vm.numImages > 0) ? _c('upload', {
+  }, [_vm._v(_vm._s(_vm.currentPage))]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('upload', {
     on: {
       "eventchild": _vm.eventChild
     }
-  }) : _vm._e(), _vm._v(" "), _c('people')], 1)], 1), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('people')], 1)], 1), _vm._v(" "), _c('div', {
     attrs: {
       "id": "images-wrapper"
     }
