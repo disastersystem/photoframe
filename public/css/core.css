@@ -2,6 +2,10 @@
 html, body {
     padding: 0;
     margin: 0;
+    background: #fff;
+    /*background: #F9F9F9;*/
+    /*min-height: 100%;*/
+    /*background: red;*/
 }
 
 img {
@@ -73,6 +77,6 @@ body::-webkit-scrollbar-thumb:hover { background: hsla(45, 100%, 69%, 1); }
     width: 100px;
     left: 0px;
     top: 10px;
-    z-index: 30;
+    z-index: 10;
     background: rgba(255, 255, 255, 0);
 }

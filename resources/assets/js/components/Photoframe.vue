@@ -1,12 +1,12 @@
 <template>
-    <v-layout row justify-center style="z-index: 990;">
-        <v-dialog v-model="dialog" fullscreen transition="v-dialog-bottom-transition" :overlay=false style="z-index: 100;">
-            <v-btn primary light slot="activator" style="font-size: 20px; z-index: 100;" class="start-frame">
-                Start bilderammemodus
+    <v-layout row justify-center style="z-index: 800;">
+        <v-dialog v-model="dialog" fullscreen transition="v-dialog-bottom-transition" :overlay=false>
+            <v-btn primary light slot="activator" class="start-frame">
+                start bilderammemodus
             </v-btn>
             <v-card>
                 <v-card-row>
-                    <v-toolbar style="" class="elevation-0">
+                    <v-toolbar style="z-index: 900;" class="elevation-0">
                         <v-btn icon="icon" @click.native="dialog = false" light style="padding-left: 30px;">
                             <v-icon>close</v-icon>
                         </v-btn>
@@ -15,7 +15,7 @@
                     </v-toolbar>
 
                     <v-carousel icon="stop">
-                        <v-carousel-item v-for="(item, i) in items" v-bind:src="item.filepath" :key="i"></v-carousel-item>
+                        <v-carousel-item v-for="(photo, i) in photos" v-bind:src="photo.filepath" :key="i"></v-carousel-item>
                     </v-carousel>
                 </v-card-row>
             </v-card>
@@ -29,25 +29,20 @@
             return {
                 dialog: false,
 
-                items: [
-                    // { filepath: '' }
-                ]
+                photos: []
             }
         },
 
         methods: {
-            getImages() {
+            setPhotos() {
                 axios.get('getphotos').then(response => {
-                    // this.group = response.data[0]
-                    // this.currentPage = this.group.title
-                    // this.numImages = this.group.group_images.length
-                    this.items = response.data.data;
+                    this.photos = response.data.data;
                 });
             }
         },
 
         mounted() {
-            this.getImages()
+            this.setPhotos()
         }
     }
 </script>
@@ -55,6 +50,10 @@
 <style scoped>
     .card {
         background: #fff;
+    }
+
+    .dialog {
+        z-index: 100;
     }
 
     .carousel {
@@ -69,6 +68,7 @@
         left: -7px;
         right: 0px;
         width: 101%;
-        z-index: 10;
+        z-index: 100;
+        font-size: 20px;
     }
 </style>

@@ -1,8 +1,8 @@
 import './bootstrap'
 import router from './router'
 
-import CreateGroup from './components/CreateGroup'
-import PhotoFrame from './components/PhotoFrame'
+import creategroup from './components/dialogs/CreateGroup'
+import photoframe from './components/Photoframe'
 
 
 Vue.component('main-layout', {
@@ -46,6 +46,8 @@ Vue.component('main-layout', {
 	                </transition>
 	            </div>
 	        </main>
+
+	        <photoframe></photoframe>
 	    </div>
 	`,
 
@@ -58,13 +60,13 @@ Vue.component('main-layout', {
 	},
 
 	components: {
-		'creategroup': CreateGroup
+		creategroup, photoframe
 	},
 
 	mounted() {
 		axios.get('getgroups').then(response => {
         	this.groups = response.data;
-        });
+        })
 	},
 
 	methods: {

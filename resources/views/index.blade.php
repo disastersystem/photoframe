@@ -10,7 +10,7 @@
 
         <!-- Font library and icon pack -->
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-        <!-- Vuetify.js -->
+        <!-- Vuetify -->
         <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" type="text/css" href="css/core.css">

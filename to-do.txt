@@ -2,14 +2,29 @@
 - kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
 - add group modal, clicking on the text field closes modal
 - få orden på z-index'er
-- move photoframe component outside group into main area, and only show the button
-if there is any images do display
+
+- align "arrow_back Velg eller opprett en gruppe."
+
+- Shaking upload button, when there is no images in the group.
+
+- not allowed to submit if empty
+
+- look into tags til invite i stedet?
+
+- Bilderammemodus
+	- settings (timer, choose tansition effect(?), new images updated(?))
+	- kun X og arrow on hover and click
+	- increase the size of the buttons
+	- nd only show the button if there is any images do display
 
 - dato når man scroller
 
 - xs12 på last opp og members knapp
 
 - Delete group functionality
+- Delete photos functionality
+
+- diable "save"-button until changes has been made
 
 - login system
 
@@ -22,7 +37,16 @@ if there is any images do display
 <transition-group name="list">
 
 - scrollable invitation modal
+- the same person can only be added once in the invitation array
+
+- pause bilderamme when closed
+
+- Fullscreen når enkelt bilder velges?
+
+- set vue to production mode
 
 BUGS:
 - Bilde legger seg på feil side etter de blir henta ut igjen?
 	- Miss match mellom id i database, url og dropzone form?
+
+- ERROR I EDGE!!
