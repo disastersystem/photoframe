@@ -20,7 +20,6 @@
                         
                         <v-text-field
                             name="groupname"
-                            
                             class="input-group--focused"
                             label="Skriv inn et gruppenavn"
                             v-model="form.title">

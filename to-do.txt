@@ -45,8 +45,24 @@
 
 - set vue to production mode
 
+- figure out what to do with vodal css import
+
 BUGS:
 - Bilde legger seg på feil side etter de blir henta ut igjen?
 	- Miss match mellom id i database, url og dropzone form?
 
 - ERROR I EDGE!!
+
+
+Pug eller jade ellerno
+stylus
+
+dev production --watch something
+
+https://laravel.com/docs/5.4/mix
+
+
+// "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules",
+// "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
+// "hmr": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+// "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"

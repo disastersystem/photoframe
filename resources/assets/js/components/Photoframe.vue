@@ -1,43 +1,45 @@
 <template>
-    <v-layout row justify-center style="z-index: 800;">
-        <v-dialog v-model="dialog" fullscreen transition="v-dialog-bottom-transition" :overlay=false>
-            <v-btn primary light slot="activator" class="start-frame">
-                start bilderammemodus
-            </v-btn>
-            <v-card>
-                <v-card-row>
-                    <v-toolbar style="z-index: 900;" class="elevation-0">
-                        <v-btn icon="icon" @click.native="dialog = false" light style="padding-left: 30px;">
-                            <v-icon>close</v-icon>
-                        </v-btn>
-                        <!-- <v-toolbar-title>Settings</v-toolbar-title> -->
-                        <!-- <v-btn light flat @click.native="dialog = false">Save</v-btn> -->
-                    </v-toolbar>
+    <div>
+        <vodal :show="show" animation="slideUp" @hide="show = false"
+        :width="vWidth" :height="vHeight" :closeButton="true" style="border-radius: 0;">
+            <!-- <div>A vue modal with animations.</div> -->
+            <v-carousel icon="stop">
+                <v-carousel-item v-for="(photo, i) in photos" v-bind:src="photo.filepath" :key="i"></v-carousel-item>
+            </v-carousel>
+        </vodal>
 
-                    <v-carousel icon="stop">
-                        <v-carousel-item v-for="(photo, i) in photos" v-bind:src="photo.filepath" :key="i"></v-carousel-item>
-                    </v-carousel>
-                </v-card-row>
-            </v-card>
-        </v-dialog>
-    </v-layout>
+        <button class="btn scale" style="animation-delay: 600ms;" @click="show = true">
+            start bilderammemodus
+        </button>
+    </div>
 </template>
 
 <script>
+    import Vodal from 'vodal';
+
     export default {
-        data () {
+        data() {
             return {
-                dialog: false,
+                show: false,
 
                 photos: []
             }
+        },
+
+        computed: {
+            vWidth() { return window.innerWidth },
+            vHeight() { return window.innerHeight }
+        },
+
+        components: {
+            Vodal
         },
 
         methods: {
             setPhotos() {
                 axios.get('getphotos').then(response => {
                     this.photos = response.data.data;
-                });
+                })
             }
         },
 
@@ -48,27 +50,31 @@
 </script>
 
 <style scoped>
-    .card {
-        background: #fff;
-    }
-
-    .dialog {
-        z-index: 100;
+    .btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        width: 100%;
+        z-index: 90;
+        font-size: 20px;
+        background: #3486D7;
+        color: #fff;
     }
 
     .carousel {
-        /*height: 935px;*/
-        /*display: flex;*/
-        height: 98vh;
+        height: 100%;
+        margin: 0;
     }
 
-    .start-frame {
-        position: fixed;
-        bottom: -6px;
-        left: -7px;
-        right: 0px;
-        width: 101%;
-        z-index: 100;
-        font-size: 20px;
+    .carousel .carousel__controls {
+        visibility: hidden;
+        display: none;
+    }
+
+    .carousel .carousel__left {
+        visibility: hidden;
+        display: none;
     }
 </style>

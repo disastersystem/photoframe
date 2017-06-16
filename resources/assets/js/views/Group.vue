@@ -70,7 +70,7 @@
                 this.group.group_images.unshift(data)
                 this.numImages = this.group.group_images.length;
             }
-        }, 
+        },
 
         mounted() {
             // this.currentPage = this.$route.params.id
@@ -82,7 +82,7 @@
 <style scoped>
     #images-wrapper {
         padding: 2%;
-/*        display: flex;
+        /*display: flex;
         justify-content: center;
         align-items: center;
         height: 70vh;

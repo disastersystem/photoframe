@@ -1,6 +1,6 @@
 <template>
-    <v-layout row justify-center style="margin-left: 10px;">
-        <v-dialog v-model="dialog" width="600" persistent>
+    <v-layout row justify-center style="z-index: 8999;">
+        <v-dialog v-model="dialog" width="600px" persistent style="z-index: 8999;">
             <v-btn success light slot="activator" style="margin-right: 30px;">
                 Legg til bilder
                 <i class="material-icons icon icon--dark icon--light icon--right">cloud_upload</i>
@@ -77,5 +77,10 @@
 <style scoped>
     .card {
         background: #fff;
+    }
+
+    .dialog {
+        width: 100vw;
+        height: 100vh;
     }
 </style>
