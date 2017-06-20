@@ -14,17 +14,20 @@
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
-                        <dropzone id="myVueDropzone" 
+                        <dropzone id="myVueDropzone"
+                            ref="dropzoneInstance"
                             :maxFileSizeInMB="maxSize"
-                            v-bind:headers="csrfToken"
-                            v-bind:url="groupUrl"
-                            v-on:vdropzone-success="showSuccess">
+                            :headers="csrfToken"
+                            :url="url"
+                            :language="{ dictDefaultMessage: '<br>Dra filer hit for å laste opp' }"
+                            :showRemoveLink="false"
+                            @vdropzone-success="showSuccess">
                         </dropzone>
                     </v-card-text>
                 </v-card-row>
-                <v-card-row actions style="border-top: 1px solid #ddd; margin-top: 20px;">
+                <v-card-row actions class="dialog-footer">
                     <!-- <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Lukk</v-btn> -->
-                    <v-btn class="elevation-1" @click.native="dialog = false" style="margin-right: 12px;">Lukk</v-btn>
+                    <v-btn class="elevation-1" @click.native="closeDialog" style="margin-right: 12px;">Lukk</v-btn>
                 </v-card-row>
             </v-card>
         </v-dialog>
@@ -43,13 +46,7 @@
                     'X-CSRF-Token': window.Laravel.csrfToken
                 },
                 maxSize: 20,
-                groupId: this.$route.params.id
-            }
-        },
-
-        computed: {
-            groupUrl() {
-                return 'group/' + this.groupId + '/photo'
+                url: 'group/' + this.$route.params.id + '/photo'
             }
         },
 
@@ -57,18 +54,23 @@
             Dropzone
         },
 
-        // react to route changes...
+        // react to route changes
         watch: {
             '$route' (to, from) {
-                this.groupId = this.$route.params.id
+                // update the upload url with the new group id
+                this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo')
             }
         },
 
         methods: {
             showSuccess(file, uploaded_file) {
-                // empty upload field
-                // set no size limit
                 this.$emit('eventchild', uploaded_file)
+            },
+
+            closeDialog() {
+                this.dialog = false
+                // empty uploaded files
+                this.$refs.dropzoneInstance.removeAllFiles()
             }
         }
     }
@@ -79,8 +81,8 @@
         background: #fff;
     }
 
-    .dialog {
-        width: 100vw;
-        height: 100vh;
+    .dialog-footer {
+        border-top: 1px solid #ddd;
+        margin-top: 20px;
     }
 </style>

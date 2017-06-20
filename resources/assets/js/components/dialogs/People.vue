@@ -80,7 +80,9 @@
                         </i>
                         Tilbake
                     </v-btn>
-                    <v-btn class="white--text" success @click.native="dialog = false">Lagre</v-btn>
+                    <v-btn class="white--text" success @click.native="dialog = false" :disabled="invitations.length == 0">
+                        Lagre
+                    </v-btn>
                 </v-card-row>
             </v-card>
         </v-dialog>

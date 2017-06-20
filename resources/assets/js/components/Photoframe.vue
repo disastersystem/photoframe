@@ -1,26 +1,29 @@
 <template>
     <div>
-        <vodal :show="show" animation="slideUp" @hide="show = false"
-        :width="vWidth" :height="vHeight" :closeButton="true" style="border-radius: 0;">
-            <!-- <div>A vue modal with animations.</div> -->
-            <v-carousel icon="stop">
-                <v-carousel-item v-for="(photo, i) in photos" v-bind:src="photo.filepath" :key="i"></v-carousel-item>
-            </v-carousel>
+        <vodal :show="show" animation="slideUp" @hide="closeVodal" :width="vWidth" :height="vHeight">
+            <carousel :auto="auto" :watch-items="photos">
+                <carousel-item v-for="(photo, index) in photos">
+                    <img v-bind:src="photo.filepath" :key="index">
+                </carousel-item>
+            </carousel>
         </vodal>
 
-        <button class="btn scale" style="animation-delay: 600ms;" @click="show = true">
+        <button class="btn scale" style="animation-delay: 600ms;" @click="show = true; auto = 3000">
+            <!-- v-if="photos.length > 0" -->
             start bilderammemodus
         </button>
     </div>
 </template>
 
 <script>
-    import Vodal from 'vodal';
+    import Vodal from 'vodal'
+    import { Carousel, CarouselItem } from 'vue-l-carousel'
 
     export default {
         data() {
             return {
                 show: false,
+                auto: 3000,
 
                 photos: []
             }
@@ -32,14 +35,21 @@
         },
 
         components: {
-            Vodal
+            Vodal,
+            'carousel': Carousel,
+            'carousel-item': CarouselItem
         },
 
         methods: {
             setPhotos() {
                 axios.get('getphotos').then(response => {
-                    this.photos = response.data.data;
+                    this.photos = response.data.data
                 })
+            },
+
+            closeVodal() {
+                this.show = false
+                this.auto = 0
             }
         },
 
@@ -63,18 +73,18 @@
         color: #fff;
     }
 
-    .carousel {
+    /*.carousel {
         height: 100%;
         margin: 0;
-    }
+    }*/
 
-    .carousel .carousel__controls {
-        visibility: hidden;
-        display: none;
-    }
-
-    .carousel .carousel__left {
-        visibility: hidden;
-        display: none;
-    }
+    .v-carousel{width:100%;position:relative}
+    .v-carousel,.v-carousel-items{overflow:hidden}
+    .v-carousel-dots{position:absolute;bottom:10px;left:0;width:100%;text-align:center}
+    .v-carousel-dot{cursor:pointer;display:inline-block;width:10px;height:10px;margin:0 5px;border-radius:5px;background:rgba(0,0,0,.5)}
+    .v-carousel-dot.active{background:#000;cursor:default}
+    .v-carousel-nav{cursor:pointer;position:absolute;line-height:30px;color:#fff;padding:0 5px;background:rgba(0,0,0,.5);top:50%;margin-top:-15px}
+    .v-carousel-nav.prev{left:0}
+    .v-carousel-nav.next{right:0}
+    .v-carousel-item{width:100%;float:left}
 </style>

@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "moment": "^2.17.1",
-    "vodal": "^2.1.0"
+    "vodal": "^2.1.0",
+    "vue-l-carousel": "^1.0.1"
   }
 }

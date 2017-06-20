@@ -36,7 +36,9 @@
                         </i>
                         Avbryt
                     </v-btn>
-                    <v-btn class="white--text" success @click.native="saveGroup">Lagre</v-btn>
+                    <v-btn class="white--text" success @click.native="saveGroup" :disabled="form.title == ''">
+                        Lagre
+                    </v-btn>
                 </v-card-row>
             </v-card>
         </v-dialog>
