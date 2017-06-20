@@ -3,6 +3,9 @@
 ************** bytte ut modals.. med bulma lignende
 **************
 
+- stretch either width or height in modal depending on what hits the wall first
+	max-height, max-with?
+
 - kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
 
 - align "Velg eller opprett en gruppe."
@@ -20,7 +23,7 @@
 
 - xs12 på last opp og members knapp
 
-- Delete group functionality
+- Delete group functionality -> setting knapp i hjørnet i gruppa
 - Delete photos functionality
 
 - login system
@@ -31,7 +34,6 @@
 
 <transition-group name="list">
 
-- scrollable invitation modal
 - the same person can only be added once in the invitation array
 
 - Fullscreen når enkelt bilder velges?
@@ -52,6 +54,7 @@ dev production --watch something
 
 https://laravel.com/docs/5.4/mix
 
+What's up with having to include CSS manually?
 
 // "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules",
 // "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",

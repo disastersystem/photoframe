@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vodal :show="show" animation="slideUp" @hide="closeVodal" :width="vWidth" :height="vHeight">
+        <vodal :mask="false" :show="show" animation="slideUp" @hide="closeVodal" :width="100" :height="100" measure="%">
             <carousel :auto="auto" :watch-items="photos">
                 <carousel-item v-for="(photo, index) in photos">
                     <img v-bind:src="photo.filepath" :key="index">
@@ -8,7 +8,7 @@
             </carousel>
         </vodal>
 
-        <button class="btn scale" style="animation-delay: 600ms;" @click="show = true; auto = 3000">
+        <button class="btn scale" style="animation-delay: 600ms;" @click="openModal">
             <!-- v-if="photos.length > 0" -->
             start bilderammemodus
         </button>
@@ -29,15 +29,10 @@
             }
         },
 
-        computed: {
-            vWidth() { return window.innerWidth },
-            vHeight() { return window.innerHeight }
-        },
-
         components: {
-            Vodal,
-            'carousel': Carousel,
-            'carousel-item': CarouselItem
+            Carousel,
+            CarouselItem,
+            Vodal
         },
 
         methods: {
@@ -47,9 +42,22 @@
                 })
             },
 
+            openModal() {
+                this.show = true
+                this.auto = 3000
+
+                // hide body scrollbar and apply padding to avoid page "jumping"
+                document.documentElement.style.overflowY = 'hidden'
+                document.documentElement.style.paddingRight = '17px'
+            },
+
             closeVodal() {
                 this.show = false
-                this.auto = 0
+                this.auto = 0 // stop the carousel from running
+
+                // show body scrollbar
+                document.documentElement.style.overflowY = null
+                document.documentElement.style.paddingRight = null
             }
         },
 
@@ -71,20 +79,23 @@
         font-size: 20px;
         background: #3486D7;
         color: #fff;
+        border-radius: 0;
     }
 
-    /*.carousel {
-        height: 100%;
-        margin: 0;
-    }*/
-
-    .v-carousel{width:100%;position:relative}
-    .v-carousel,.v-carousel-items{overflow:hidden}
-    .v-carousel-dots{position:absolute;bottom:10px;left:0;width:100%;text-align:center}
-    .v-carousel-dot{cursor:pointer;display:inline-block;width:10px;height:10px;margin:0 5px;border-radius:5px;background:rgba(0,0,0,.5)}
-    .v-carousel-dot.active{background:#000;cursor:default}
-    .v-carousel-nav{cursor:pointer;position:absolute;line-height:30px;color:#fff;padding:0 5px;background:rgba(0,0,0,.5);top:50%;margin-top:-15px}
-    .v-carousel-nav.prev{left:0}
-    .v-carousel-nav.next{right:0}
-    .v-carousel-item{width:100%;float:left}
+    .v-carousel {
+        max-width:100%;
+        max-height:100%;
+        position:relative;
+    }
+    .v-carousel, .v-carousel-items {
+        max-width:100%;
+        max-height:100%;
+        overflow:hidden;
+    }
+    .v-carousel-item {
+        max-width:100%;
+        max-height:100%;
+        float:left;
+        background: #000;
+    }
 </style>

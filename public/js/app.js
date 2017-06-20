@@ -17723,19 +17723,10 @@ exports.default = {
     },
 
 
-    computed: {
-        vWidth: function vWidth() {
-            return window.innerWidth;
-        },
-        vHeight: function vHeight() {
-            return window.innerHeight;
-        }
-    },
-
     components: {
-        Vodal: _vodal2.default,
-        'carousel': _vueLCarousel.Carousel,
-        'carousel-item': _vueLCarousel.CarouselItem
+        Carousel: _vueLCarousel.Carousel,
+        CarouselItem: _vueLCarousel.CarouselItem,
+        Vodal: _vodal2.default
     },
 
     methods: {
@@ -17746,9 +17737,21 @@ exports.default = {
                 _this.photos = response.data.data;
             });
         },
+        openModal: function openModal() {
+            this.show = true;
+            this.auto = 3000;
+
+            // hide body scrollbar and apply padding to avoid page "jumping"
+            document.documentElement.style.overflowY = 'hidden';
+            document.documentElement.style.paddingRight = '17px';
+        },
         closeVodal: function closeVodal() {
             this.show = false;
-            this.auto = 0;
+            this.auto = 0; // stop the carousel from running
+
+            // show body scrollbar
+            document.documentElement.style.overflowY = null;
+            document.documentElement.style.paddingRight = null;
         }
     },
 
@@ -22605,7 +22608,7 @@ exports = module.exports = __webpack_require__(46)();
 
 
 // module
-exports.push([module.i, "\n.btn[data-v-8b9fb28c] {\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    margin: 0;\n    width: 100%;\n    z-index: 90;\n    font-size: 20px;\n    background: #3486D7;\n    color: #fff;\n}\n\n/*.carousel {\n    height: 100%;\n    margin: 0;\n}*/\n.v-carousel[data-v-8b9fb28c]{width:100%;position:relative\n}\n.v-carousel[data-v-8b9fb28c],.v-carousel-items[data-v-8b9fb28c]{overflow:hidden\n}\n.v-carousel-dots[data-v-8b9fb28c]{position:absolute;bottom:10px;left:0;width:100%;text-align:center\n}\n.v-carousel-dot[data-v-8b9fb28c]{cursor:pointer;display:inline-block;width:10px;height:10px;margin:0 5px;border-radius:5px;background:rgba(0,0,0,.5)\n}\n.v-carousel-dot.active[data-v-8b9fb28c]{background:#000;cursor:default\n}\n.v-carousel-nav[data-v-8b9fb28c]{cursor:pointer;position:absolute;line-height:30px;color:#fff;padding:0 5px;background:rgba(0,0,0,.5);top:50%;margin-top:-15px\n}\n.v-carousel-nav.prev[data-v-8b9fb28c]{left:0\n}\n.v-carousel-nav.next[data-v-8b9fb28c]{right:0\n}\n.v-carousel-item[data-v-8b9fb28c]{width:100%;float:left\n}\n", ""]);
+exports.push([module.i, "\n.btn[data-v-8b9fb28c] {\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    margin: 0;\n    width: 100%;\n    z-index: 90;\n    font-size: 20px;\n    background: #3486D7;\n    color: #fff;\n    border-radius: 0;\n}\n.v-carousel[data-v-8b9fb28c] {\n    max-width:100%;\n    max-height:100%;\n    position:relative;\n}\n.v-carousel[data-v-8b9fb28c], .v-carousel-items[data-v-8b9fb28c] {\n    max-width:100%;\n    max-height:100%;\n    overflow:hidden;\n}\n.v-carousel-item[data-v-8b9fb28c] {\n    max-width:100%;\n    max-height:100%;\n    float:left;\n    background: #000;\n}\n", ""]);
 
 // exports
 
@@ -23856,10 +23859,12 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('vodal', {
     attrs: {
+      "mask": false,
       "show": _vm.show,
       "animation": "slideUp",
-      "width": _vm.vWidth,
-      "height": _vm.vHeight
+      "width": 100,
+      "height": 100,
+      "measure": "%"
     },
     on: {
       "hide": _vm.closeVodal
@@ -23882,10 +23887,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "animation-delay": "600ms"
     },
     on: {
-      "click": function($event) {
-        _vm.show = true;
-        _vm.auto = 3000
-      }
+      "click": _vm.openModal
     }
   }, [_vm._v("\n        start bilderammemodus\n    ")])], 1)
 },staticRenderFns: []}
