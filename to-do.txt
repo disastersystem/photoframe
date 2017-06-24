@@ -3,9 +3,6 @@
 ************** bytte ut modals.. med bulma lignende
 **************
 
-- stretch either width or height in modal depending on what hits the wall first
-	max-height, max-with?
-
 - kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
 
 - align "Velg eller opprett en gruppe."
@@ -17,7 +14,6 @@
 - Bilderammemodus
 	- settings (timer, choose tansition effect(?), new images updated(?))
 	- kun X og arrow on hover and click/tap
-	- increase the size of the buttons
 
 - dato når man scroller
 
@@ -28,9 +24,15 @@
 
 - login system
 
+- rydd opp i api
+
 - Farge på menu items helt ut til kanten. Og samme farge som bakgrunn inne i rommet?
 
 - show succes -> toast/alert/something
+
+- modal above "start bilderammemodus"-knapp
+
+- refactor Laravel routes, use api.php instead?
 
 <transition-group name="list">
 

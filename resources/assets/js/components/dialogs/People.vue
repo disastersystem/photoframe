@@ -49,7 +49,7 @@
 
                 <v-divider></v-divider>
 
-                <v-card-row height="250px">
+                <v-card-row height="200px">
                     <v-card-text>
                         <v-flex xs12 sm12 md12 lg12 xl12>
                             <v-card class="elevation-0">
@@ -134,6 +134,7 @@
 <style scoped>
     .card {
         background: #fff;
+        /*height: 100vh;*/
     }
 
     .dialog-footer {

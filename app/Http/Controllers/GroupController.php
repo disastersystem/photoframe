@@ -39,6 +39,10 @@ class GroupController extends Controller
         return Group::where('id', $id)
             ->with('groupImages')
             ->get();
+
+            // $users = App\User::with(['posts' => function ($query) {
+            //     $query->orderBy('created_at', 'desc');
+            // }])->get();
     }
 
     /**

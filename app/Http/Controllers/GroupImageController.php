@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Requests;
 use App\GroupImage;
 
@@ -18,6 +19,14 @@ class GroupImageController extends Controller
      */
     public function all() {
         return GroupImage::orderBy('id', 'desc')->paginate(20);
+    }
+
+    public function byGroupYear($group_id, $year) {
+        return DB::select("SELECT * FROM group_images WHERE group_id = " . $group_id . " && created_at LIKE '" . $year . "%';");
+        // return DB::table('group_images')
+        //     ->select('id', 'filename', 'filepath', 'thumbnail_filepath', 'created_at')
+        //     ->where('created_at', 'LIKE', $year)
+        //     ->get();
     }
 
     /**

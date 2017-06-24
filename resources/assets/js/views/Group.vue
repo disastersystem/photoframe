@@ -19,31 +19,19 @@
             </p>
 
             <v-layout row wrap>
-                <v-flex xs12 sm6 md4 lg3 xl3 v-for="(image, index) in group.group_images" :key="index">
-                    <v-card class="elevation-10 mb-4 photo-frame">
-                        <img :src="image.filepath">
-                        <!-- <v-card-text>Hello World</v-card-text> -->
-                    </v-card>
-                </v-flex>
-            <v-layout row>
-
-            <!-- <div v-for="(item, i) in items">
-                <v-layout row class="year-row">
-                    <div class="year-title">
-                        {{ item.year }}
-                    </div>
-                </v-layout>
-                
-
-                <v-layout row wrap>
-    				<v-flex xs12 sm6 md4 lg3 xl3 v-for="(image, index) in item.images" :key="index">
+                <template v-for="(photo, i) in group.group_images">
+                    <v-flex v-if="newYear(photo.created_at.substring(0, 4))" xs12 class="year-title" :key="i">
+                        {{ photo.created_at.substring(0, 4) }}
+                    </v-flex>
+                    
+    				<v-flex xs12 sm6 md4 lg3 xl3>
     					<v-card class="elevation-10 mb-4 photo-frame">
-    						<img :src="image.url">
+    						<img :src="photo.filepath" style="width: 100%;">
     					</v-card>
     				</v-flex>
-                </v-layout>
+                </template>
+            </v-layout>
 
-            </div> -->
 		</div>
     </div>
 </template>
@@ -51,42 +39,15 @@
 <script>
 	import upload from '../components/dialogs/Upload'
     import people from '../components/dialogs/People'
+    
+    var prevDate = ''
 
     export default {
         data () {
             return {
                 currentPage: '',
                 group: [],
-                numImages: 0,
-                items: [
-                    {
-                        year: 2017,
-                        images: [
-                            {url: 'uploads/groups/149765735420130120_140520.jpg/149765735420130120_140520.jpg'},
-                            {url: 'uploads/groups/149765735420130120_140520.jpg/149765735420130120_140520.jpg'},
-                            {url: 'uploads/groups/149765735420130120_140520.jpg/149765735420130120_140520.jpg'},
-                            {url: 'uploads/groups/149765735420130120_140520.jpg/149765735420130120_140520.jpg'}
-                        ]
-                    },
-                    {
-                        year: 2016,
-                        images: [
-                            {url: 'uploads/groups/1497655766dt141218.gif/1497655766dt141218.gif'},
-                            {url: 'uploads/groups/1497655766dt141218.gif/1497655766dt141218.gif'},
-                            {url: 'uploads/groups/1497655766dt141218.gif/1497655766dt141218.gif'},
-                            {url: 'uploads/groups/1497655766dt141218.gif/1497655766dt141218.gif'}
-                        ]
-                    },
-                    {
-                        year: 2015,
-                        images: [
-                            {url: 'uploads/groups/149765735420130131_104213.jpg/149765735420130131_104213.jpg'},
-                            {url: 'uploads/groups/149765735420130131_104213.jpg/149765735420130131_104213.jpg'},
-                            {url: 'uploads/groups/149765735420130131_104213.jpg/149765735420130131_104213.jpg'},
-                            {url: 'uploads/groups/149765735420130131_104213.jpg/149765735420130131_104213.jpg'}
-                        ]
-                    } 
-                ]
+                numImages: 0
             }
         },
 
@@ -107,10 +68,25 @@
 
             getGroupData(id) {
                 axios.get('getgroup/' + id).then(response => {
+                    prevDate = ''
+                    response.data[0].group_images.reverse()
                     this.group = response.data[0]
                     this.currentPage = this.group.title
                     this.numImages = this.group.group_images.length
-                });
+                })
+            },
+
+            /**
+             * 
+             */
+            newYear(date) {
+                if (prevDate == date) {
+                    prevDate = date
+                    return false
+                } else {
+                    prevDate = date
+                    return true
+                }
             },
 
             eventChild(data) {
@@ -120,7 +96,6 @@
         },
 
         mounted() {
-            // this.currentPage = this.$route.params.id
             this.getGroupData(this.$route.params.id)
         }
     }
@@ -130,25 +105,15 @@
     #images-wrapper {
         padding: 2%;
         padding-bottom: 100px;
-        /*display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 70vh;
-        text-align: center;*/
-    }
-
-    .year-row {
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 15px;
-        margin-top: 30px;
     }
 
     .year-title {
-        margin: 10px 0;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 25px;
+        margin-top: 40px;
         padding: 10px;
         font-size: 16px;
         color: #bbb;
-        text-align: center;
     }
 
     .toolbar-title {

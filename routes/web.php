@@ -12,13 +12,15 @@ Route::get('/', function () {
 # api
 Route::post('addgroup', 'GroupController@add');
 Route::get('getgroups', 'GroupController@index');
-Route::get('getgroup/{group_id}/', 'GroupController@specific');
+Route::get('getgroup/{group_id}', 'GroupController@specific');
 Route::post('group/{group_id}/photo', 'GroupController@addPhoto');
 Route::get('getphotos', 'GroupImageController@all');
 
 Route::get('getuser/{id}', function() {
 	// return Group::where('id', $id)->get();
 });
+
+Route::get('group/{group_id}/year/{year}', 'GroupImageController@byGroupYear');
 
 // Route::post('sendEntryMail', 'MailController@sendEntryMail');
 
