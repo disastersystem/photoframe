@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use App\GroupImage;
+use App\GroupPhoto;
 
 class Group extends Model
 {
@@ -17,10 +17,10 @@ class Group extends Model
     protected $fillable = ['title', 'user_id'];
 
     /**
-     * A group has many group images.
+     * A group has many group photos.
      */
-    public function groupImages() {
-        return $this->hasMany('App\GroupImage');
+    public function groupPhotos() {
+        return $this->hasMany('App\GroupPhoto');
     }
 
     /**
@@ -44,10 +44,10 @@ class Group extends Model
     /**
      * Add a photo to the referenced group.
      *
-     * @param GroupImage $photo
+     * @param GroupPhoto $photo
      */
-    public function savePhoto(GroupImage $photo) {
-        return $this->groupImages()->save($photo);
+    public function savePhoto(GroupPhoto $photo) {
+        return $this->groupPhotos()->save($photo);
     }
 
 }

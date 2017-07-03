@@ -2,18 +2,18 @@ import './bootstrap'
 import router from './router'
 
 import creategroup from './components/dialogs/CreateGroup'
-import photoframe from './components/PhotoFrame'
+import photoframe from './components/Frame'
 
 Vue.component('main-layout', {
 	template: `
 		<div>
 	        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>
 	        	
-	        	<creategroup v-on:event_child="eventChild" style="margin: 150px 0 40px 0;"></creategroup>
+	        	<creategroup @created="addGroup"></creategroup>
 				
 				<v-layout row align-center style="margin-bottom: -10px;">
 					<v-flex xs12>
-						<v-subheader>
+						<v-subheader v-if="groups.length > 0">
 							Grupper
 						</v-subheader>
 					</v-flex>
@@ -63,13 +63,13 @@ Vue.component('main-layout', {
 	},
 
 	mounted() {
-		axios.get('getgroups').then(response => {
+		axios.get('group/all/get').then(response => {
         	this.groups = response.data;
         })
 	},
 
 	methods: {
-		eventChild(data) {
+		addGroup(data) {
 			this.groups.unshift({ id: data.id, title: data.title })
 		}
 	}

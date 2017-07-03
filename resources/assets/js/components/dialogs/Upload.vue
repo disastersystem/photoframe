@@ -1,6 +1,6 @@
 <template>
-    <v-layout row justify-center style="z-index: 8999;">
-        <v-dialog v-model="dialog" width="600px" persistent style="z-index: 8999;">
+    <v-layout row justify-center>
+        <v-dialog v-model="dialog" width="600px" persistent>
             <v-btn success light slot="activator" style="margin-right: 30px;">
                 Legg til bilder
                 <i class="material-icons icon icon--dark icon--light icon--right">cloud_upload</i>
@@ -42,11 +42,11 @@
         data () {
             return {
                 dialog: false,
-                csrfToken: { 
+                csrfToken: {
                     'X-CSRF-Token': window.Laravel.csrfToken
                 },
                 maxSize: 20,
-                url: 'group/' + this.$route.params.id + '/photo'
+                url: 'group/' + this.$route.params.id + '/photo/add'
             }
         },
 
@@ -58,13 +58,13 @@
         watch: {
             '$route' (to, from) {
                 // update the upload url with the new group id
-                this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo')
+                this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo' + '/add')
             }
         },
 
         methods: {
             showSuccess(file, uploaded_file) {
-                this.$emit('eventchild', uploaded_file)
+                this.$emit('success', uploaded_file)
             },
 
             closeDialog() {

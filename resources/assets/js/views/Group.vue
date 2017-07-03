@@ -1,27 +1,30 @@
 <template>
 	<div>
         <div>
-            <v-toolbar class="white elevation-0 ">
-                <v-toolbar-title class="hidden-sm-and-down toolbar-title">{{ currentPage }}</v-toolbar-title>
+            <v-toolbar class="white elevation-0">
+                <v-toolbar-title class="hidden-sm-and-down toolbar-title">
+                    {{ group.title }}
+                </v-toolbar-title>
+                
                 <v-spacer></v-spacer>
-                <upload v-on:eventchild="eventChild"></upload>
-                <!-- v-if="numImages > 0" -->
+                
+                <upload @success="successfulUpload"></upload> <!-- v-if="group.group_photos.length > 0" -->
+                <!-- v-if="group.group_photos.length > 0" -->
                 <people></people>
             </v-toolbar>
         </div>
 
 		<div id="images-wrapper">
-            <p v-if="numImages == 0" class="status-message">
-                Ingen bilder i denne gruppen.
-                <!-- Trykk på "Legg til bilder"-knappen oppe i høyre hjørne<br>
-                for å legge til bilder i gruppen. -->
-                <!-- <upload v-on:eventchild="eventChild" v-if="numImages == 0"></upload> -->
+            <p v-if="group.group_photos.length == 0" class="status-message">
+                Ingen bilder i denne gruppen.<br>
+                <!-- <upload v-on:eventchild="eventChild" 
+                    v-if="group.group_photos.length == 0"></upload> -->
             </p>
 
             <v-layout row wrap>
-                <template v-for="(photo, i) in group.group_images">
-                    <v-flex v-if="newYear(photo.created_at.substring(0, 4))" xs12 class="year-title" :key="i">
-                        {{ photo.created_at.substring(0, 4) }}
+                <template v-for="(photo, i) in group.group_photos">
+                    <v-flex v-if="newMonth(photo.created_at.substring(0, 7))" xs12 class="year-title" :key="i">
+                        {{ formatDate(photo.created_at) }}
                     </v-flex>
                     
     				<v-flex xs12 sm6 md4 lg3 xl3>
@@ -40,14 +43,14 @@
 	import upload from '../components/dialogs/Upload'
     import people from '../components/dialogs/People'
     
-    var prevDate = ''
+    var prevDate = '' //
 
     export default {
         data () {
             return {
-                currentPage: '',
-                group: [],
-                numImages: 0
+                group: {
+                    group_photos: []
+                }
             }
         },
 
@@ -67,19 +70,14 @@
         	},
 
             getGroupData(id) {
-                axios.get('getgroup/' + id).then(response => {
-                    prevDate = ''
-                    response.data[0].group_images.reverse()
+                axios.get('group/' + id + '/get').then(response => {
+                    prevDate = '' // reset the prevDate when a new view is loaded
+
                     this.group = response.data[0]
-                    this.currentPage = this.group.title
-                    this.numImages = this.group.group_images.length
                 })
             },
 
-            /**
-             * 
-             */
-            newYear(date) {
+            newMonth(date) {
                 if (prevDate == date) {
                     prevDate = date
                     return false
@@ -89,9 +87,23 @@
                 }
             },
 
-            eventChild(data) {
-                this.group.group_images.unshift(data)
-                this.numImages = this.group.group_images.length
+            /**
+             * Replace with moment.js?
+             */
+            formatDate(date) {
+                let y = date.substring(0, 4)
+                let m = date.substring(5, 7)
+                m = m.replace('0','') // remove any leading zeroes, for easy index matching in the months array
+                let months = [
+                    'Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 
+                    'September', 'oktober', 'november', 'desember'
+                ]
+
+                return y + ' ' + months[parseInt(m) - 1]
+            },
+
+            successfulUpload(data) {
+                this.group.group_photos.unshift(data)
             }
         },
 

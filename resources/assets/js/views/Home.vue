@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="view-container">
 		<p>
 			<v-icon>arrow_back</v-icon>
 			Velg eller opprett en gruppe.
@@ -8,7 +8,7 @@
 </template>
 
 <style scoped>
-	div {
+	.view-container {
 		padding: 40px;
 	}
 </style>

@@ -5,6 +5,8 @@
 
 - kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
 
+- ny animert mobil meny icon
+
 - align "Velg eller opprett en gruppe."
 
 - Shaking upload button, when there is no images in the group.
@@ -15,8 +17,6 @@
 	- settings (timer, choose tansition effect(?), new images updated(?))
 	- kun X og arrow on hover and click/tap
 
-- dato når man scroller
-
 - xs12 på last opp og members knapp
 
 - Delete group functionality -> setting knapp i hjørnet i gruppa
@@ -24,15 +24,11 @@
 
 - login system
 
-- rydd opp i api
+- split photos into groups by group id in the uploads folder
 
 - Farge på menu items helt ut til kanten. Og samme farge som bakgrunn inne i rommet?
 
 - show succes -> toast/alert/something
-
-- modal above "start bilderammemodus"-knapp
-
-- refactor Laravel routes, use api.php instead?
 
 <transition-group name="list">
 
@@ -44,7 +40,6 @@
 
 - figure out what to do with vodal css import
 
-- DESC order når bilder hentes ut
 
 - ERROR I EDGE!!
 
@@ -62,3 +57,16 @@ What's up with having to include CSS manually?
 // "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
 // "hmr": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
 // "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+
+<div class="modal-content">
+	<p class="image is-4by3">
+		<img src="http://bulma.io/images/placeholders/1280x960.png">
+	</p>
+</div>
+
+
+<div style="display: flex; z-index: 999; width: 100%; margin: 0; position: absolute; top: 0; left: 0;">
+	<div style="background: green; padding: 10px 15px;">Effect</div>
+	<div style="background: blue; padding: 10px 15px;">Time</div>
+	<div style="background: brown; padding: 10px 15px; position: absolute; right: 0;">Avslutt</div>
+</div>

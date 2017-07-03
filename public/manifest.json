@@ -1,3 +1,6 @@
 {
-  "app.js": "\\js\\app.js"
+  "\\fonts\\default-skin.svg": "/fonts/default-skin.svg?b257fa9c5ac8c515ac4d77a667ce2943",
+  "app.js": "\\js\\app.js",
+  "default-skin.png": "default-skin.png?e3f799c6dec9af194c86decdf7392405",
+  "preloader.gif": "preloader.gif?e34aafbb485a96eaf2a789b2bf3af6fe"
 }

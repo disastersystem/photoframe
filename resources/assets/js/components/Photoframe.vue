@@ -1,6 +1,8 @@
 <template>
     <div>
         <vodal :mask="false" :show="show" animation="slideUp" @hide="closeVodal" :width="100" :height="100" measure="%">
+            <div style="background: red; position: fixed; top: 0; left: 0; height: 40px;"></div>
+
             <carousel :auto="auto" :watch-items="photos">
                 <carousel-item v-for="(photo, index) in photos">
                     <img v-bind:src="photo.filepath" :key="index">
@@ -37,7 +39,7 @@
 
         methods: {
             setPhotos() {
-                axios.get('getphotos').then(response => {
+                axios.get('photo/all/get').then(response => {
                     this.photos = response.data.data
                 })
             },
@@ -68,6 +70,35 @@
 </script>
 
 <style scoped>
+    @import "~vodal/common.css";
+    @import "~vodal/slide-up.css";
+
+    .vodal {
+        position: fixed;
+        padding: 0;
+        margin: 0;
+    }
+
+    .vodal-dialog {
+        z-index: 101;
+        padding: 0;
+        background: #000;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .vodal-close {
+        position: absolute;
+        cursor: pointer;
+        top: 16px;
+        right: 26px;
+        width: 16px;
+        height: 16px;
+        width: 30px;
+        height: 30px;
+        z-index: 999;
+    }
+
     .btn {
         position: fixed;
         bottom: 0;
@@ -75,11 +106,11 @@
         right: 0;
         margin: 0;
         width: 100%;
-        z-index: 90;
         font-size: 20px;
         background: #3486D7;
         color: #fff;
         border-radius: 0;
+        z-index: 1;
     }
 
     .v-carousel {

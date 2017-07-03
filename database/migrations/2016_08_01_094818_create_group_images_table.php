@@ -18,10 +18,12 @@ class CreateGroupImagesTable extends Migration
             $table->integer('group_id')->unsigned();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
 
-            $table->string('filename');
-            $table->string('filepath', 500);
-            $table->string('thumbnail_filepath', 500)->default('');
-            // $table->string('caption', 1000)->default('');
+            $table->string('filename')->default('');
+            $table->string('filepath')->default('');
+            $table->string('thumbnail_filepath')->default('');
+            
+            $table->integer('width')->unsigned()->default(0);
+            $table->integer('height')->unsigned()->default(0);
 
             $table->timestamps();
 

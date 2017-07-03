@@ -9,16 +9,12 @@ use App\Http\Requests\GroupRequest;
 use App\Http\Requests\ChangeGroupRequest;
 
 use App\Group;
-use App\GroupImage;
+use App\GroupPhoto;
 
 use Storage;
 
 class GroupController extends Controller
 {
-    public function __construct() {
-        // $this->middleware('auth');
-    }
-
     /**
      * Return all groups in descending order.
      *
@@ -26,7 +22,7 @@ class GroupController extends Controller
      */
     public function index() {
         return Group::orderBy('id', 'desc')
-            ->with('groupImages')
+            // ->with('groupPhotos')
             ->get();
     }
 
@@ -37,12 +33,8 @@ class GroupController extends Controller
      */
     public function specific($id) {
         return Group::where('id', $id)
-            ->with('groupImages')
+            ->with(['groupPhotos' => function ($query) { $query->orderBy('created_at', 'desc'); }])
             ->get();
-
-            // $users = App\User::with(['posts' => function ($query) {
-            //     $query->orderBy('created_at', 'desc');
-            // }])->get();
     }
 
     /**
@@ -62,8 +54,8 @@ class GroupController extends Controller
     public function add(Request $request)
     {
         $request->merge(['user_id' => 1]);
+
         return Group::create($request->all());
-        // return $request->all();
     }
 
     /**
@@ -74,7 +66,7 @@ class GroupController extends Controller
      */
     public function addPhoto($group_id, Request $request)
     {
-        $photo = GroupImage::fromFile($request->file('file'));
+        $photo = GroupPhoto::fromFile($request->file('file'));
 
         return Group::where('id', $group_id)
             ->firstOrFail()
@@ -108,18 +100,17 @@ class GroupController extends Controller
      */
     public function destroy(Request $request, Group $group)
     {
-        $groupImages = GroupImage::where('group_id', $group->id)->get();
+        $groupPhotos = GroupPhoto::where('group_id', $group->id)->get();
 
         /* delete the files on the filesystem */
-        foreach ($groupImages as $image) {
+        foreach ($groupPhotos as $photo) {
             \File::delete([
-                $image->filepath,
-                $image->thumbnail_filepath
+                $photo->filepath,
+                $photo->thumbnail_filepath
             ]);
         }
 
         $group->delete();
     }
-
 
 }

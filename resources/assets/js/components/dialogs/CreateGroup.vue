@@ -1,5 +1,5 @@
 <template>
-    <v-layout row justify-center>
+    <v-layout row justify-center style="margin: 150px 0 40px 0;">
         <v-dialog v-model="dialog" scrollable persistent>
             <v-btn success slot="activator" class="green white--text">
                 Legg til gruppe
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import Form from '../../core/Form';
+    import Form from '../../core/Form'
 
     export default {
         data () {
@@ -62,8 +62,8 @@
         methods: {
             saveGroup() {
                 if (this.form.title.length != 0) {
-                    this.form.post('addgroup').then(response => {
-                        this.$emit('event_child', { id: response.id, title: response.title })
+                    this.form.post('group/add').then(response => {
+                        this.$emit('created', { id: response.id, title: response.title })
                         this.dialog = false
                         this.form.title = ''
                     })
