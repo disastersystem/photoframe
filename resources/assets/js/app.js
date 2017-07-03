@@ -2,7 +2,7 @@ import './bootstrap'
 import router from './router'
 
 import creategroup from './components/dialogs/CreateGroup'
-import photoframe from './components/Frame'
+import photoframe from './components/PhotoFrame'
 
 Vue.component('main-layout', {
 	template: `
