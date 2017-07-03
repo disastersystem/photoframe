@@ -16,9 +16,10 @@ class GroupPhotoController extends Controller
         return GroupPhoto::orderBy('id', 'desc')
             ->select(
                 'id', 'group_id',
-                'filename', 'filepath AS src', 'thumbnail_filepath', 
-                'width AS w', 'height AS h',
-                'created_at', 'updated_at'
+                'filename', 'filepath AS src', 'thumbnail_filepath'
+                // , 
+                // 'width AS w', 'height AS h',
+                // 'created_at', 'updated_at'
             )->paginate(20);
     }
 
