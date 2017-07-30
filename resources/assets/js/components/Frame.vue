@@ -64,10 +64,14 @@
             </div>
         </div>
 
-        <button class="btn scale btn-photoframe" style="animation-delay: 600ms;" @click="open">
-            <!-- v-if="photos.length > 0" -->
-            start bilderammemodus
-        </button>
+        <!-- v-if="photos.length > 0" -->
+        <div class="photoframe-launcher">
+            <div @click="open">
+                <v-btn primary light class="btn-photoframe">
+                    start bilderammemodus
+                </v-btn>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -149,4 +153,28 @@
 <style scoped>
     @import "~photoswipe/dist/photoswipe.css";
     @import "~photoswipe/dist/default-skin/default-skin.css";
+
+    .photoframe-launcher {
+        position: fixed;
+        /*display: flex;*/
+        /*justify-content: center;*/
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        width: 100%;
+        z-index: 1;
+        padding: 0;
+        background: red;
+    }
+
+    .btn-photoframe {
+        font-size: 20px;
+        background: #3486D7;
+        color: #fff;
+        border-radius: 0;
+        /*padding: 0;*/
+        width: 100%;
+        margin: 0;
+    }
 </style>

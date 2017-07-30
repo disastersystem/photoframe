@@ -1,38 +1,49 @@
 <template>
 	<div>
         <div>
-            <v-toolbar class="white elevation-0">
-                <v-toolbar-title class="hidden-sm-and-down toolbar-title">
+            <v-toolbar class="white elevation-0" style="z-index: 0;">
+                <drawertrigger></drawertrigger>
+
+                <v-toolbar-title class="hidden-sm-and-down toolbar-title" style="color: #000;">
                     {{ group.title }}
                 </v-toolbar-title>
                 
                 <v-spacer></v-spacer>
+
+                <v-btn light flat>
+                    <i class="material-icons icon icon--dark icon--center">
+                        notifications_none
+                    </i>
+                </v-btn>
                 
-                <upload @success="successfulUpload"></upload> <!-- v-if="group.group_photos.length > 0" -->
-                <!-- v-if="group.group_photos.length > 0" -->
+                <!-- v-if="photos.length > 0" -->
+                <upload @success="successfulUpload"></upload>
                 <people></people>
             </v-toolbar>
         </div>
 
 		<div id="images-wrapper">
-            <p v-if="group.group_photos.length == 0" class="status-message">
+            <p v-if="photos.length == 0" class="status-message">
                 Ingen bilder i denne gruppen.<br>
-                <!-- <upload v-on:eventchild="eventChild" 
-                    v-if="group.group_photos.length == 0"></upload> -->
             </p>
 
             <v-layout row wrap>
-                <template v-for="(photo, i) in group.group_photos">
-                    <v-flex v-if="newMonth(photo.created_at.substring(0, 7))" xs12 class="year-title" :key="i">
-                        {{ formatDate(photo.created_at) }}
-                    </v-flex>
-                    
-    				<v-flex xs12 sm6 md4 lg3 xl3>
-    					<v-card class="elevation-10 mb-4 photo-frame">
-    						<img :src="photo.filepath" style="width: 100%;">
-    					</v-card>
-    				</v-flex>
-                </template>
+                <!-- <transition-group name="list"> -->
+                    <template v-for="(photo, i) in photos">
+        				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
+        					<v-card class="elevation-10 mb-4 photo-frame">
+        						<img :src="photo.thumbnail_filepath" style="width: 100%;">
+        					</v-card>
+        				</v-flex>
+                    </template>
+                <!-- </transition-group> -->
+            </v-layout>
+
+
+            <v-layout row justify-center v-if="pagination.nextPage !== null" style="margin-top: 50px;">
+                <v-btn @click.native.stop="nextPhotos">
+                    last in flere
+                </v-btn>
             </v-layout>
 
 		</div>
@@ -42,64 +53,60 @@
 <script>
 	import upload from '../components/dialogs/Upload'
     import people from '../components/dialogs/People'
-    
-    var prevDate = '' //
+    import drawertrigger from '../components/DrawerTrigger'
 
     export default {
         data () {
             return {
-                group: {
-                    group_photos: []
-                }
+                group: {},
+                photos: [],
+                pagination: {}
             }
         },
 
         watch: {
             '$route' (to, from) {
                 this.getGroupData(this.$route.params.id)
+                this.getGroupPhotos(this.$route.params.id)
             }
         },
 
         components: {
-    		upload, people
+    		upload, people, drawertrigger
     	},
 
         methods: {
         	imageLink(image) {
-        		return `uploads/${image}`
+        		return 'uploads/' + image
         	},
 
             getGroupData(id) {
                 axios.get('group/' + id + '/get').then(response => {
-                    prevDate = '' // reset the prevDate when a new view is loaded
-
                     this.group = response.data[0]
                 })
             },
 
-            newMonth(date) {
-                if (prevDate == date) {
-                    prevDate = date
-                    return false
-                } else {
-                    prevDate = date
-                    return true
-                }
+            getGroupPhotos(id) {
+                axios.get('group/' + id + '/photos/get').then(response => {
+                    this.photos = response.data.data
+
+                    this.pagination = {
+                        nextPage: response.data.next_page_url
+                    }
+                })
             },
 
-            /**
-             * Replace with moment.js?
-             */
-            formatDate(date) {
-                let y = date.substring(0, 4)
-                let m = date.substring(5, 7)
-                m = m.replace('0','') // remove any leading zeroes, for easy index matching in the months array
-                let months = [
-                    'Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 
-                    'September', 'oktober', 'november', 'desember'
-                ]
+            nextPhotos() {
+                if (this.pagination.nextPage !== null) {
 
-                return y + ' ' + months[parseInt(m) - 1]
+                    axios.get(this.pagination.nextPage).then(response => {
+                        this.photos.push.apply( this.photos, response.data.data );
+                        
+                        this.pagination = {
+                            nextPage: response.data.next_page_url
+                        }
+                    });
+                }
             },
 
             successfulUpload(data) {
@@ -109,6 +116,7 @@
 
         mounted() {
             this.getGroupData(this.$route.params.id)
+            this.getGroupPhotos(this.$route.params.id)
         }
     }
 </script>

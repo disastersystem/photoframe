@@ -14,13 +14,12 @@ class GroupPhotoController extends Controller
      */
     public function all() {
         return GroupPhoto::orderBy('id', 'desc')
-            // ->select(
-            //     'id', 'group_id',
-            //     'filename', 'filepath AS src', 'thumbnail_filepath',
-            //     'width AS w', 'height AS h',
-            //     'created_at', 'updated_at'
-            // )
-            ->paginate(20);
+            ->select(
+                'id', 'group_id',
+                'filename', 'filepath AS src', 'thumbnail_filepath',
+                'width AS w', 'height AS h',
+                'created_at', 'updated_at'
+            )->paginate(20);
     }
 
 

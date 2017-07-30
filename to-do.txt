@@ -2,8 +2,11 @@
 **************
 ************** bytte ut modals.. med bulma lignende
 **************
-
 - kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
+
+- Input fields like digital ocean!
+
+- look into delete photos on mobile gallery
 
 - ny animert mobil meny icon
 
@@ -30,9 +33,7 @@
 
 - show succes -> toast/alert/something
 
-<transition-group name="list">
-
-- the same person can only be added once in the invitation array
+- the same person should only be added once in the invitation array
 
 - Fullscreen når enkelt bilder velges?
 
@@ -40,6 +41,7 @@
 
 - figure out what to do with vodal css import
 
+- intervall meny under modal on second open
 
 - ERROR I EDGE!!
 

@@ -14,3 +14,6 @@ window.axios = axios
 window.axios.defaults.headers.common = {
 	'X-Requested-With': 'XMLHttpRequest'
 }
+
+/* empty Vue instance as a central event bus */
+window.Bus = new Vue()

@@ -92,12 +92,16 @@ class GroupPhoto extends Model
             $this->filename
         );
 
-        // Image::make($this->filepath)
-        //     ->fit(200)
-        //     ->save($this->thumbnail_filepath);
-
-        exec('convert ' . $this->filepath . ' -resize 500x350^ -gravity center -crop 500x350+0+0 ' . $this->thumbnail_filepath);
-        // exec('convert ' . $this->filepath . ' -resize 1500x1500^ ' . $this->thumbnail_filepath);
+        exec(
+            'magick ' .
+            $this->filepath .
+            ' -auto-orient' . # reads and resets the EXIF image profile setting 'Orientation'
+            #' -resize 500x350^' . # minimum values of width and height given, aspect ratio preserved
+            ' -gravity center' . # move to the center of image
+            ' -crop 500x350+0+0 ' . # crop (from center) remains if image is larger than 500x350
+            // ' -crop 500x350 ' .
+            $this->thumbnail_filepath
+        );
 
         return $this;
     }

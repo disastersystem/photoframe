@@ -2,7 +2,7 @@ import './bootstrap'
 import router from './router'
 
 import creategroup from './components/dialogs/CreateGroup'
-import photoframe from './components/PhotoFrame'
+import photoframe from './components/Frame'
 
 Vue.component('main-layout', {
 	template: `
@@ -33,12 +33,6 @@ Vue.component('main-layout', {
 	        </v-navigation-drawer>
 
 	        <main>
-	            <v-navigation-drawer temporary v-model="left"></v-navigation-drawer>
-	            
-	            <v-toolbar class="elevation-0 menu-bar" flat>
-		            <v-toolbar-side-icon dark @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
-		        </v-toolbar>
-
 	            <div>
 	                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">
 	                    <router-view></router-view>
@@ -53,8 +47,7 @@ Vue.component('main-layout', {
 	data() {
 		return {
 			groups: [],
-			drawer: true,
-			left: null
+			drawer: true
 		}
 	},
 
@@ -72,6 +65,15 @@ Vue.component('main-layout', {
 		addGroup(data) {
 			this.groups.unshift({ id: data.id, title: data.title })
 		}
+	},
+
+	created() {
+		let self = this
+		
+		/* listen for a toggleDrawer broadcast */
+		Bus.$on('toggleDrawer', function(state) {
+			self.drawer = state
+		})
 	}
 })
 

@@ -33,8 +33,18 @@ class GroupController extends Controller
      */
     public function specific($id) {
         return Group::where('id', $id)
-            ->with(['groupPhotos' => function ($query) { $query->orderBy('created_at', 'desc'); }])
+            //->with(['groupPhotos' => function($query) { $query->orderBy('created_at', 'desc'); }])
             ->get();
+    }
+
+    /** 
+     *
+     * @return 
+     */
+    public function photos($id) {
+        return GroupPhoto::where('group_id', $id)
+            ->orderBy('id', 'desc')
+            ->simplePaginate(8);
     }
 
     /**
