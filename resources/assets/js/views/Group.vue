@@ -1,7 +1,7 @@
 <template>
 	<div>
         <div>
-            <v-toolbar class="white elevation-0" style="z-index: 0;">
+            <v-toolbar class="white elevation-0">
                 <drawertrigger></drawertrigger>
 
                 <v-toolbar-title class="hidden-sm-and-down toolbar-title" style="color: #000;">
@@ -28,17 +28,15 @@
             </p>
 
             <v-layout row wrap>
-                <!-- <transition-group name="list"> -->
-                    <template v-for="(photo, i) in photos">
-        				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
-        					<v-card class="elevation-10 mb-4 photo-frame">
-                                <div class="intrinsic-placeholder">
-                                    <photo :src="photo.thumbnail_filepath"></photo>
-                                </div>
-        					</v-card>
-        				</v-flex>
-                    </template>
-                <!-- </transition-group> -->
+                <template v-for="(photo, i) in photos">
+    				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
+    					<v-card class="elevation-10 mb-4 photo-frame">
+                            <div class="intrinsic-placeholder">
+                                <photo :src="photo.thumbnail_filepath"></photo>
+                            </div>
+    					</v-card>
+    				</v-flex>
+                </template>
             </v-layout>
 
 
@@ -113,7 +111,7 @@
             },
 
             successfulUpload(data) {
-                this.group.group_photos.unshift(data)
+                this.photos.unshift(data)
             }
         },
 

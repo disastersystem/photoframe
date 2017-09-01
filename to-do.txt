@@ -1,3 +1,4 @@
+node_modules\.bin\webpack
 
 **************
 ************** bytte ut modals.. med bulma lignende

@@ -3,7 +3,9 @@
         <v-dialog v-model="dialog" width="600px" persistent>
             <v-btn success light slot="activator" style="margin-right: 30px;">
                 Legg til bilder
-                <i class="material-icons icon icon--dark icon--light icon--right">cloud_upload</i>
+                <i class="material-icons icon icon--dark icon--light icon--right">
+                    cloud_upload
+                </i>
             </v-btn>
             <v-card>
                 <v-card-row>
@@ -73,7 +75,12 @@
             closeDialog() {
                 this.dialog = false
                 // empty uploaded files
-                this.$refs.dropzoneInstance.removeAllFiles()
+                // this.$refs.dropzoneInstance.removeAllFiles() // currently bugged in this dropzone version
+                // this.$refs.dropzoneInstance.$el.innerHTML=''
+                let elements = this.$refs.dropzoneInstance.$el.getElementsByClassName('dz-preview')
+                while(elements.length > 0) {
+                    elements[0].parentNode.removeChild(elements[0])
+                }
             }
         }
     }

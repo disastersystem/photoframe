@@ -22,7 +22,7 @@ img {
 }
 
 .navigation-drawer .list__item,
-.navigation-drawer .list__tile  {
+.navigation-drawer .list__tile {
     padding: 0;
     margin: 0;
 }
@@ -36,12 +36,7 @@ img {
     padding: 30px;
 }
 
-.trigger-menu {
-   /* position: fixed;
-    left: 300px;
-    z-index: 3;*/
-}
-
+/* Active main drawer item. */
 .is-active {
     background: #ccc;
 }

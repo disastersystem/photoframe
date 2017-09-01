@@ -1,10 +1,10 @@
 <template>
 	<transition name="fade">
-		<div class="b-modal b-is-active">
+		<div class="b-modal b-is-active" v-show="show">
 			<div class="b-modal-background"></div>
 
 			<div class="b-modal-card">
-				<header class="b-modal-card-head">
+				<header class="b-modal-card-head" v-if="options.header">
 					<h2 class="b-modal-card-title">
 						{{ title }}
 					</h2>
@@ -16,8 +16,9 @@
 					<slot></slot>
 				</section>
 				
-				<!-- <footer class="b-modal-card-foot">
-				</footer> -->
+				<footer class="b-modal-card-foot" v-if="options.footer">
+					<!-- -->
+				</footer>
 			</div>
 		</div>
 	</transition>
@@ -25,13 +26,64 @@
 
 <script>
 	export default {
-        data() {
-            return {
-                show: false
-            }
-        },
+        props: {
+			show: {
+				type: Boolean,
+				required: true
+			},
 
-        props: ['title']
+			options: {
+				type: Object,
+				default: function() {
+					return {
+						header: true,
+						footer: false
+					}
+				}
+			},
+
+			title: {
+				type: String,
+				default: ''
+			}
+		},
+
+		watch: {
+			show(status) {
+				// status && this.$nextTick(() => {
+				// 	this.$el.focus()
+				// })
+
+				(status == true) ? this.open() : this.close()
+			}
+		},
+
+		methods: {
+			open() {
+				this.show = true
+
+				// hide body scrollbar and apply padding to avoid page "jumping"
+                document.documentElement.style.overflowY = 'hidden'
+                document.documentElement.style.paddingRight = '17px'
+			},
+
+			close() {
+				this.show = false
+
+				// show body scrollbar
+                document.documentElement.style.overflowY = null
+                document.documentElement.style.paddingRight = null
+			}
+		},
+
+		/**
+		 * Incase the whole component is destroyed.
+		 */
+		destroyed() {
+			// show body scrollbar
+            document.documentElement.style.overflowY = null
+            document.documentElement.style.paddingRight = null
+		}
     }
 </script>
 
