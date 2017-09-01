@@ -32,7 +32,9 @@
                     <template v-for="(photo, i) in photos">
         				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
         					<v-card class="elevation-10 mb-4 photo-frame">
-        						<img :src="photo.thumbnail_filepath" style="width: 100%;">
+                                <div class="intrinsic-placeholder">
+                                    <photo :src="photo.thumbnail_filepath"></photo>
+                                </div>
         					</v-card>
         				</v-flex>
                     </template>
@@ -54,6 +56,7 @@
 	import upload from '../components/dialogs/Upload'
     import people from '../components/dialogs/People'
     import drawertrigger from '../components/DrawerTrigger'
+    import photo from '../components/Photo'
 
     export default {
         data () {
@@ -72,7 +75,7 @@
         },
 
         components: {
-    		upload, people, drawertrigger
+    		upload, people, drawertrigger, photo
     	},
 
         methods: {
@@ -125,6 +128,11 @@
     #images-wrapper {
         padding: 2%;
         padding-bottom: 100px;
+    }
+
+    .intrinsic-placeholder {
+        padding-bottom: 60%;
+        position: relative;
     }
 
     .year-title {

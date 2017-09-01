@@ -17,7 +17,8 @@
                         <dropzone id="myVueDropzone"
                             ref="dropzoneInstance"
                             :maxFileSizeInMB="maxSize"
-                            :headers="csrfToken"
+                            :dropzone-options="options"
+                            :use-custom-dropzone-options="true"
                             :url="url"
                             :language="{ dictDefaultMessage: '<br>Dra filer hit for å laste opp' }"
                             :showRemoveLink="false"
@@ -42,8 +43,10 @@
         data () {
             return {
                 dialog: false,
-                csrfToken: {
-                    'X-CSRF-Token': window.Laravel.csrfToken
+                options: {  
+                    headers: {
+                        'X-CSRF-Token': window.Laravel.csrfToken
+                    }
                 },
                 maxSize: 20,
                 url: 'group/' + this.$route.params.id + '/photo/add'
