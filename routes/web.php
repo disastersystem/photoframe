@@ -1,12 +1,8 @@
 <?php
 
 # views
-Route::get('inside', function () {
-    return view('index');
-});
-
 Route::get('/', function () {
-    return view('login');
+    return view('index');
 });
 
 # api

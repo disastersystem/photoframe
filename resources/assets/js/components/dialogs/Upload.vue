@@ -12,7 +12,9 @@
                     <v-card-title>Velg bilder å legge til</v-card-title>
                 </v-card-row>
                 <v-card-row>
-                    <p style="padding-left: 20px;">Trykk på boksen under, eller dra bilder til boksen for å laste opp.</p>
+                    <p style="padding-left: 20px;">
+                        Trykk på boksen under, eller dra bilder til boksen for å laste opp.
+                    </p>
                 </v-card-row>
                 <v-card-row>
                     <v-card-text>
@@ -39,7 +41,7 @@
 
 <script>
     import $ from "jquery"
-    import Dropzone from 'vue2-dropzone'
+    import dropzone from 'vue2-dropzone'
 
     export default {
         data () {
@@ -56,14 +58,15 @@
         },
 
         components: {
-            Dropzone
+            dropzone
         },
 
         // react to route changes
         watch: {
             '$route' (to, from) {
                 // update the upload url with the new group id
-                this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo' + '/add')
+                this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo/add')
+                // this.$refs.dropzoneInstance.dropzoneOptions.url = 'group/' + to.params.id + '/photo/add'
             }
         },
 
@@ -74,13 +77,9 @@
 
             closeDialog() {
                 this.dialog = false
+
                 // empty uploaded files
-                // this.$refs.dropzoneInstance.removeAllFiles() // currently bugged in this dropzone version
-                // this.$refs.dropzoneInstance.$el.innerHTML=''
-                let elements = this.$refs.dropzoneInstance.$el.getElementsByClassName('dz-preview')
-                while(elements.length > 0) {
-                    elements[0].parentNode.removeChild(elements[0])
-                }
+                this.$refs.dropzoneInstance.removeAllFiles()
             }
         }
     }

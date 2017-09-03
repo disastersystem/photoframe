@@ -15,15 +15,13 @@
 
         props: ['src'],
 
-        /**
-         * Wait until photo is fully loaded before displaying
-         */
         mounted() {
         	let photo = new Image()
         	let that = this
 
         	photo.src = this.src
 
+            /* wait until photo is fully loaded before displaying */
         	photo.onload = function() {
         		that.url = that.src
 
