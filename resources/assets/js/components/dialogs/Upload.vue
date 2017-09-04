@@ -1,47 +1,33 @@
 <template>
-    <v-layout row justify-center>
-        <v-dialog v-model="dialog" width="600px" persistent>
-            <v-btn success light slot="activator" style="margin-right: 30px;">
-                Legg til bilder
-                <i class="material-icons icon icon--dark icon--light icon--right">
-                    cloud_upload
-                </i>
-            </v-btn>
-            <v-card>
-                <v-card-row>
-                    <v-card-title>Velg bilder å legge til</v-card-title>
-                </v-card-row>
-                <v-card-row>
-                    <p style="padding-left: 20px;">
-                        Trykk på boksen under, eller dra bilder til boksen for å laste opp.
-                    </p>
-                </v-card-row>
-                <v-card-row>
-                    <v-card-text>
-                        <dropzone id="myVueDropzone"
-                            ref="dropzoneInstance"
-                            :maxFileSizeInMB="maxSize"
-                            :dropzone-options="options"
-                            :use-custom-dropzone-options="true"
-                            :url="url"
-                            :language="{ dictDefaultMessage: '<br>Dra filer hit for å laste opp' }"
-                            :showRemoveLink="false"
-                            @vdropzone-success="showSuccess">
-                        </dropzone>
-                    </v-card-text>
-                </v-card-row>
-                <v-card-row actions class="dialog-footer">
-                    <!-- <v-btn class="blue--text darken-1" flat @click.native="dialog = false">Lukk</v-btn> -->
-                    <v-btn class="elevation-1" @click.native="closeDialog" style="margin-right: 12px;">Lukk</v-btn>
-                </v-card-row>
-            </v-card>
-        </v-dialog>
-    </v-layout>
+    <div>
+        <modal :show="dialog" @close="onDialogClose" title="Bildeopplasting">
+            <div class="row">
+                <dropzone id="myVueDropzone"
+                    ref="dropzoneInstance"
+                    :maxFileSizeInMB="maxSize"
+                    :dropzone-options="options"
+                    :use-custom-dropzone-options="true"
+                    :url="url"
+                    :language="{ dictDefaultMessage: '<br>Dra filer hit for å laste opp' }"
+                    :showRemoveLink="false"
+                    @vdropzone-success="showSuccess">
+                </dropzone>
+            </div>
+        </modal>
+
+        <v-btn success light @click.native="dialog = true">
+            Legg til bilder
+            <i class="material-icons icon icon--dark icon--light icon--right">
+                cloud_upload
+            </i>
+        </v-btn>
+    </div>
 </template>
 
 <script>
     import $ from "jquery"
     import dropzone from 'vue2-dropzone'
+    import modal from '../utilities/Modal'
 
     export default {
         data () {
@@ -58,15 +44,15 @@
         },
 
         components: {
-            dropzone
+            dropzone,
+            modal
         },
 
-        // react to route changes
         watch: {
+            /* react to route changes */
             '$route' (to, from) {
                 // update the upload url with the new group id
                 this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo/add')
-                // this.$refs.dropzoneInstance.dropzoneOptions.url = 'group/' + to.params.id + '/photo/add'
             }
         },
 
@@ -75,10 +61,10 @@
                 this.$emit('success', uploaded_file)
             },
 
-            closeDialog() {
+            onDialogClose() {
                 this.dialog = false
 
-                // empty uploaded files
+                /* empty uploaded files */
                 this.$refs.dropzoneInstance.removeAllFiles()
             }
         }
@@ -86,12 +72,7 @@
 </script>
 
 <style scoped>
-    .card {
-        background: #fff;
-    }
-
-    .dialog-footer {
-        border-top: 1px solid #ddd;
-        margin-top: 20px;
+    .row {
+        padding: 15px;
     }
 </style>

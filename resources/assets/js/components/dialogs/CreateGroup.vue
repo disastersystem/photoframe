@@ -1,51 +1,44 @@
 <template>
-    <v-layout row justify-center style="margin: 150px 0 40px 0;">
-        <v-dialog v-model="dialog" scrollable persistent>
-            <v-btn success slot="activator" class="green white--text">
-                Legg til gruppe
-                <i class="material-icons icon icon--light icon--right">
-                    add
-                </i>
-            </v-btn>
+    <div>
+        <modal :show="dialog" @close="dialog = false" title="Opprett Gruppe">
+            <!-- <h3>Opprett gruppe</h3> -->
+            
+            <div class="row">
+                <p class="help-text">
+                    Ved å opprette en gruppe vil du få tilgang til å 
+                    dele bilder privat med venner og familie.
+                </p>
+            </div>
 
-            <v-card>
-                <v-card-title>Opprett gruppe</v-card-title>
-                
-                <v-divider></v-divider>
-                
-                <v-card-row height="300px">
-                    <v-card-text>
-                        <p class="help-text">Ved å opprette en gruppe vil du få tilgang til å 
-                        dele bilder privat med venner og familie.</p>
-                        
-                        <v-text-field
-                            name="groupname"
-                            class="input-group--focused"
-                            label="Skriv inn et gruppenavn"
-                            v-model="form.title">
-                        </v-text-field>    
-                    </v-card-text>
-                </v-card-row>
-                
-                <v-divider></v-divider>
+            <div class="row">
+                <v-text-field
+                    name="groupname"
+                    class="input-group--focused"
+                    label="Skriv inn et gruppenavn"
+                    v-model="form.title"
+                ></v-text-field>
+            </div>
+            
+            <v-divider></v-divider>
 
-                <v-card-row actions class="dialog-footer">
-                    <v-btn @click.native="dialog = false">
-                        <i class="material-icons icon icon--left">
-                            keyboard_backspace
-                        </i>
-                        Avbryt
-                    </v-btn>
-                    <v-btn class="white--text" success @click.native="saveGroup" :disabled="form.title == ''">
-                        Lagre
-                    </v-btn>
-                </v-card-row>
-            </v-card>
-        </v-dialog>
-    </v-layout>
+            <v-card-row actions>
+                <v-btn class="white--text" success @click.native="saveGroup" :disabled="form.title == ''">
+                    Lagre
+                </v-btn>
+            </v-card-row>
+        </modal>
+
+        <v-btn class="green white--text" success @click.native="dialog = true">
+            Legg til gruppe
+            <i class="material-icons icon icon--light icon--right">
+                add
+            </i>
+        </v-btn>
+    </div>
 </template>
 
 <script>
+    import modal from '../utilities/Modal'
     import Form from '../../core/Form'
 
     export default {
@@ -57,6 +50,10 @@
                     title: ''
                 })
             }
+        },
+
+        components: {
+            modal
         },
 
         methods: {
@@ -76,17 +73,7 @@
 </script>
 
 <style scoped>
-    .help-text {
-        margin-bottom: 50px;
-    }
-
-    .card {
-        background: #fff;
-    }
-
-    .dialog-footer {
-        border-top: 1px solid #ccc;
-        display: flex;
-        justify-content: space-between;
+    .row {
+        padding: 15px;
     }
 </style>

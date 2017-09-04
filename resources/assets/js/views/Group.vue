@@ -1,28 +1,25 @@
 <template>
 	<div>
-        <div>
-            <v-toolbar class="white elevation-0">
-                <drawertrigger></drawertrigger>
+        <v-toolbar class="white elevation-0">
+            <drawertrigger></drawertrigger>
 
-                <v-toolbar-title class="hidden-sm-and-down toolbar-title">
-                    {{ group.title }}
-                </v-toolbar-title>
-                
-                <v-spacer></v-spacer>
+            <v-toolbar-title class="hidden-sm-and-down toolbar-title">
+                {{ group.title }}
+            </v-toolbar-title>
+            
+            <v-spacer></v-spacer>
 
-                <v-btn light flat>
-                    <i class="material-icons icon icon--dark icon--center">
-                        notifications_none
-                    </i>
-                </v-btn>
-                
-                <upload @success="successfulUpload"></upload>
-                <people></people>
-            </v-toolbar>
-        </div>
+            <v-btn light flat>
+                <i class="material-icons icon icon--dark icon--center">
+                    notifications_none
+                </i>
+            </v-btn>
+            
+            <upload @success="successfulUpload"></upload>
+            <people></people>
+        </v-toolbar>
 
 		<div id="images-wrapper">
-            
             <p v-if="photos.length == 0" class="status-message">
                 Ingen bilder i denne gruppen.<br>
             </p>
@@ -32,21 +29,19 @@
     				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
     					<v-card class="elevation-10 mb-4 photo-frame">
                             <div class="intrinsic-placeholder">
-                                <!-- <photo :src="photo.thumbnail_filepath"></photo> -->
-                                <img :src="photo.thumbnail_filepath" style="position: absolute; top: 0; left: 0;">
+                                <photo :path="photo.thumbnail_filepath"></photo>
+                                <!-- <img :src="photo.thumbnail_filepath" style="position: absolute; top: 0; left: 0;"> -->
                             </div>
     					</v-card>
     				</v-flex>
                 </template>
             </v-layout>
 
-
             <v-layout row justify-center v-if="pagination.nextPage !== null" style="margin-top: 50px;">
                 <v-btn @click.native.stop="nextPhotos">
                     last in flere
                 </v-btn>
             </v-layout>
-
 		</div>
     </div>
 </template>

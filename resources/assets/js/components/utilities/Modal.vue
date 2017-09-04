@@ -231,21 +231,19 @@
 		flex-grow: 1;
 		flex-shrink: 1;
 		overflow: auto;
-		/*padding: 20px;*/
 	}
 
 	.b-modal {
 		bottom: 0;
 		left: 0;
-		position: absolute;
 		right: 0;
 		top: 0;
 		align-items: center;
 		display: none;
 		justify-content: center;
 		overflow: hidden;
-		position: fixed;
-		z-index: 20;
+		position: fixed !important;
+		z-index: 1000;
 	}
 
 	.b-modal.b-is-active {

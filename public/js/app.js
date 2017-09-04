@@ -17727,7 +17727,7 @@ var _Frame2 = _interopRequireDefault(_Frame);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component('main-layout', {
-	template: '\n\t\t<div>\n\t        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>\n\t        \t\n\t        \t<creategroup @created="addGroup"></creategroup>\n\t\t\t\t\n\t\t\t\t<v-layout row align-center style="margin-bottom: -10px;">\n\t\t\t\t\t<v-flex xs12>\n\t\t\t\t\t\t<v-subheader v-if="groups.length > 0">\n\t\t\t\t\t\t\tGrupper\n\t\t\t\t\t\t</v-subheader>\n\t\t\t\t\t</v-flex>\n\t\t\t\t</v-layout>\n\n\t            <v-list>\n\t                <template v-for="(group, i) in groups">\n\t\t\t\t\t\t<v-list-item>\n\t\t\t\t\t\t\t<v-list-tile>\n\t\t\t\t\t\t\t\t<v-list-tile-content>\n\t\t\t\t\t                <router-link :to="\'/group/\' + group.id" class="nav-item">{{ group.title }}</router-link>\n\t\t\t\t\t\t\t\t</v-list-tile-content>\n\t\t\t\t\t\t\t</v-list-tile>\n\t\t\t\t\t\t</v-list-item>\n\t\t\t\t\t</template>\n\t            </v-list>\n\t        </v-navigation-drawer>\n\n\t        <main>\n\t            <div>\n\t                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">\n\t                    <router-view></router-view>\n\t                </transition>\n\t            </div>\n\t        </main>\n\n\t        <photoframe></photoframe>\n\t    </div>\n\t',
+	template: '\n\t\t<div>\n\t        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>\n\t\t\t\t\n\t\t\t\t<creategroup @created="addGroup"></creategroup>\n\n\t\t\t\t<v-layout row align-center style="margin-bottom: -10px;">\n\t\t\t\t\t<v-flex xs12>\n\t\t\t\t\t\t<v-subheader v-if="groups.length > 0">\n\t\t\t\t\t\t\tGrupper\n\t\t\t\t\t\t</v-subheader>\n\t\t\t\t\t</v-flex>\n\t\t\t\t</v-layout>\n\n\t            <v-list>\n\t                <template v-for="(group, i) in groups">\n\t\t\t\t\t\t<v-list-item>\n\t\t\t\t\t\t\t<v-list-tile>\n\t\t\t\t\t\t\t\t<v-list-tile-content>\n\t\t\t\t\t                <router-link :to="\'/group/\' + group.id" class="nav-item">\n\t\t\t\t\t                \t{{ group.title }}\n\t\t\t\t\t                </router-link>\n\t\t\t\t\t\t\t\t</v-list-tile-content>\n\t\t\t\t\t\t\t</v-list-tile>\n\t\t\t\t\t\t</v-list-item>\n\t\t\t\t\t</template>\n\t            </v-list>\n\t        </v-navigation-drawer>\n\n\t        <main>\n\t            <div>\n\t                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">\n\t                    <router-view></router-view>\n\t                </transition>\n\t            </div>\n\t        </main>\n\n\t        <photoframe></photoframe>\n\t    </div>\n\t',
 
 	data: function data() {
 		return {
@@ -18823,27 +18823,27 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     data: function data() {
         return {
-            show: false,
+            show: true,
             url: ''
         };
     },
 
 
-    props: ['src'],
+    props: ['path'],
 
     mounted: function mounted() {
-        var photo = new Image();
-        var that = this;
+        // let photo = new Image()
+        // let that = this
 
-        photo.src = this.src;
+        //    /* wait until photo is fully loaded before displaying */
+        // photo.onload = function() {
+        // 	that.url = that.dd
 
-        /* wait until photo is fully loaded before displaying */
-        photo.onload = function () {
-            that.url = that.src;
+        // 	/* trigger fade in animation */
+        // 	that.show = true
+        // }
 
-            /* trigger fade in animation */
-            that.show = true;
-        };
+        //    photo.src = this.dd
     }
 };
 
@@ -18858,11 +18858,55 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _Modal = __webpack_require__(393);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
 var _Form = __webpack_require__(168);
 
 var _Form2 = _interopRequireDefault(_Form);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     data: function data() {
@@ -18875,6 +18919,10 @@ exports.default = {
         };
     },
 
+
+    components: {
+        modal: _Modal2.default
+    },
 
     methods: {
         saveGroup: function saveGroup() {
@@ -18891,53 +18939,7 @@ exports.default = {
             }
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 161 */
@@ -19094,49 +19096,11 @@ var _vue2Dropzone = __webpack_require__(415);
 
 var _vue2Dropzone2 = _interopRequireDefault(_vue2Dropzone);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Modal = __webpack_require__(393);
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _Modal2 = _interopRequireDefault(_Modal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     data: function data() {
@@ -19154,15 +19118,15 @@ exports.default = {
 
 
     components: {
-        dropzone: _vue2Dropzone2.default
+        dropzone: _vue2Dropzone2.default,
+        modal: _Modal2.default
     },
 
-    // react to route changes
     watch: {
+        /* react to route changes */
         '$route': function $route(to, from) {
             // update the upload url with the new group id
             this.$refs.dropzoneInstance.setOption('url', 'group/' + to.params.id + '/photo/add');
-            // this.$refs.dropzoneInstance.dropzoneOptions.url = 'group/' + to.params.id + '/photo/add'
         }
     },
 
@@ -19170,14 +19134,39 @@ exports.default = {
         showSuccess: function showSuccess(file, uploaded_file) {
             this.$emit('success', uploaded_file);
         },
-        closeDialog: function closeDialog() {
+        onDialogClose: function onDialogClose() {
             this.dialog = false;
 
-            // empty uploaded files
+            /* empty uploaded files */
             this.$refs.dropzoneInstance.removeAllFiles();
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 163 */
@@ -19305,11 +19294,6 @@ var _Photo2 = _interopRequireDefault(_Photo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -25061,7 +25045,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n.card[data-v-5c1f0d74] {\n    background: #fff;\n}\n.dialog-footer[data-v-5c1f0d74] {\n    border-top: 1px solid #ddd;\n    margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-5c1f0d74] {\n    padding: 15px;\n}\n", ""]);
 
 // exports
 
@@ -25132,7 +25116,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n.help-text[data-v-d469d100] {\n    margin-bottom: 50px;\n}\n.card[data-v-d469d100] {\n    background: #fff;\n}\n.dialog-footer[data-v-d469d100] {\n    border-top: 1px solid #ccc;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-d469d100] {\n    padding: 15px;\n}\n", ""]);
 
 // exports
 
@@ -25146,7 +25130,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n.b-modal-background[data-v-f049d82e] {\n\tbottom: 0;\n\tleft: 0;\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tbackground-color: rgba(10, 10, 10, 0.6);\n\tz-index: 900;\n}\n.b-modal-content[data-v-f049d82e],\n.b-modal-card[data-v-f049d82e] {\n\tmargin: 0;\n\tmax-height: calc(100vh - 160px);\n\toverflow: auto;\n\tposition: relative;\n\twidth: 100%;\n\tz-index: 950;\n}\n@media screen and (min-width: 769px), print {\n.b-modal-content[data-v-f049d82e],\n\t.b-modal-card[data-v-f049d82e] {\n\t\tmargin: 10px auto;\n\t\tmax-height: calc(100vh - 40px);\n\t\twidth: 500px;\n}\n}\n@media screen and (max-width: 768px), print {\n.b-modal-content[data-v-f049d82e],\n\t.b-modal-card[data-v-f049d82e] {\n\t\twidth: 94%;\n}\n}\n.b-modal-close[data-v-f049d82e] {\n\t-webkit-touch-callout: none;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t-ms-user-select: none;\n\tuser-select: none;\n\t-moz-appearance: none;\n\t-webkit-appearance: none;\n\tbackground-color: rgba(10, 10, 10, 0.2);\n\tborder: none;\n\tborder-radius: 290486px;\n\tcursor: pointer;\n\tdisplay: inline-block;\n\t-webkit-box-flex: 0;\n\t-ms-flex-positive: 0;\n\tflex-grow: 0;\n\t-ms-flex-negative: 0;\n\tflex-shrink: 0;\n\tfont-size: 1rem;\n\theight: 30px;\n\tmax-height: 30px;\n\tmax-width: 30px;\n\tmin-height: 30px;\n\tmin-width: 30px;\n\toutline: none;\n\tposition: relative;\n\tvertical-align: top;\n\twidth: 30px;\n}\n.b-modal-close[data-v-f049d82e]:before, .b-modal-close[data-v-f049d82e]:after {\n\tbackground-color: white;\n\tcontent: \"\";\n\tdisplay: block;\n\tleft: 50%;\n\tposition: absolute;\n\ttop: 50%;\n\t-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);\n\t        transform: translateX(-50%) translateY(-50%) rotate(45deg);\n\t-webkit-transform-origin: center center;\n\t        transform-origin: center center;\n}\n.b-modal-close[data-v-f049d82e]:before {\n\theight: 2px;\n\twidth: 50%;\n}\n.b-modal-close[data-v-f049d82e]:after {\n\theight: 50%;\n\twidth: 2px;\n}\n.b-modal-close[data-v-f049d82e]:hover, .b-modal-close[data-v-f049d82e]:focus {\n\tbackground-color: rgba(10, 10, 10, 0.3);\n}\n.b-modal-close[data-v-f049d82e]:active {\n\tbackground-color: rgba(10, 10, 10, 0.4);\n}\n.b-modal-card[data-v-f049d82e] {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n\tmax-height: calc(100vh - 40px);\n\toverflow: hidden;\n}\n.b-modal-card-head[data-v-f049d82e],\n.b-modal-card-foot[data-v-f049d82e] {\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tbackground-color: whitesmoke;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-ms-flex-negative: 0;\n\t    flex-shrink: 0;\n\t-webkit-box-pack: start;\n\t    -ms-flex-pack: start;\n\t        justify-content: flex-start;\n\tpadding: 20px 20px 0 20px;\n\tposition: relative;\n}\n.b-modal-card-head[data-v-f049d82e] {\n\tborder-bottom: 1px solid #dbdbdb;\n\tborder-top-left-radius: 2px;\n\tborder-top-right-radius: 2px;\n}\n.b-modal-card-title[data-v-f049d82e] {\n\tcolor: #363636;\n\t-webkit-box-flex: 1;\n\t    -ms-flex-positive: 1;\n\t        flex-grow: 1;\n\t-ms-flex-negative: 0;\n\t    flex-shrink: 0;\n\tfont-size: 1.5rem;\n\tline-height: 1;\n}\n.b-modal-card-foot[data-v-f049d82e] {\n\tborder-bottom-left-radius: 2px;\n\tborder-bottom-right-radius: 2px;\n\tborder-top: 1px solid #dbdbdb;\n}\n.b-modal-card-foot .button[data-v-f049d82e]:not(:last-child) {\n\tmargin-right: 10px;\n}\n.b-modal-card-body[data-v-f049d82e] {\n\t-webkit-overflow-scrolling: touch;\n\tbackground-color: white;\n\t-webkit-box-flex: 1;\n\t    -ms-flex-positive: 1;\n\t        flex-grow: 1;\n\t-ms-flex-negative: 1;\n\t    flex-shrink: 1;\n\toverflow: auto;\n\t/*padding: 20px;*/\n}\n.b-modal[data-v-f049d82e] {\n\tbottom: 0;\n\tleft: 0;\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tdisplay: none;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\toverflow: hidden;\n\tposition: fixed;\n\tz-index: 20;\n}\n.b-modal.b-is-active[data-v-f049d82e] {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n}\n", ""]);
+exports.push([module.i, "\n.b-modal-background[data-v-f049d82e] {\n\tbottom: 0;\n\tleft: 0;\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tbackground-color: rgba(10, 10, 10, 0.6);\n\tz-index: 900;\n}\n.b-modal-content[data-v-f049d82e],\n.b-modal-card[data-v-f049d82e] {\n\tmargin: 0;\n\tmax-height: calc(100vh - 160px);\n\toverflow: auto;\n\tposition: relative;\n\twidth: 100%;\n\tz-index: 950;\n}\n@media screen and (min-width: 769px), print {\n.b-modal-content[data-v-f049d82e],\n\t.b-modal-card[data-v-f049d82e] {\n\t\tmargin: 10px auto;\n\t\tmax-height: calc(100vh - 40px);\n\t\twidth: 500px;\n}\n}\n@media screen and (max-width: 768px), print {\n.b-modal-content[data-v-f049d82e],\n\t.b-modal-card[data-v-f049d82e] {\n\t\twidth: 94%;\n}\n}\n.b-modal-close[data-v-f049d82e] {\n\t-webkit-touch-callout: none;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t-ms-user-select: none;\n\tuser-select: none;\n\t-moz-appearance: none;\n\t-webkit-appearance: none;\n\tbackground-color: rgba(10, 10, 10, 0.2);\n\tborder: none;\n\tborder-radius: 290486px;\n\tcursor: pointer;\n\tdisplay: inline-block;\n\t-webkit-box-flex: 0;\n\t-ms-flex-positive: 0;\n\tflex-grow: 0;\n\t-ms-flex-negative: 0;\n\tflex-shrink: 0;\n\tfont-size: 1rem;\n\theight: 30px;\n\tmax-height: 30px;\n\tmax-width: 30px;\n\tmin-height: 30px;\n\tmin-width: 30px;\n\toutline: none;\n\tposition: relative;\n\tvertical-align: top;\n\twidth: 30px;\n}\n.b-modal-close[data-v-f049d82e]:before, .b-modal-close[data-v-f049d82e]:after {\n\tbackground-color: white;\n\tcontent: \"\";\n\tdisplay: block;\n\tleft: 50%;\n\tposition: absolute;\n\ttop: 50%;\n\t-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);\n\t        transform: translateX(-50%) translateY(-50%) rotate(45deg);\n\t-webkit-transform-origin: center center;\n\t        transform-origin: center center;\n}\n.b-modal-close[data-v-f049d82e]:before {\n\theight: 2px;\n\twidth: 50%;\n}\n.b-modal-close[data-v-f049d82e]:after {\n\theight: 50%;\n\twidth: 2px;\n}\n.b-modal-close[data-v-f049d82e]:hover, .b-modal-close[data-v-f049d82e]:focus {\n\tbackground-color: rgba(10, 10, 10, 0.3);\n}\n.b-modal-close[data-v-f049d82e]:active {\n\tbackground-color: rgba(10, 10, 10, 0.4);\n}\n.b-modal-card[data-v-f049d82e] {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n\tmax-height: calc(100vh - 40px);\n\toverflow: hidden;\n}\n.b-modal-card-head[data-v-f049d82e],\n.b-modal-card-foot[data-v-f049d82e] {\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tbackground-color: whitesmoke;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-ms-flex-negative: 0;\n\t    flex-shrink: 0;\n\t-webkit-box-pack: start;\n\t    -ms-flex-pack: start;\n\t        justify-content: flex-start;\n\tpadding: 20px 20px 0 20px;\n\tposition: relative;\n}\n.b-modal-card-head[data-v-f049d82e] {\n\tborder-bottom: 1px solid #dbdbdb;\n\tborder-top-left-radius: 2px;\n\tborder-top-right-radius: 2px;\n}\n.b-modal-card-title[data-v-f049d82e] {\n\tcolor: #363636;\n\t-webkit-box-flex: 1;\n\t    -ms-flex-positive: 1;\n\t        flex-grow: 1;\n\t-ms-flex-negative: 0;\n\t    flex-shrink: 0;\n\tfont-size: 1.5rem;\n\tline-height: 1;\n}\n.b-modal-card-foot[data-v-f049d82e] {\n\tborder-bottom-left-radius: 2px;\n\tborder-bottom-right-radius: 2px;\n\tborder-top: 1px solid #dbdbdb;\n}\n.b-modal-card-foot .button[data-v-f049d82e]:not(:last-child) {\n\tmargin-right: 10px;\n}\n.b-modal-card-body[data-v-f049d82e] {\n\t-webkit-overflow-scrolling: touch;\n\tbackground-color: white;\n\t-webkit-box-flex: 1;\n\t    -ms-flex-positive: 1;\n\t        flex-grow: 1;\n\t-ms-flex-negative: 1;\n\t    flex-shrink: 1;\n\toverflow: auto;\n}\n.b-modal[data-v-f049d82e] {\n\tbottom: 0;\n\tleft: 0;\n\tright: 0;\n\ttop: 0;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tdisplay: none;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\toverflow: hidden;\n\tposition: fixed !important;\n\tz-index: 1000;\n}\n.b-modal.b-is-active[data-v-f049d82e] {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n}\n", ""]);
 
 // exports
 
@@ -30098,7 +30082,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [(_vm.show) ? _c('img', {
     attrs: {
-      "src": _vm.url
+      "src": _vm.path
     }
   }) : _vm._e()])
 },staticRenderFns: []}
@@ -30115,22 +30099,22 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', [_c('v-toolbar', {
+  return _c('div', [_c('v-toolbar', {
     staticClass: "white elevation-0"
   }, [_c('drawertrigger'), _vm._v(" "), _c('v-toolbar-title', {
     staticClass: "hidden-sm-and-down toolbar-title"
-  }, [_vm._v("\n                    " + _vm._s(_vm.group.title) + "\n                ")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
+  }, [_vm._v("\n                " + _vm._s(_vm.group.title) + "\n            ")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
     attrs: {
       "light": "",
       "flat": ""
     }
   }, [_c('i', {
     staticClass: "material-icons icon icon--dark icon--center"
-  }, [_vm._v("\n                        notifications_none\n                    ")])]), _vm._v(" "), _c('upload', {
+  }, [_vm._v("\n                    notifications_none\n                ")])]), _vm._v(" "), _c('upload', {
     on: {
       "success": _vm.successfulUpload
     }
-  }), _vm._v(" "), _c('people')], 1)], 1), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('people')], 1), _vm._v(" "), _c('div', {
     attrs: {
       "id": "images-wrapper"
     }
@@ -30155,16 +30139,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "elevation-10 mb-4 photo-frame"
     }, [_c('div', {
       staticClass: "intrinsic-placeholder"
-    }, [_c('img', {
-      staticStyle: {
-        "position": "absolute",
-        "top": "0",
-        "left": "0"
-      },
+    }, [_c('photo', {
       attrs: {
-        "src": photo.thumbnail_filepath
+        "path": photo.thumbnail_filepath
       }
-    })])])], 1)]
+    })], 1)])], 1)]
   })], 2), _vm._v(" "), (_vm.pagination.nextPage !== null) ? _c('v-layout', {
     staticStyle: {
       "margin-top": "50px"
@@ -30180,7 +30159,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.nextPhotos($event)
       }
     }
-  }, [_vm._v("\n                    last in flere\n                ")])], 1) : _vm._e()], 1)])
+  }, [_vm._v("\n                    last in flere\n                ")])], 1) : _vm._e()], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -30195,39 +30174,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('v-layout', {
+  return _c('div', [_c('modal', {
     attrs: {
-      "row": "",
-      "justify-center": ""
-    }
-  }, [_c('v-dialog', {
-    attrs: {
-      "width": "600px",
-      "persistent": ""
+      "show": _vm.dialog,
+      "title": "Bildeopplasting"
     },
-    model: {
-      value: (_vm.dialog),
-      callback: function($$v) {
-        _vm.dialog = $$v
-      },
-      expression: "dialog"
+    on: {
+      "close": _vm.onDialogClose
     }
-  }, [_c('v-btn', {
-    staticStyle: {
-      "margin-right": "30px"
-    },
-    attrs: {
-      "success": "",
-      "light": ""
-    },
-    slot: "activator"
-  }, [_vm._v("\n            Legg til bilder\n            "), _c('i', {
-    staticClass: "material-icons icon icon--dark icon--light icon--right"
-  }, [_vm._v("\n                cloud_upload\n            ")])]), _vm._v(" "), _c('v-card', [_c('v-card-row', [_c('v-card-title', [_vm._v("Velg bilder å legge til")])], 1), _vm._v(" "), _c('v-card-row', [_c('p', {
-    staticStyle: {
-      "padding-left": "20px"
-    }
-  }, [_vm._v("\n                    Trykk på boksen under, eller dra bilder til boksen for å laste opp.\n                ")])]), _vm._v(" "), _c('v-card-row', [_c('v-card-text', [_c('dropzone', {
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('dropzone', {
     ref: "dropzoneInstance",
     attrs: {
       "id": "myVueDropzone",
@@ -30243,22 +30200,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "vdropzone-success": _vm.showSuccess
     }
-  })], 1)], 1), _vm._v(" "), _c('v-card-row', {
-    staticClass: "dialog-footer",
+  })], 1)]), _vm._v(" "), _c('v-btn', {
     attrs: {
-      "actions": ""
-    }
-  }, [_c('v-btn', {
-    staticClass: "elevation-1",
-    staticStyle: {
-      "margin-right": "12px"
+      "success": "",
+      "light": ""
     },
     nativeOn: {
       "click": function($event) {
-        _vm.closeDialog($event)
+        _vm.dialog = true
       }
     }
-  }, [_vm._v("Lukk")])], 1)], 1)], 1)], 1)
+  }, [_vm._v("\n        Legg til bilder\n        "), _c('i', {
+    staticClass: "material-icons icon icon--dark icon--light icon--right"
+  }, [_vm._v("\n            cloud_upload\n        ")])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -30554,41 +30508,23 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('v-layout', {
-    staticStyle: {
-      "margin": "150px 0 40px 0"
+  return _c('div', [_c('modal', {
+    attrs: {
+      "show": _vm.dialog,
+      "title": "Opprett Gruppe"
     },
-    attrs: {
-      "row": "",
-      "justify-center": ""
+    on: {
+      "close": function($event) {
+        _vm.dialog = false
+      }
     }
-  }, [_c('v-dialog', {
-    attrs: {
-      "scrollable": "",
-      "persistent": ""
-    },
-    model: {
-      value: (_vm.dialog),
-      callback: function($$v) {
-        _vm.dialog = $$v
-      },
-      expression: "dialog"
-    }
-  }, [_c('v-btn', {
-    staticClass: "green white--text",
-    attrs: {
-      "success": ""
-    },
-    slot: "activator"
-  }, [_vm._v("\n            Legg til gruppe\n            "), _c('i', {
-    staticClass: "material-icons icon icon--light icon--right"
-  }, [_vm._v("\n                add\n            ")])]), _vm._v(" "), _c('v-card', [_c('v-card-title', [_vm._v("Opprett gruppe")]), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-card-row', {
-    attrs: {
-      "height": "300px"
-    }
-  }, [_c('v-card-text', [_c('p', {
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('p', {
     staticClass: "help-text"
-  }, [_vm._v("Ved å opprette en gruppe vil du få tilgang til å \n                    dele bilder privat med venner og familie.")]), _vm._v(" "), _c('v-text-field', {
+  }, [_vm._v("\n                Ved å opprette en gruppe vil du få tilgang til å \n                dele bilder privat med venner og familie.\n            ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('v-text-field', {
     staticClass: "input-group--focused",
     attrs: {
       "name": "groupname",
@@ -30601,20 +30537,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "form.title"
     }
-  })], 1)], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-card-row', {
-    staticClass: "dialog-footer",
+  })], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('v-card-row', {
     attrs: {
       "actions": ""
     }
   }, [_c('v-btn', {
-    nativeOn: {
-      "click": function($event) {
-        _vm.dialog = false
-      }
-    }
-  }, [_c('i', {
-    staticClass: "material-icons icon icon--left"
-  }, [_vm._v("\n                        keyboard_backspace\n                    ")]), _vm._v("\n                    Avbryt\n                ")]), _vm._v(" "), _c('v-btn', {
     staticClass: "white--text",
     attrs: {
       "success": "",
@@ -30625,7 +30552,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.saveGroup($event)
       }
     }
-  }, [_vm._v("\n                    Lagre\n                ")])], 1)], 1)], 1)], 1)
+  }, [_vm._v("\n                Lagre\n            ")])], 1)], 1), _vm._v(" "), _c('v-btn', {
+    staticClass: "green white--text",
+    attrs: {
+      "success": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.dialog = true
+      }
+    }
+  }, [_vm._v("\n        Legg til gruppe\n        "), _c('i', {
+    staticClass: "material-icons icon icon--light icon--right"
+  }, [_vm._v("\n            add\n        ")])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

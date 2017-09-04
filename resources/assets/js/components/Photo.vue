@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade">
-		<img :src="url" v-if="show">
+		<img :src="path" v-if="show">
 	</transition>
 </template>
 
@@ -8,26 +8,26 @@
 	export default {
         data() {
             return {
-            	show: false,
+            	show: true,
                 url: ''
             }
         },
 
-        props: ['src'],
+        props: ['path'],
 
         mounted() {
-        	let photo = new Image()
-        	let that = this
+        	// let photo = new Image()
+        	// let that = this
 
-        	photo.src = this.src
+         //    /* wait until photo is fully loaded before displaying */
+        	// photo.onload = function() {
+        	// 	that.url = that.dd
 
-            /* wait until photo is fully loaded before displaying */
-        	photo.onload = function() {
-        		that.url = that.src
+        	// 	/* trigger fade in animation */
+        	// 	that.show = true
+        	// }
 
-        		/* trigger fade in animation */
-        		that.show = true
-        	}
+         //    photo.src = this.dd
         }
     }
 </script>

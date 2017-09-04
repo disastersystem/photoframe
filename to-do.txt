@@ -46,6 +46,8 @@ node_modules\.bin\webpack
 
 - ERROR I EDGE!!
 
+- Cropping on upload.
+
 
 Pug eller jade ellerno
 stylus

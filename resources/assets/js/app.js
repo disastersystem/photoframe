@@ -8,9 +8,9 @@ Vue.component('main-layout', {
 	template: `
 		<div>
 	        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>
-	        	
-	        	<creategroup @created="addGroup"></creategroup>
 				
+				<creategroup @created="addGroup"></creategroup>
+
 				<v-layout row align-center style="margin-bottom: -10px;">
 					<v-flex xs12>
 						<v-subheader v-if="groups.length > 0">
@@ -24,7 +24,9 @@ Vue.component('main-layout', {
 						<v-list-item>
 							<v-list-tile>
 								<v-list-tile-content>
-					                <router-link :to="'/group/' + group.id" class="nav-item">{{ group.title }}</router-link>
+					                <router-link :to="'/group/' + group.id" class="nav-item">
+					                	{{ group.title }}
+					                </router-link>
 								</v-list-tile-content>
 							</v-list-tile>
 						</v-list-item>
