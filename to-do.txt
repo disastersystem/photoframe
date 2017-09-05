@@ -8,6 +8,8 @@ node_modules\.bin\webpack
 
 - ny animert mobil meny icon
 
+- Mulig å slette gruppe.
+
 - align "Velg eller opprett en gruppe."
 
 - Shaking upload button, when there is no images in the group.

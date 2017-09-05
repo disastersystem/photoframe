@@ -1,39 +1,18 @@
 <template>
     <div>
-        <modal :show="dialog" @close="dialog = false" title="Opprett Gruppe">
-            <!-- <h3>Opprett gruppe</h3> -->
-            
-            <div class="row">
-                <p class="help-text">
-                    Ved å opprette en gruppe vil du få tilgang til å 
-                    dele bilder privat med venner og familie.
-                </p>
-            </div>
+        <div class="row">
+            <v-text-field style="margin: 0;"
+                title="Ved å opprette en gruppe vil du få tilgang til å dele bilder privat med venner og familie."
+                name="groupname"
+                class="input-group"
+                label="Opprett ny gruppe"
+                v-model="form.title"
+            ></v-text-field>
 
-            <div class="row">
-                <v-text-field
-                    name="groupname"
-                    class="input-group--focused"
-                    label="Skriv inn et gruppenavn"
-                    v-model="form.title"
-                ></v-text-field>
-            </div>
-            
-            <v-divider></v-divider>
-
-            <v-card-row actions>
-                <v-btn class="white--text" success @click.native="saveGroup" :disabled="form.title == ''">
-                    Lagre
-                </v-btn>
-            </v-card-row>
-        </modal>
-
-        <v-btn class="green white--text" success @click.native="dialog = true">
-            Legg til gruppe
-            <i class="material-icons icon icon--light icon--right">
-                add
-            </i>
-        </v-btn>
+            <v-btn class="white--text" success @click.native="saveGroup" :disabled="form.title == ''" v-if="form.title != ''">
+                Opprett
+            </v-btn>
+        </div>
     </div>
 </template>
 
@@ -74,6 +53,10 @@
 
 <style scoped>
     .row {
-        padding: 15px;
+        padding: 50px 30px;
+    }
+
+    button, input {
+        margin: 0;
     }
 </style>
