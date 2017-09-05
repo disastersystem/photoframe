@@ -3,7 +3,7 @@
 		<div class="b-modal b-is-active" v-show="show">
 			<div class="b-modal-background"></div>
 
-			<div class="b-modal-card">
+			<div class="b-modal-card" :style="'width: ' + width + 'px;'">
 				<header class="b-modal-card-head" v-if="options.header">
 					<h2 class="b-modal-card-title">
 						{{ title }}
@@ -17,7 +17,7 @@
 				</section>
 				
 				<footer class="b-modal-card-foot" v-if="options.footer">
-					<!-- -->
+					<slot name="footer"></slot>
 				</footer>
 			</div>
 		</div>
@@ -42,6 +42,11 @@
 				}
 			},
 
+			width: {
+				type: Number,
+				default: 400
+			},
+
 			title: {
 				type: String,
 				default: ''
@@ -50,9 +55,9 @@
 
 		watch: {
 			show(status) {
-				// status && this.$nextTick(() => {
-				// 	this.$el.focus()
-				// })
+				status && this.$nextTick(() => {
+					this.$el.focus()
+				})
 
 				(status == true) ? this.open() : this.close()
 			}
@@ -71,8 +76,7 @@
 				this.show = false
 
 				// show body scrollbar
-                document.documentElement.style.overflowY = null
-                document.documentElement.style.paddingRight = null
+                document.documentElement.removeAttribute('style')
 			}
 		},
 
@@ -81,8 +85,7 @@
 		 */
 		destroyed() {
 			// show body scrollbar
-            document.documentElement.style.overflowY = null
-            document.documentElement.style.paddingRight = null
+            document.documentElement.removeAttribute('style')
 		}
     }
 </script>

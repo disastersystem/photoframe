@@ -21,7 +21,7 @@
 
 		<div id="images-wrapper">
             <p v-if="photos.length == 0" class="status-message">
-                Ingen bilder i denne gruppen.<br>
+                Ingen bilder i denne gruppen
             </p>
 
             <v-layout row wrap>
@@ -30,7 +30,6 @@
     					<v-card class="elevation-10 mb-4 photo-frame">
                             <div class="intrinsic-placeholder">
                                 <photo :path="photo.thumbnail_filepath"></photo>
-                                <!-- <img :src="photo.thumbnail_filepath" style="position: absolute; top: 0; left: 0;"> -->
                             </div>
     					</v-card>
     				</v-flex>
@@ -56,7 +55,10 @@
         data () {
             return {
                 group: {},
-                photos: [],
+                /* initalizing the photos array with an empty object 
+                keeps the "no images" message from showing while 
+                photos gets fetched */
+                photos: [{}],
                 pagination: {}
             }
         },

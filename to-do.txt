@@ -1,8 +1,5 @@
 node_modules\.bin\webpack
 
-**************
-************** bytte ut modals.. med bulma lignende
-**************
 - kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
 
 - Input fields like digital ocean!

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <modal :show="dialog" @close="onDialogClose" title="Bildeopplasting">
+        <modal :show="dialog" @close="onDialogClose" title="Bildeopplasting" :width="550">
             <div class="row">
                 <dropzone id="myVueDropzone"
                     ref="dropzoneInstance"
