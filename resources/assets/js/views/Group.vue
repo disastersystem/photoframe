@@ -8,15 +8,15 @@
             </v-toolbar-title>
             
             <v-spacer></v-spacer>
-
-            <v-btn light flat>
-                <i class="material-icons icon icon--dark icon--center">
-                    notifications_none
-                </i>
-            </v-btn>
             
             <upload @success="successfulUpload"></upload>
             <people></people>
+
+            <v-btn  flat>
+                <i class="material-icons icon icon--dark icon--center">
+                    settings
+                </i>
+            </v-btn>
         </v-toolbar>
 
 		<div id="images-wrapper">
@@ -36,7 +36,7 @@
                 </template>
             </v-layout>
 
-            <v-layout row justify-center v-if="pagination.nextPage !== null" style="margin-top: 50px;">
+            <v-layout row justify-center v-if="pagination.nextPage !== null" class="load-more-row">
                 <v-btn @click.native.stop="nextPhotos">
                     last in flere
                 </v-btn>
@@ -159,5 +159,13 @@
         height: 70vh;
         width: 100%;
         text-align: center;
+    }
+
+    .load-more-row {
+        margin-top: 50px;
+    }
+
+    .settings-trigger {
+        padding: 0 15px;
     }
 </style>

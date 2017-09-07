@@ -19,7 +19,7 @@
         	// let photo = new Image()
         	// let that = this
 
-         //    /* wait until photo is fully loaded before displaying */
+            // /* wait until photo is fully loaded before displaying */
         	// photo.onload = function() {
         	// 	that.url = that.dd
 
@@ -27,7 +27,7 @@
         	// 	that.show = true
         	// }
 
-         //    photo.src = this.dd
+            // photo.src = this.dd
         }
     }
 </script>

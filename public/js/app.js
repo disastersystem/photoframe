@@ -18632,7 +18632,10 @@ exports.default = {
 
     methods: {
         toggleDrawer: function toggleDrawer() {
+            // emit a global event when the drawer button is toggled
+            // this makes it easier to broadcast across views
             Bus.$emit('toggleDrawer', this.drawer = !this.drawer);
+            // close or open the drawer
             this.isOpen = this.isOpen = !this.isOpen;
         }
     }
@@ -18659,7 +18662,6 @@ var _photoswipeUiDefault2 = _interopRequireDefault(_photoswipeUiDefault);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
 //
 //
 //
@@ -18776,20 +18778,18 @@ exports.default = {
             });
         },
         changeInterval: function changeInterval(time) {
-            // this.interval = time
-
-            // window.clearInterval(this.loopGallery)
-
-            // this.loopGallery = window.setInterval(function() {
-            //     gallery.next()
-            // }, this.interval)
+            /* this.interval = time
+             window.clearInterval(this.loopGallery)
+             this.loopGallery = window.setInterval(function() {
+                gallery.next()
+            }, this.interval) */
         }
     },
 
     mounted: function mounted() {
         var _this = this;
 
-        /* fetch all photos */
+        /* fetch all photos from every group */
         axios.get('photo/all/get').then(function (response) {
             _this.photos = response.data.data;
         });
@@ -18858,6 +18858,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
 	data: function data() {
@@ -18869,7 +18876,8 @@ exports.default = {
 
 
 	components: {
-		creategroup: _CreateGroup2.default, photoframe: _Frame2.default
+		creategroup: _CreateGroup2.default,
+		photoframe: _Frame2.default
 	},
 
 	mounted: function mounted() {
@@ -18929,7 +18937,7 @@ exports.default = {
         // let photo = new Image()
         // let that = this
 
-        //    /* wait until photo is fully loaded before displaying */
+        // /* wait until photo is fully loaded before displaying */
         // photo.onload = function() {
         // 	that.url = that.dd
 
@@ -18937,7 +18945,7 @@ exports.default = {
         // 	that.show = true
         // }
 
-        //    photo.src = this.dd
+        // photo.src = this.dd
     }
 };
 
@@ -18984,8 +18992,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
     data: function data() {
         return {
-            dialog: false,
-
             form: new _Form2.default({
                 title: ''
             })
@@ -19003,12 +19009,13 @@ exports.default = {
 
             if (this.form.title.length != 0) {
                 this.form.post('group/add').then(function (response) {
-                    _this.$emit('created', { id: response.id, title: response.title });
-                    _this.dialog = false;
+                    _this.$emit('created', {
+                        id: response.id, title: response.title
+                    });
+
+                    // empty the input field
                     _this.form.title = '';
                 });
-            } else {
-                // set form error
             }
         }
     }
@@ -19069,19 +19076,6 @@ exports.default = {
         }
     }
 }; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19308,11 +19302,7 @@ exports.default = {
 
 	watch: {
 		show: function show(status) {
-			var _this = this;
-
-			status && this.$nextTick(function () {
-				_this.$el.focus();
-			})(status == true) ? this.open() : this.close();
+			status == true ? this.open() : this.close();
 		}
 	},
 
@@ -19507,8 +19497,6 @@ exports.default = {
               drawertrigger: _DrawerTrigger2.default
        }
 }; //
-//
-//
 //
 //
 //
@@ -25109,7 +25097,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n#images-wrapper[data-v-48931658] {\n    padding: 2%;\n    padding-bottom: 100px;\n}\n.intrinsic-placeholder[data-v-48931658] {\n    padding-bottom: 60%;\n    position: relative;\n}\n.year-title[data-v-48931658] {\n    border-bottom: 1px solid #ddd;\n    margin-bottom: 25px;\n    margin-top: 40px;\n    padding: 10px;\n    font-size: 16px;\n    color: #bbb;\n}\n.toolbar-title[data-v-48931658] {\n    text-align: center;\n    font-size: 25px;\n    color: #000;\n}\n.photo-frame[data-v-48931658] {\n    padding: 10px;\n}\n.status-message[data-v-48931658] {\n    padding: 30px;\n    font-size: 18px;\n    color: #ccc;\n    font-weight: 500;\n    font-size: 18px;\n    text-transform: uppercase;\n\n    display: -webkit-box;\n\n    display: -ms-flexbox;\n\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    height: 70vh;\n    width: 100%;\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n#images-wrapper[data-v-48931658] {\n    padding: 2%;\n    padding-bottom: 100px;\n}\n.intrinsic-placeholder[data-v-48931658] {\n    padding-bottom: 60%;\n    position: relative;\n}\n.year-title[data-v-48931658] {\n    border-bottom: 1px solid #ddd;\n    margin-bottom: 25px;\n    margin-top: 40px;\n    padding: 10px;\n    font-size: 16px;\n    color: #bbb;\n}\n.toolbar-title[data-v-48931658] {\n    text-align: center;\n    font-size: 25px;\n    color: #000;\n}\n.photo-frame[data-v-48931658] {\n    padding: 10px;\n}\n.status-message[data-v-48931658] {\n    padding: 30px;\n    font-size: 18px;\n    color: #ccc;\n    font-weight: 500;\n    font-size: 18px;\n    text-transform: uppercase;\n\n    display: -webkit-box;\n\n    display: -ms-flexbox;\n\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    height: 70vh;\n    width: 100%;\n    text-align: center;\n}\n.load-more-row[data-v-48931658] {\n    margin-top: 50px;\n}\n.settings-trigger[data-v-48931658] {\n    padding: 0 15px;\n}\n", ""]);
 
 // exports
 
@@ -25138,7 +25126,7 @@ exports.i(__webpack_require__(375), "");
 exports.i(__webpack_require__(374), "");
 
 // module
-exports.push([module.i, "\n.photoframe-launcher[data-v-75c2f2ae] {\n    position: fixed;\n    /*display: flex;*/\n    /*justify-content: center;*/\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0;\n    width: 100%;\n    z-index: 1;\n    padding: 0;\n    background: red;\n}\n.btn-photoframe[data-v-75c2f2ae] {\n    font-size: 20px;\n    background: #3486D7;\n    color: #fff;\n    border-radius: 0;\n    /*padding: 0;*/\n    width: 100%;\n    margin: 0;\n}\n", ""]);
+exports.push([module.i, "\n.photoframe-launcher[data-v-75c2f2ae] {\n    position: fixed;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0;\n    width: 100%;\n    z-index: 1;\n    padding: 0;\n    background: red;\n}\n.btn-photoframe[data-v-75c2f2ae] {\n    font-size: 20px;\n    background: #3486D7;\n    color: #fff;\n    border-radius: 0;\n    width: 100%;\n    margin: 0;\n}\n", ""]);
 
 // exports
 
@@ -25152,7 +25140,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n.view-container[data-v-7948211a] {\n\tpadding: 40px 30px;\n}\n", ""]);
+exports.push([module.i, "\n.message[data-v-7948211a] {\n\tmargin-left: 20px;\n}\n", ""]);
 
 // exports
 
@@ -25180,7 +25168,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n.modal-content-row[data-v-91c789fc] {\n    padding: 20px;\n}\n.help-text[data-v-91c789fc] {\n    margin-bottom: 0;\n    padding: 0 10px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content-row[data-v-91c789fc] {\n    padding: 20px;\n}\n.help-text[data-v-91c789fc] {\n    margin-bottom: 0;\n    padding: 0 10px;\n}\n.menu[data-v-91c789fc] {\n    margin: 20px 0 0 0;\n    padding: 0;\n    width: 98%;\n}\n.input-group[data-v-91c789fc] {\n    width: 90%;\n}\n.card[data-v-91c789fc] {\n    margin-top: 10px;\n}\n", ""]);
 
 // exports
 
@@ -25194,7 +25182,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\n.row[data-v-d469d100] {\n    padding: 50px 30px;\n}\nbutton[data-v-d469d100], input[data-v-d469d100] {\n    margin: 0;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-d469d100] {\n    padding: 50px 30px;\n}\nbutton[data-v-d469d100], input[data-v-d469d100], .input-group[data-v-d469d100] {\n    margin: 0;\n}\n", ""]);
 
 // exports
 
@@ -29887,13 +29875,17 @@ module.exports = Component.exports
 /* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(423)
+
 var Component = __webpack_require__(29)(
   /* script */
   __webpack_require__(160),
   /* template */
   __webpack_require__(399),
   /* scopeId */
-  null,
+  "data-v-370cd85c",
   /* cssModules */
   null
 )
@@ -30191,9 +30183,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "created": _vm.addGroup
     }
   }), _vm._v(" "), _c('v-layout', {
-    staticStyle: {
-      "margin-bottom": "-10px"
-    },
+    staticClass: "sub-header-row",
     attrs: {
       "row": "",
       "align-center": ""
@@ -30202,7 +30192,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "xs12": ""
     }
-  }, [(_vm.groups.length > 0) ? _c('v-subheader', [_vm._v("\n\t\t\t\t\t\tGrupper\n\t\t\t\t\t")]) : _vm._e()], 1)], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.groups), function(group, i) {
+  }, [(_vm.groups.length > 0) ? _c('v-subheader', [_vm._v("\n\t\t\t\t\t\tDine Grupper\n\t\t\t\t\t")]) : _c('p', {
+    staticClass: "no-groups-message"
+  }, [_vm._v("\n\t\t\t\t\t\tDu er ikke medlem av noen grupper enda.\n\t\t\t\t\t")])], 1)], 1), _vm._v(" "), _c('v-list', [_vm._l((_vm.groups), function(group, i) {
     return [_c('v-list-item', [_c('v-list-tile', [_c('v-list-tile-content', [_c('router-link', {
       staticClass: "nav-item",
       attrs: {
@@ -30235,18 +30227,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "white elevation-0"
   }, [_c('drawertrigger'), _vm._v(" "), _c('v-toolbar-title', {
     staticClass: "hidden-sm-and-down toolbar-title"
-  }, [_vm._v("\n                " + _vm._s(_vm.group.title) + "\n            ")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-btn', {
+  }, [_vm._v("\n                " + _vm._s(_vm.group.title) + "\n            ")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('upload', {
+    on: {
+      "success": _vm.successfulUpload
+    }
+  }), _vm._v(" "), _c('people'), _vm._v(" "), _c('v-btn', {
     attrs: {
-      "light": "",
       "flat": ""
     }
   }, [_c('i', {
     staticClass: "material-icons icon icon--dark icon--center"
-  }, [_vm._v("\n                    notifications_none\n                ")])]), _vm._v(" "), _c('upload', {
-    on: {
-      "success": _vm.successfulUpload
-    }
-  }), _vm._v(" "), _c('people')], 1), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                    settings\n                ")])])], 1), _vm._v(" "), _c('div', {
     attrs: {
       "id": "images-wrapper"
     }
@@ -30277,9 +30268,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })], 1)])], 1)]
   })], 2), _vm._v(" "), (_vm.pagination.nextPage !== null) ? _c('v-layout', {
-    staticStyle: {
-      "margin-top": "50px"
-    },
+    staticClass: "load-more-row",
     attrs: {
       "row": "",
       "justify-center": ""
@@ -30417,7 +30406,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.changeInterval(interval.time)
         }
       }
-    }, [_c('v-list-tile', [_c('v-list-tile-title', [_vm._v(_vm._s(interval.title))])], 1)], 1)
+    }, [_c('v-list-tile', [_c('v-list-tile-title', [_vm._v("\n                                        " + _vm._s(interval.title) + "\n                                    ")])], 1)], 1)
   }))], 1), _vm._v(" "), _vm._m(1)], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('button', {
     staticClass: "pswp__button pswp__button--arrow--left",
     attrs: {
@@ -30430,17 +30419,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _vm._m(3)])])]), _vm._v(" "), _c('div', {
     staticClass: "photoframe-launcher"
-  }, [_c('div', {
-    on: {
-      "click": _vm.open
-    }
   }, [_c('v-btn', {
     staticClass: "btn-photoframe",
     attrs: {
       "primary": "",
       "light": ""
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.open($event)
+      }
     }
-  }, [_vm._v("\n                start bilderammemodus\n            ")])], 1)])])
+  }, [_vm._v("\n            start bilderammemodus\n        ")])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "pswp__container"
@@ -30489,9 +30479,9 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('div', [_c('v-toolbar', {
     staticClass: "white elevation-0"
-  }, [_c('drawertrigger')], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "view-container"
-  }, [_c('p', [_c('v-icon', [_vm._v("arrow_back")]), _vm._v("\n\t\t\tVelg eller opprett en gruppe.\n\t\t")], 1)])])
+  }, [_c('drawertrigger'), _vm._v(" "), _c('div', {
+    staticClass: "message"
+  }, [_c('v-icon', [_vm._v("arrow_back")]), _vm._v("\n\t\t\t\tVelg eller opprett en gruppe.\n\t\t\t")], 1)], 1)], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -30546,19 +30536,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                Legg til venner eller familie du vil dele fotosamlingen med.\n                Du kan søke på e-post adresse, eller navn på de som allerede er registrert.\n            ")])]), _vm._v(" "), _c('div', {
     staticClass: "modal-content-row"
   }, [_c('v-menu', {
-    staticStyle: {
-      "margin": "20px 0 0 0",
-      "padding": "0",
-      "width": "98%"
-    },
     attrs: {
       "offset-y": ""
     }
   }, [_c('v-text-field', {
-    staticClass: "input-group--focused",
-    staticStyle: {
-      "width": "90%"
-    },
+    staticClass: "input-group",
     attrs: {
       "name": "person",
       "label": "Søk etter en person",
@@ -30578,14 +30560,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selected(item.id)
         }
       }
-    }, [_c('v-list-tile-title', [_vm._v("\n                                    " + _vm._s(item.name) + "\n                                ")]), _vm._v(" "), _c('v-list-tile-sub-title', [_vm._v("\n                                    " + _vm._s(item.email) + "\n                                ")])], 1)], 1)], 1)
+    }, [_c('v-list-tile-title', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('v-list-tile-sub-title', [_vm._v(_vm._s(item.email))])], 1)], 1)], 1)
   }))], 1)], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('div', {
     staticClass: "modal-content-row"
   }, [_c('v-card', {
-    staticClass: "elevation-0",
-    staticStyle: {
-      "margin-top": "10px"
-    }
+    staticClass: "elevation-0"
   }, [_c('v-list', {
     attrs: {
       "subheader": ""
@@ -30645,9 +30624,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('v-text-field', {
     staticClass: "input-group",
-    staticStyle: {
-      "margin": "0"
-    },
     attrs: {
       "title": "Ved å opprette en gruppe vil du få tilgang til å dele bilder privat med venner og familie.",
       "name": "groupname",
@@ -50124,6 +50100,46 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 module.exports = __webpack_require__(139);
 
+
+/***/ }),
+/* 422 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.sub-header-row[data-v-370cd85c] {\n\tmargin-bottom: -10px;\n}\n.no-groups-message[data-v-370cd85c] {\n\tpadding: 20px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 423 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(422);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(32)("2f9e95d8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-370cd85c&scoped=true!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MainLayout.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-370cd85c&scoped=true!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MainLayout.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

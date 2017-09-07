@@ -3,15 +3,13 @@
 		<div>
 			<v-toolbar class="white elevation-0">
 	            <drawertrigger></drawertrigger>
+
+	            <div class="message">
+					<v-icon>arrow_back</v-icon>
+					Velg eller opprett en gruppe.
+				</div>
 	        </v-toolbar>
 		</div>
-			
-	    <div class="view-container">
-			<p>
-				<v-icon>arrow_back</v-icon>
-				Velg eller opprett en gruppe.
-			</p>
-	    </div>
 	</div>
 </template>
 
@@ -26,7 +24,7 @@
 </script>
 
 <style scoped>
-	.view-container {
-		padding: 40px 30px;
+	.message {
+		margin-left: 20px;
 	}
 </style>

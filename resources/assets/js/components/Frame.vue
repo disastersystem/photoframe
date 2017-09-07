@@ -1,7 +1,7 @@
 <template>
     <div>
        <!-- Root element of PhotoSwipe. Must have class pswp. -->
-        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 5">
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 5;">
 
             <!-- Background of PhotoSwipe. It's a separate element as animating opacity is faster than rgba(). -->
             <div class="pswp__bg"></div>
@@ -32,7 +32,9 @@
                             <v-list>
                                 <v-list-item v-for="interval in intervals" :key="interval.time" @click="changeInterval(interval.time)">
                                     <v-list-tile>
-                                        <v-list-tile-title>{{ interval.title }}</v-list-tile-title>
+                                        <v-list-tile-title>
+                                            {{ interval.title }}
+                                        </v-list-tile-title>
                                     </v-list-tile>
                                 </v-list-item>
                             </v-list>
@@ -64,13 +66,10 @@
             </div>
         </div>
 
-        <!-- v-if="photos.length > 0" -->
         <div class="photoframe-launcher">
-            <div @click="open">
-                <v-btn primary light class="btn-photoframe">
-                    start bilderammemodus
-                </v-btn>
-            </div>
+            <v-btn primary light class="btn-photoframe" @click.native="open">
+                start bilderammemodus
+            </v-btn>
         </div>
     </div>
 </template>
@@ -131,18 +130,18 @@
             },
 
             changeInterval(time) {
-                // this.interval = time
+                /* this.interval = time
 
-                // window.clearInterval(this.loopGallery)
+                window.clearInterval(this.loopGallery)
 
-                // this.loopGallery = window.setInterval(function() {
-                //     gallery.next()
-                // }, this.interval)
+                this.loopGallery = window.setInterval(function() {
+                    gallery.next()
+                }, this.interval) */
             }
         },
 
         mounted() {
-            /* fetch all photos */
+            /* fetch all photos from every group */
             axios.get('photo/all/get').then(response => {
                 this.photos = response.data.data
             })
@@ -156,8 +155,6 @@
 
     .photoframe-launcher {
         position: fixed;
-        /*display: flex;*/
-        /*justify-content: center;*/
         bottom: 0px;
         left: 0;
         right: 0;
@@ -173,7 +170,6 @@
         background: #3486D7;
         color: #fff;
         border-radius: 0;
-        /*padding: 0;*/
         width: 100%;
         margin: 0;
     }

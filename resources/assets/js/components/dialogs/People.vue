@@ -9,31 +9,21 @@
             </div>
 
             <div class="modal-content-row">
-                <v-menu offset-y style="margin: 20px 0 0 0; padding: 0; width: 98%;">
+                <v-menu offset-y>
                     <v-text-field
-                        style="width: 90%;"
                         name="person"
                         label="Søk etter en person"
                         prepend-icon="search"
-                        class="input-group--focused"
+                        class="input-group"
                         slot="activator"
                     ></v-text-field>
 
                     <v-list>
                         <v-list-item v-for="(item, i) in items" :key="i">
                             <v-list-tile avatar>
-                                <!-- <v-list-tile-avatar>
-                                    <img v-bind:src="item.avatar">
-                                </v-list-tile-avatar> -->
-                                
                                 <v-list-tile-content @click="selected(item.id)">
-                                    <v-list-tile-title>
-                                        {{ item.name }}
-                                    </v-list-tile-title>
-
-                                    <v-list-tile-sub-title>
-                                        {{ item.email }}
-                                    </v-list-tile-sub-title>
+                                    <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                                    <v-list-tile-sub-title>{{ item.email }}</v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list-item>
@@ -44,7 +34,7 @@
             <v-divider></v-divider>
 
             <div class="modal-content-row">
-                <v-card class="elevation-0" style="margin-top: 10px;">
+                <v-card class="elevation-0">
                     <v-list subheader>
                         <v-subheader v-if="members.length > 0">
                             Medlemmer
@@ -52,9 +42,6 @@
 
                         <v-list-item v-for="(item, i) in members" :key="i">
                             <v-list-tile avatar>
-                                <!-- <v-list-tile-avatar>
-                                    <img v-bind:src="item.avatar">
-                                </v-list-tile-avatar> -->
                                 <v-list-tile-content>
                                     <v-list-tile-title v-html="item.title"></v-list-tile-title>
                                 </v-list-tile-content>
@@ -137,5 +124,19 @@
     .help-text {
         margin-bottom: 0;
         padding: 0 10px;
+    }
+
+    .menu {
+        margin: 20px 0 0 0;
+        padding: 0;
+        width: 98%;
+    }
+
+    .input-group {
+        width: 90%;
+    }
+
+    .card {
+        margin-top: 10px;
     }
 </style>

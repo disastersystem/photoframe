@@ -4,11 +4,14 @@
 			
 			<creategroup @created="addGroup"></creategroup>
 
-			<v-layout row align-center style="margin-bottom: -10px;">
+			<v-layout row align-center class="sub-header-row">
 				<v-flex xs12>
 					<v-subheader v-if="groups.length > 0">
-						Grupper
+						Dine Grupper
 					</v-subheader>
+					<p class="no-groups-message" v-else>
+						Du er ikke medlem av noen grupper enda.
+					</p>
 				</v-flex>
 			</v-layout>
 
@@ -25,6 +28,10 @@
 					</v-list-item>
 				</template>
             </v-list>
+
+            <!-- <i class="material-icons icon icon--dark icon--center">
+                notifications_none
+            </i> -->
         </v-navigation-drawer>
 
         <main>
@@ -52,7 +59,8 @@
 		},
 
 		components: {
-			creategroup, photoframe
+			creategroup,
+			photoframe
 		},
 
 		mounted() {
@@ -77,3 +85,13 @@
 		}
 	}
 </script>
+
+<style scoped>
+	.sub-header-row {
+		margin-bottom: -10px;
+	}
+
+	.no-groups-message {
+		padding: 20px;
+	}
+</style>

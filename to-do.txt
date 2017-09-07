@@ -1,16 +1,21 @@
 node_modules\.bin\webpack
 
-- kan ikke scrolle modal på telefon, it's also janky, make it fullscreen on mobile
-
 - Input fields like digital ocean!
 
-- look into delete photos on mobile gallery
+- Update Vuetify and take advantage of the modularity.
+- Update Laravel/Mix/Webpack
+
+- Pluss icon which expands into "create group"-input field.
 
 - ny animert mobil meny icon
 
-- Mulig å slette gruppe.
+- transition when photo is uploaded
 
-- align "Velg eller opprett en gruppe."
+- Delete group functionality -> setting knapp i hjørnet i gruppa
+- Delete photos functionality (look into delete photos on mobile gallery)
+
+- login system:
+	- Binde navnet på en gruppe til en konto, slik at det er mulig at forskjellige folk har samme gruppenavn.
 
 - Shaking upload button, when there is no images in the group.
 
@@ -22,14 +27,9 @@ node_modules\.bin\webpack
 
 - xs12 på last opp og members knapp
 
-- Delete group functionality -> setting knapp i hjørnet i gruppa
-- Delete photos functionality
-
-- login system
-
 - split photos into groups by group id in the uploads folder
 
-- Farge på menu items helt ut til kanten. Og samme farge som bakgrunn inne i rommet?
+- Farge på menu items samme farge som bakgrunn inne i rommet?
 
 - show succes -> toast/alert/something
 
@@ -39,38 +39,10 @@ node_modules\.bin\webpack
 
 - set vue to production mode
 
-- figure out what to do with vodal css import
-
 - intervall meny under modal on second open
-
-- ERROR I EDGE!!
 
 - Cropping on upload.
 
 
-Pug eller jade ellerno
+Pug eller jade
 stylus
-
-dev production --watch something
-
-https://laravel.com/docs/5.4/mix
-
-What's up with having to include CSS manually?
-
-// "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules",
-// "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
-// "hmr": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
-// "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"
-
-<div class="modal-content">
-	<p class="image is-4by3">
-		<img src="http://bulma.io/images/placeholders/1280x960.png">
-	</p>
-</div>
-
-
-<div style="display: flex; z-index: 999; width: 100%; margin: 0; position: absolute; top: 0; left: 0;">
-	<div style="background: green; padding: 10px 15px;">Effect</div>
-	<div style="background: blue; padding: 10px 15px;">Time</div>
-	<div style="background: brown; padding: 10px 15px; position: absolute; right: 0;">Avslutt</div>
-</div>

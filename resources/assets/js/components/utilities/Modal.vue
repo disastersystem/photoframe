@@ -55,10 +55,6 @@
 
 		watch: {
 			show(status) {
-				status && this.$nextTick(() => {
-					this.$el.focus()
-				})
-
 				(status == true) ? this.open() : this.close()
 			}
 		},
