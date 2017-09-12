@@ -1,21 +1,18 @@
 <template>
 	<div>
-        <v-toolbar class="white elevation-0">
+        <v-toolbar class="group-toolbar elevation-0">
             <drawertrigger></drawertrigger>
 
-            <v-toolbar-title class="hidden-sm-and-down toolbar-title">
-                {{ group.title }}
-            </v-toolbar-title>
+            <v-toolbar-title>{{ group.title }}</v-toolbar-title>
             
             <v-spacer></v-spacer>
             
-            <upload @success="successfulUpload"></upload>
-            <people></people>
+            <upload-dialog @success="successfulUpload"></upload-dialog>
 
-            <v-btn  flat>
-                <i class="material-icons icon icon--dark icon--center">
-                    settings
-                </i>
+            <people-dialog></people-dialog>
+
+            <v-btn flat>
+                <v-icon>settings</v-icon>
             </v-btn>
         </v-toolbar>
 
@@ -27,7 +24,7 @@
             <v-layout row wrap>
                 <template v-for="(photo, i) in photos">
     				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
-    					<v-card class="elevation-10 mb-4 photo-frame">
+    					<v-card class="elevation-10 mb-4 ml-2 mr-2 photo-frame">
                             <div class="intrinsic-placeholder">
                                 <photo :path="photo.thumbnail_filepath"></photo>
                             </div>
@@ -55,9 +52,11 @@
         data () {
             return {
                 group: {},
-                /* initalizing the photos array with an empty object 
-                keeps the "no images" message from showing while 
-                photos gets fetched */
+                /* 
+                * initalizing the photos array with an empty object 
+                * keeps the "no images" message from showing while 
+                * photos gets fetched 
+                */
                 photos: [{}],
                 pagination: {}
             }
@@ -71,7 +70,10 @@
         },
 
         components: {
-    		upload, people, drawertrigger, photo
+    		'upload-dialog': upload,
+            'people-dialog': people,
+            'drawertrigger': drawertrigger,
+            'photo': photo
     	},
 
         methods: {
@@ -94,12 +96,12 @@
             nextPhotos() {
                 if (this.pagination.nextPage !== null) {
                     axios.get(this.pagination.nextPage).then(response => {
-                        this.photos.push.apply( this.photos, response.data.data );
+                        this.photos.push.apply( this.photos, response.data.data )
                         
                         this.pagination = {
                             nextPage: response.data.next_page_url
                         }
-                    });
+                    })
                 }
             },
 
@@ -126,18 +128,15 @@
         position: relative;
     }
 
-    .year-title {
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 25px;
-        margin-top: 40px;
-        padding: 10px;
-        font-size: 16px;
-        color: #bbb;
+    .group-toolbar {
+        display: flex;
+        padding: 10px 0;
     }
 
-    .toolbar-title {
+    .toolbar__title {
+        display: flex;
+        align-items: center;
         text-align: center;
-        font-size: 25px;
         color: #000;
     }
 

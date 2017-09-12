@@ -1,6 +1,6 @@
 <template>
 	<div>
-        <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher>
+        <v-navigation-drawer persistent v-model="drawer" enable-resize-watcher>
 			
 			<creategroup @created="addGroup"></creategroup>
 
@@ -9,37 +9,30 @@
 					<v-subheader v-if="groups.length > 0">
 						Dine Grupper
 					</v-subheader>
+
 					<p class="no-groups-message" v-else>
 						Du er ikke medlem av noen grupper enda.
 					</p>
 				</v-flex>
 			</v-layout>
 
-            <v-list>
+            <v-list style="background: #eee;">
                 <template v-for="(group, i) in groups">
-					<v-list-item>
-						<v-list-tile>
-							<v-list-tile-content>
-				                <router-link :to="'/group/' + group.id" class="nav-item">
-				                	{{ group.title }}
-				                </router-link>
-							</v-list-tile-content>
-						</v-list-tile>
-					</v-list-item>
+					<v-list-tile>
+						<v-list-tile-content>
+			                <router-link :to="'/group/' + group.id" class="nav-item">
+			                	{{ group.title }}
+			                </router-link>
+						</v-list-tile-content>
+					</v-list-tile>
 				</template>
             </v-list>
-
-            <!-- <i class="material-icons icon icon--dark icon--center">
-                notifications_none
-            </i> -->
         </v-navigation-drawer>
 
         <main>
-            <div>
-                <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">
-                    <router-view></router-view>
-                </transition>
-            </div>
+            <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated fadeIn">
+                <router-view></router-view>
+            </transition>
         </main>
 
         <photoframe></photoframe>
@@ -53,7 +46,7 @@
 	export default {
 		data() {
 			return {
-				groups: [],
+				groups: [{}],
 				drawer: true
 			}
 		},
@@ -93,5 +86,30 @@
 
 	.no-groups-message {
 		padding: 20px;
+	}
+
+	.navigation-drawer {
+	    z-index: 1; /* keep the drawer underneath the dialogs/modals */
+	    background: #eee;
+	}
+
+	.navigation-drawer .list__item,
+	.navigation-drawer .list__tile {
+	    padding: 0;
+	    margin: 0;
+	}
+
+	.navigation-drawer .nav-item {
+	    display: flex;
+	    width: 100%;
+	    height: 100%;
+	    align-items: center;
+	    text-decoration: none;
+	    padding: 30px;
+	}
+
+	/* Active main drawer item. */
+	.is-active {
+	    background: #ccc;
 	}
 </style>

@@ -58,10 +58,8 @@
             </v-card-row>
         </modal>
 
-        <v-btn @click.native="openModal" class="indigo">
-            <i class="material-icons icon icon--light icon--center">
-                person_add
-            </i>
+        <v-btn class="indigo white--text" @click.native="openModal">
+            <v-icon>person_add</v-icon>
         </v-btn>
     </div>
 </template>

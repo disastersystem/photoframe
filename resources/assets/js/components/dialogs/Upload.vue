@@ -10,16 +10,14 @@
                     :url="url"
                     :language="{ dictDefaultMessage: '<br>Dra filer hit for å laste opp' }"
                     :showRemoveLink="false"
-                    @vdropzone-success="showSuccess">
-                </dropzone>
+                    @vdropzone-success="showSuccess"
+                ></dropzone>
             </div>
         </modal>
 
-        <v-btn success light @click.native="dialog = true">
+        <v-btn success class="white--text" @click.native="dialog = true">
             Legg til bilder
-            <i class="material-icons icon icon--dark icon--light icon--right">
-                cloud_upload
-            </i>
+            <v-icon right>cloud_upload</v-icon>
         </v-btn>
     </div>
 </template>

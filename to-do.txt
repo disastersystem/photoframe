@@ -9,8 +9,6 @@ node_modules\.bin\webpack
 
 - ny animert mobil meny icon
 
-- transition when photo is uploaded
-
 - Delete group functionality -> setting knapp i hjørnet i gruppa
 - Delete photos functionality (look into delete photos on mobile gallery)
 

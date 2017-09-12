@@ -13,8 +13,8 @@
         <!-- Font library and icon pack -->
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
         <!-- Vuetify -->
-        <link href="https://unpkg.com/vuetify@0.12.0/dist/vuetify.min.css" rel="stylesheet" type="text/css">
-        <!-- <link rel="stylesheet" type="text/css" href="../node_modules/vuetify/dist/vuetify.min.css"> -->
+        <!-- <link href="https://unpkg.com/vuetify@0.12.0/dist/vuetify.min.css" rel="stylesheet" type="text/css"> -->
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/vuetify@0.15.3/dist/vuetify.min.css">
 
         <link rel="stylesheet" type="text/css" href="css/core.css">
 
