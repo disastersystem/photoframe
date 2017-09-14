@@ -11,9 +11,9 @@
 
             <people-dialog></people-dialog>
 
-            <v-btn flat>
+            <!-- <v-btn flat>
                 <v-icon>settings</v-icon>
-            </v-btn>
+            </v-btn> -->
         </v-toolbar>
 
 		<div id="images-wrapper">
@@ -23,10 +23,11 @@
 
             <v-layout row wrap>
                 <template v-for="(photo, i) in photos">
-    				<v-flex xs12 sm6 md4 lg3 xl3 :key="i">
+    				<v-flex xs12 sm6 md4 lg3 xl3>
     					<v-card class="elevation-10 mb-4 ml-2 mr-2 photo-frame">
                             <div class="intrinsic-placeholder">
-                                <photo :path="photo.thumbnail_filepath"></photo>
+                                <photo :src="photo.thumbnail_filepath"></photo>
+                                <!-- <img class="lazy-loaded" :v-lazy-load="photo.thumbnail_filepath" src=""> -->
                             </div>
     					</v-card>
     				</v-flex>
@@ -51,14 +52,9 @@
     export default {
         data () {
             return {
+                pagination: {},
                 group: {},
-                /* 
-                * initalizing the photos array with an empty object 
-                * keeps the "no images" message from showing while 
-                * photos gets fetched 
-                */
-                photos: [{}],
-                pagination: {}
+                photos: []
             }
         },
 

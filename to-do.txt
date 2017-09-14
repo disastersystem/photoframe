@@ -33,6 +33,8 @@ node_modules\.bin\webpack
 
 - the same person should only be added once in the invitation array
 
+- load icon until group data has been fetched
+
 - Fullscreen når enkelt bilder velges?
 
 - set vue to production mode

@@ -1,33 +1,38 @@
 <template>
-	<transition name="fade">
-		<img :src="path" v-if="show">
-	</transition>
+	<!-- <transition name="fade"> -->
+		<img :src="src" ref="thephoto">
+        <!-- v-if="show" -->
+	<!-- </transition> -->
 </template>
 
 <script>
 	export default {
         data() {
             return {
-            	show: true,
+            	// show: true,
                 url: ''
             }
         },
 
-        props: ['path'],
+        props: ['src'],
 
         mounted() {
-        	// let photo = new Image()
-        	// let that = this
+            const img = new Image()
+            // let that = this
 
-            // /* wait until photo is fully loaded before displaying */
-        	// photo.onload = function() {
-        	// 	that.url = that.dd
+            // this.$nextTick(function () {
+                /* wait until photo is fully loaded before displaying */
+                img.onload = function() {
+                    this.url = this.src
+                    // this.$refs.thephoto.src = this.src
+                    // this.$el.src = this.src
 
-        	// 	/* trigger fade in animation */
-        	// 	that.show = true
-        	// }
+                    /* trigger fade in animation */
+                    // this.show = true
+                }.bind(this)
 
-            // photo.src = this.dd
+                img.src = this.src
+            // })
         }
     }
 </script>

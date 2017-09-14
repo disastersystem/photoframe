@@ -18914,31 +18914,36 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     data: function data() {
         return {
-            show: true,
+            // show: true,
             url: ''
         };
     },
 
 
-    props: ['path'],
+    props: ['src'],
 
     mounted: function mounted() {
-        // let photo = new Image()
+        var img = new Image();
         // let that = this
 
-        // /* wait until photo is fully loaded before displaying */
-        // photo.onload = function() {
-        // 	that.url = that.dd
+        // this.$nextTick(function () {
+        /* wait until photo is fully loaded before displaying */
+        img.onload = function () {
+            this.url = this.src;
+            // this.$refs.thephoto.src = this.src
+            // this.$el.src = this.src
 
-        // 	/* trigger fade in animation */
-        // 	that.show = true
-        // }
+            /* trigger fade in animation */
+            // this.show = true
+        }.bind(this);
 
-        // photo.src = this.dd
+        img.src = this.src;
+        // })
     }
 };
 
@@ -19069,19 +19074,6 @@ exports.default = {
         }
     }
 }; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19393,18 +19385,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
     data: function data() {
         return {
+            pagination: {},
             group: {},
-            /* 
-            * initalizing the photos array with an empty object 
-            * keeps the "no images" message from showing while 
-            * photos gets fetched 
-            */
-            photos: [{}],
-            pagination: {}
+            photos: []
         };
     },
 
@@ -30145,15 +30133,12 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('transition', {
+  return _c('img', {
+    ref: "thephoto",
     attrs: {
-      "name": "fade"
+      "src": _vm.src
     }
-  }, [(_vm.show) ? _c('img', {
-    attrs: {
-      "src": _vm.path
-    }
-  }) : _vm._e()])
+  })
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -30235,11 +30220,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "success": _vm.successfulUpload
     }
-  }), _vm._v(" "), _c('people-dialog'), _vm._v(" "), _c('v-btn', {
-    attrs: {
-      "flat": ""
-    }
-  }, [_c('v-icon', [_vm._v("settings")])], 1)], 1), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('people-dialog')], 1), _vm._v(" "), _c('div', {
     attrs: {
       "id": "images-wrapper"
     }
@@ -30252,7 +30233,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._l((_vm.photos), function(photo, i) {
     return [_c('v-flex', {
-      key: i,
       attrs: {
         "xs12": "",
         "sm6": "",
@@ -30266,7 +30246,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "intrinsic-placeholder"
     }, [_c('photo', {
       attrs: {
-        "path": photo.thumbnail_filepath
+        "src": photo.thumbnail_filepath
       }
     })], 1)])], 1)]
   })], 2), _vm._v(" "), (_vm.pagination.nextPage !== null) ? _c('v-layout', {
@@ -30541,33 +30521,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help-text"
   }, [_vm._v("\n                Legg til venner eller familie du vil dele fotosamlingen med.\n                Du kan søke på e-post adresse, eller navn på de som allerede er registrert.\n            ")])]), _vm._v(" "), _c('div', {
     staticClass: "modal-content-row"
-  }, [_c('v-menu', {
-    attrs: {
-      "offset-y": ""
-    }
   }, [_c('v-text-field', {
-    staticClass: "input-group",
     attrs: {
+      "box": "",
+      "dark": "",
       "name": "person",
-      "label": "Søk etter en person",
-      "prepend-icon": "search"
-    },
-    slot: "activator"
-  }), _vm._v(" "), _c('v-list', _vm._l((_vm.items), function(item, i) {
-    return _c('v-list-item', {
-      key: i
-    }, [_c('v-list-tile', {
-      attrs: {
-        "avatar": ""
-      }
-    }, [_c('v-list-tile-content', {
-      on: {
-        "click": function($event) {
-          _vm.selected(item.id)
-        }
-      }
-    }, [_c('v-list-tile-title', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('v-list-tile-sub-title', [_vm._v(_vm._s(item.email))])], 1)], 1)], 1)
-  }))], 1)], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('div', {
+      "label": "Søk etter en person"
+    }
+  })], 1), _vm._v(" "), _c('v-divider'), _vm._v(" "), _c('div', {
     staticClass: "modal-content-row"
   }, [_c('v-card', {
     staticClass: "elevation-0"

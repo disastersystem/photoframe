@@ -9,26 +9,13 @@
             </div>
 
             <div class="modal-content-row">
-                <v-menu offset-y>
+                <!-- <v-form> -->
                     <v-text-field
+                        box dark
                         name="person"
                         label="Søk etter en person"
-                        prepend-icon="search"
-                        class="input-group"
-                        slot="activator"
                     ></v-text-field>
-
-                    <v-list>
-                        <v-list-item v-for="(item, i) in items" :key="i">
-                            <v-list-tile avatar>
-                                <v-list-tile-content @click="selected(item.id)">
-                                    <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-                                    <v-list-tile-sub-title>{{ item.email }}</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list-item>
-                    </v-list>
-                </v-menu>
+                <!-- </v-form> -->
             </div>
 
             <v-divider></v-divider>
